@@ -22,7 +22,12 @@
 			<div class="w3l_sign_in_register">
 				<ul>
 					<li><i class="fa fa-phone" aria-hidden="true"></i> (+000) 123 345 653</li>|
-					<li><a href="#" data-toggle="modal" data-target="#myModal">登录中心</a></li>
+					<#if (Session.loginUser.account)??>
+						<li><a href="#">观看历史</a></li>
+					<#else>
+						<li><a href="#" data-toggle="modal" data-target="#myModal">登录中心</a></li>
+					</#if>
+					
 				</ul>
 			</div>
 			<div class="clearfix"> </div>
@@ -46,10 +51,10 @@
 							  </div>
 							  <div class="form">
 								<h3>Login to your account</h3>
-								<form action="#" method="post">
+								<form id="loginForm">
 								  <input type="text" name="account" placeholder="Username" required="required">
 								  <input type="password" name="password" placeholder="Password" required="required" >
-								  <input type="submit" id="login" value="Login">
+								  <input type="button" id="login" value="Login">
 								</form>
 							  </div>
 							  <div class="form">
@@ -73,10 +78,24 @@
 												success:function(res){
 													if(res.status == 'success'){
 														alert("注册成功");
+														location.reload();
 													}
 												}
 											});
-										});					
+										});		
+							  			//登录							  			
+							  			$("#login").click(function() {
+							  				$.ajax({
+												type: "POST",
+												data:$("#loginForm").serialize(),
+												url:'${ctx}/front/login',
+												success:function(res){
+													if(res.status == 'success'){
+														location.reload();
+													}
+												}
+											});
+										});		
 									});
 							  </script>
 							  <div class="cta"><a href="#">Forgot your password?</a></div>

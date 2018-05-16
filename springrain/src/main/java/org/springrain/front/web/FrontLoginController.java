@@ -91,12 +91,11 @@ public class FrontLoginController extends BaseController {
 			returnDatas.setStatus(ReturnDatas.ERROR);
 			returnDatas.setMessage("未知错误,请联系管理员.");
 		}
-
+		session.setAttribute("loginUser", currUser);
 		// 设置tokenkey
 		String springraintoken = "f_" + SecUtils.getUUID();
 		session.setAttribute(GlobalStatic.tokenKey, springraintoken);
 		model.addAttribute(GlobalStatic.tokenKey, springraintoken);
-
 		return returnDatas;
 	}
 
@@ -130,13 +129,15 @@ public class FrontLoginController extends BaseController {
 			return returnDatas;
 		}
 		user.setUserType(SystemEnum.UserType.前台用户.getType());
+		user.setPassword(SecUtils.encoderByMd5With32Bit(user.getPassword()));
+		user.setActive(SystemEnum.Active.可用.getType());
 		try {
 			userService.saveUser(user);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			e.printStackTrace();
 			returnDatas.setStatus(ReturnDatas.ERROR);
-			returnDatas.setMessage("手机号不能为空！");
+			returnDatas.setMessage("注册失败！");
 		}
 		return returnDatas;
 	}
@@ -146,6 +147,7 @@ public class FrontLoginController extends BaseController {
 	 * 
 	 * @param request
 	 */
+	@SuppressWarnings("static-access")
 	@RequestMapping(value = "/logout")
 	public String logout(HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
@@ -173,6 +175,7 @@ public class FrontLoginController extends BaseController {
 		return returnDatas;
 	}
 
+	@SuppressWarnings("unused")
 	private void autoLogin(User user, HttpServletRequest request, HttpServletResponse response) {
 		// 模拟登陆
 		ShiroUser shiroUser = new ShiroUser();
@@ -191,29 +194,6 @@ public class FrontLoginController extends BaseController {
 
 		WebSubject subject = builder.buildWebSubject();
 		ThreadContext.bind(subject);
-	}
-
-	/**
-	 * 
-	 * 修改个人信息
-	 *
-	 * @param user
-	 * @return
-	 * @author 刘志恒
-	 * @version 2018年5月2日 下午4:35:46
-	 */
-	@RequestMapping("/updateUser")
-	@ResponseBody
-	public String updateUser(Model model, User user) {
-		try {
-			userService.updateUser(user);
-			model.addAttribute("message", "更改成功");
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			model.addAttribute("message", "未知错误,请联系管理员!");
-		}
-		// 执行退出动作
-		return super.redirect + "/attend/login";
 	}
 
 }
