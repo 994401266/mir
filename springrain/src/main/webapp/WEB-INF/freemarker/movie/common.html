@@ -1,0 +1,494 @@
+<#-- 全局变量 --> 
+<#global ctx="${(ctp.contextPath)!''}"> 
+<#global defaultImg="/img/default.jpg">
+
+<#macro head>
+<link href="${ctx}/img/film/css/page.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="${ctx}/img/film/js/page.js"></script>
+</#macro>
+<#macro header>
+<!-- header -->
+	<div class="header">
+		<div class="container">
+			<div class="w3layouts_logo">
+				<a href="${ctx}/img/film/index"><h1>One<span>Movies</span></h1></a>
+			</div>
+			<div class="w3_search">
+				<form action="#" method="post">
+					<input type="text" name="Search" placeholder="Search" required="">
+					<input type="submit" value="Go">
+				</form>
+			</div>
+			<div class="w3l_sign_in_register">
+				<ul>
+					<li><i class="fa fa-phone" aria-hidden="true"></i> (+000) 123 345 653</li>|
+					<li><a href="#" data-toggle="modal" data-target="#myModal">登录中心</a></li>
+				</ul>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+<!-- //header -->
+<!-- bootstrap-pop-up -->
+	<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					登录 & 注册
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+				</div>
+				<section>
+					<div class="modal-body">
+						<div class="w3_login_module">
+							<div class="module form-module">
+							  <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+								<div class="tooltip">点击注册</div>
+							  </div>
+							  <div class="form">
+								<h3>Login to your account</h3>
+								<form action="#" method="post">
+								  <input type="text" name="account" placeholder="Username" required="required">
+								  <input type="password" name="password" placeholder="Password" required="required" >
+								  <input type="submit" id="login" value="Login">
+								</form>
+							  </div>
+							  <div class="form">
+								<h3>Create an account</h3>
+								<form id="registerForm">
+								  <input type="text" name="account" placeholder="account" required="required">
+								  <input type="password" name="password" placeholder="password" required="required" maxlength="30">
+								  <input type="email" name="email" placeholder="Email Address" required="required">
+								  <input type="text" name="mobile" placeholder="Phone Number" required="required">
+								  <input type="button" id="register" value="Register">
+								</form>
+							  </div>
+							  <script type="text/javascript">
+							  		$(function() {
+										//注册							  			
+							  			$("#register").click(function() {
+							  				$.ajax({
+												type: "POST",
+												data:$("#registerForm").serialize(),
+												url:'${ctx}/front/register',
+												success:function(res){
+													if(res.status == 'success'){
+														alert("注册成功");
+													}
+												}
+											});
+										});					
+									});
+							  </script>
+							  <div class="cta"><a href="#">Forgot your password?</a></div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('.toggle').click(function(){
+		  // Switches the Icon
+		  $(this).children('i').toggleClass('fa-pencil');
+		  // Switches the forms  
+		  $('.form').animate({
+			height: "toggle",
+			'padding-top': 'toggle',
+			'padding-bottom': 'toggle',
+			opacity: "toggle"
+		  }, "slow");
+		});
+		
+		//
+	</script>
+<!-- //bootstrap-pop-up -->
+<!-- nav -->
+	<div class="movies_nav">
+		<div class="container">
+			<nav class="navbar navbar-default">
+				<div class="navbar-header navbar-left">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<script type="text/javascript">
+					$(function() {
+						//加载电影类型
+						$.ajax({
+							type: "POST",
+							data:{page:false},
+							url:'${ctx}/front/dicdata/movieCat/list/json',
+							success:function(res){
+								if(res.status == 'success'){
+									var data = res.data;
+									var movieCateLiText = "";
+									if(!!data){
+										for(var key = 0; key < data.length; key++){
+											if(key==0|| (key+1)%7==1){
+												movieCateLiText += '<div class="col-sm-4">';
+											    movieCateLiText += '<ul class="multi-column-dropdown">';
+											}
+										    movieCateLiText += '<li><a href="${ctx}/front/movie/types/'+data[key].name+'">'+data[key].name+'</a></li>';
+										    if((key>0&&(key+1)%7==0)||key==data.length-1){
+										    movieCateLiText += '</ul></div>';
+										    }
+										}
+										movieCateLiText += '<div class="clearfix"></div>';
+										$("#movieCateLi").html(movieCateLiText);
+									}
+								}
+							}
+						});
+						//加载国家
+						$.ajax({
+							type: "POST",
+							data:{page:false},
+							url:'${ctx}/front/dicdata/area/list/json',
+							success:function(res){
+								if(res.status == 'success'){
+									var data = res.data;
+									var movieAreaLiText = "";
+									if(!!data){
+										for(var key = 0; key < data.length; key++){
+											if(key==0|| (key+1)%4==1){
+												movieAreaLiText += '<div class="col-sm-4">';
+												movieAreaLiText += '<ul class="multi-column-dropdown">';
+											}
+											movieAreaLiText += '<li><a href="${ctx}/front/movie/originPlace/'+data[key].name+'">'+data[key].name+'</a></li>';
+										    if((key>0&&(key+1)%4==0)||key==data.length-1){
+										    	movieAreaLiText += '</ul></div>';
+										    }
+										}
+										movieAreaLiText += '<div class="clearfix"></div>';
+										$("#movieAreaLi").html(movieAreaLiText);
+									}
+								}
+							}
+						});
+					});
+				</script>
+				<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+					<nav>
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="${ctx}/front/movie/index">Home</a></li>
+							<li class="dropdown">
+								<a href="${ctx}/img/film/#" class="dropdown-toggle" data-toggle="dropdown">Genres <b class="caret"></b></a>
+								<ul class="dropdown-menu multi-column columns-3">
+									<li id="movieCateLi">
+									<div class="col-sm-4">
+										<ul class="multi-column-dropdown">
+											<li><a href="${ctx}/front/movie/types/1">Action</a></li>
+											<li><a href="${ctx}/img/film/genres">Biography</a></li>
+											<li><a href="${ctx}/img/film/genres">Crime</a></li>
+											<li><a href="${ctx}/img/film/genres">Family</a></li>
+											<li><a href="${ctx}/img/film/horror">Horror</a></li>
+											<li><a href="${ctx}/img/film/genres">Romance</a></li>
+											<li><a href="${ctx}/img/film/genres">Sports</a></li>
+											<li><a href="${ctx}/img/film/genres">War</a></li>
+										</ul>
+									</div>
+									<div class="col-sm-4">
+										<ul class="multi-column-dropdown">
+											<li><a href="${ctx}/img/film/genres.html">Adventure</a></li>
+											<li><a href="${ctx}/img/film/comedy.html">Comedy</a></li>
+											<li><a href="${ctx}/img/film/genres.html">Documentary</a></li>
+											<li><a href="${ctx}/img/film/genres.html">Fantasy</a></li>
+											<li><a href="${ctx}/img/film/genres.html">Thriller</a></li>
+										</ul>
+									</div>
+									<div class="col-sm-4">
+										<ul class="multi-column-dropdown">
+											<li><a href="${ctx}/img/film/genres.html">Animation</a></li>
+											<li><a href="${ctx}/img/film/genres.html">Costume</a></li>
+											<li><a href="${ctx}/img/film/genres.html">Drama</a></li>
+											<li><a href="${ctx}/img/film/genres.html">History</a></li>
+											<li><a href="${ctx}/img/film/genres.html">Musical</a></li>
+											<li><a href="${ctx}/img/film/genres.html">Psychological</a></li>
+										</ul>
+									</div>
+									<div class="clearfix"></div>
+									</li>
+								</ul>
+							</li>
+							<li><a href="${ctx}/img/film/series.html">tv - series</a></li>
+							<li><a href="${ctx}/img/film/news.html">news</a></li>
+							<li class="dropdown">
+								<a href="${ctx}/img/film/#" class="dropdown-toggle" data-toggle="dropdown">Country <b class="caret"></b></a>
+								<ul class="dropdown-menu multi-column columns-3">
+									<li id="movieAreaLi">
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<li><a href="${ctx}/img/film/genres.html">Asia</a></li>
+												<li><a href="${ctx}/img/film/genres.html">France</a></li>
+												<li><a href="${ctx}/img/film/genres.html">Taiwan</a></li>
+												<li><a href="${ctx}/img/film/genres.html">United States</a></li>
+											</ul>
+										</div>
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<li><a href="${ctx}/img/film/genres.html">China</a></li>
+												<li><a href="${ctx}/img/film/genres.html">HongCong</a></li>
+												<li><a href="${ctx}/img/film/genres.html">Japan</a></li>
+												<li><a href="${ctx}/img/film/genres.html">Thailand</a></li>
+											</ul>
+										</div>
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<li><a href="${ctx}/img/film/genres.html">Euro</a></li>
+												<li><a href="${ctx}/img/film/genres.html">India</a></li>
+												<li><a href="${ctx}/img/film/genres.html">Korea</a></li>
+												<li><a href="${ctx}/img/film/genres.html">United Kingdom</a></li>
+											</ul>
+										</div>
+										<div class="clearfix"></div>
+									</li>
+								</ul>
+							</li>
+							<li><a href="${ctx}/img/film/short-codes.html">Short Codes</a></li>
+							<li><a href="${ctx}/movie/list">A - z list</a></li>
+						</ul>
+					</nav>
+				</div>
+			</nav>	
+		</div>
+	</div>
+<!-- //nav -->
+
+</#macro>
+<#macro footer>
+	<div class="footer">
+		<div class="container">
+			<div class="w3ls_footer_grid">
+				<div class="col-md-6 w3ls_footer_grid_left">
+					<div class="w3ls_footer_grid_left1">
+						<h2>Subscribe to us</h2>
+						<div class="w3ls_footer_grid_left1_pos">
+							<form action="#" method="post">
+								<input type="email" name="email" placeholder="Your email..." required="">
+								<input type="submit" value="Send">
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 w3ls_footer_grid_right">
+					<a href="${ctx}/img/film/index.html"><h2>One<span>Movies</span></h2></a>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-5 w3ls_footer_grid1_left">
+				<p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="${ctx}/img/film/http://guantaow.taobao.com/">厚朴网络淘宝店</a><a target="_blank" href="${ctx}/img/film/http://www.moobnn.com">网页模板</a></p>
+			</div>
+			<div class="col-md-7 w3ls_footer_grid1_right">
+				<ul>
+					<li>
+						<a href="${ctx}/img/film/genres.html">Movies</a>
+					</li>
+					<li>
+						<a href="${ctx}/img/film/faq.html">FAQ</a>
+					</li>
+					<li>
+						<a href="${ctx}/img/film/horror.html">Action</a>
+					</li>
+					<li>
+						<a href="${ctx}/img/film/genres.html">Adventure</a>
+					</li>
+					<li>
+						<a href="${ctx}/img/film/comedy.html">Comedy</a>
+					</li>
+					<li>
+						<a href="${ctx}/img/film/icons.html">Icons</a>
+					</li>
+					<li>
+						<a href="${ctx}/img/film/contact.html">Contact Us</a>
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</#macro>
+<!-- 分页 -->
+<!-- 使用时只需要 设置thispage 当前页码 和allPage 总页码    需要父级及以上 有form标签-->
+<!-- 当需要随同其他表单提交   只需要给指定的form 加pageForm类名  此时可不要父级form标签   -->
+<#macro page thisPage allPage>
+<style>
+*{
+	word-break: break-all;
+}
+/* 分页的样式 */
+.page{
+	font-size: 0;
+}
+.page button{
+	color: #666;
+	border: 1px solid #e2e2e2;
+	background: white;
+	outline: none;
+	padding: 5px 15px;
+	font-size 13px;
+	font-size: 10px;
+	border-right: 0;
+	
+}
+.page button:last-of-type{
+	border-right: 1px solid #e2e2e2;
+	margin-right: 10px;
+}
+.page button:hover,.page button.active{
+	background: #06d995;
+	color: white;
+}
+.page span{
+	font-size: 10px;
+}
+.page .form-control{
+	width: 60px;
+	min-height: 30px !important;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-radius: 0;
+	margin-right: 4px;
+}
+.page .page-submit{
+	border-left-color: transparent;
+}
+.page .page-submit:hover{
+	border-color: #06d995;
+}
+.page .form-control:focus{
+	border-color: #06d995;
+}
+.display-ib{
+	display: inline-block;
+}
+.font12{
+	font-size: 13px;
+}
+.vertical-a-t{
+	vertical-align: top;
+}
+</style>
+<div class="page text-center" data-all="${allPage}" data-this="${thisPage}">
+	<button type="button" class="page-start">首页</button>
+	<button type="button" class="page-back">上一页</button>
+	<button type="button" class="page-show">1</button>
+	<button type="button" class="page-show">2</button>
+	<button type="button" class="page-show">3</button>
+	<button type="button" class="page-show">4</button>
+	<button type="button" class="page-show">5</button>
+	<button type="button" class="page-forward">下一页</button>
+	<button type="button" class="page-end">尾页</button>
+	<span class="m-l-20">
+		转跳到：
+		<div class="display-ib vertical-a-t">
+			<input type="text" class="form-control font12" name="pageIndex" value="1"/>
+		</div> 
+		<button type="button" class="page-submit">go</button>
+	</span>
+</div>
+<script>
+$(function(){
+	pageInit();
+});
+//设置为 公共函数 供使用
+function setPages(a,b,fn){
+	$('.page').attr('data-this',a);
+	$('.page').attr('data-all',b);
+	$('.page button').show().removeClass('active');
+	pageInit(a,b);
+	if(fn){
+		$('.page button').one('click',function(){
+			fn();
+		});
+	}
+}
+function setPage(a,b){
+	$('[name="pageIndex"]').val(1);
+	var thisPage = (a || $('.page').data('this')) * 1, allPage = (b || $('.page').data('all')) * 1;
+	if(thisPage != 1){
+		$('.page-back').show();
+	}else{
+		$('.page-back').hide();
+		$('.page-start').hide();
+	};
+	if(thisPage > 3){
+		$('.page-start').show();
+	};
+	if(thisPage == allPage){
+		$('.page-forward').hide();
+		$('.page-end').hide();
+	};
+	if(thisPage >= 3 && thisPage <= allPage - 2){
+		$('.page-show').each(function(index){
+			$(this).html(thisPage + index - 2);
+		});
+		$('.page-show').eq(2).addClass('active')
+	}else if(thisPage >= allPage - 2 && thisPage >= 5){
+		$('.page-show').each(function(index){
+			$(this).html(allPage + index - 4);
+			if(thisPage == allPage + index - 4){
+				$(this).addClass('active');
+			};
+		});
+	}else if(thisPage < 5 && allPage < 5){
+		$('.page-show').slice(allPage).hide();
+		$('.page-show').each(function(index){
+			$(this).html(index + 1);
+		});
+		$('.page-show').eq(thisPage-1).addClass('active');
+	}else{
+		$('.page-show').eq(thisPage-1).addClass('active');
+	};
+};
+function pageInit(a,b){
+	$('.page .page-back').click(function(e){//分页上一页
+		e.preventDefault();
+		$('[name="pageIndex"]').val($('.page').attr('data-this') * 1 - 1);
+		submit();
+	});
+	$('.page .page-forward').click(function(e){//分页下一页
+		e.preventDefault();
+		$('[name="pageIndex"]').val($(this).parent().attr('data-this') * 1 + 1);
+		submit();
+	});
+	$('.page .page-start').click(function(e){//分页第一页
+		e.preventDefault();
+		$('[name="pageIndex"]').val(1);
+		submit();
+	});
+	$('.page .page-end').click(function(e){//分页最后一页
+		e.preventDefault();
+		$('[name="pageIndex"]').val($(this).parent().attr('data-all'));
+		submit();
+	});
+	$('.page-submit').click(function(){
+		if($('[name="pageIndex"]').val() > $('.page').data('all')){
+			$('[name="pageIndex"]').val($('.page').data('all'));
+		}
+		submit();
+	});
+	$('.page-show').click(function(){
+		if($(this).text() != $('.page').attr('data-this')){
+			$('[name="pageIndex"]').val($(this).text());
+			submit();
+		};
+	});
+	setPage(a,b);
+}
+
+function submit(){
+	if($('.pageForm').length != 0){
+		var clone = $('[name="pageIndex"]').clone().hide();
+		$('.pageForm').append(clone);
+		$('.pageForm').submit();
+	}else{
+		$('.page').parents('form').submit();
+	}
+}
+</script>
+</#macro>

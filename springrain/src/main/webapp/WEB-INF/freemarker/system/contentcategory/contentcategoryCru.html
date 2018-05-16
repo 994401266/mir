@@ -1,0 +1,159 @@
+<#ftl output_format="HTML" auto_esc=true>
+<@h.commonHead title="后台管理系统" keywords="开源,永久免费" description="springrain开源系统管理后台"/>
+
+<script src="${ctx}/js/validform/validform.min.js"></script>
+<link rel="stylesheet" href="${ctx}/js/validform/validform.css" media="all">
+<script>
+	 jQuery(function(){
+		 /*
+		 init_valid(_before,_after)
+		 @_before:提交表单前，调用 的函数   可以为空，一般有validform处理不了，独自进行处理时使用
+		 @_after:保存成功后，调用的函数  可以为空，一般为对应的列表页面
+		 */
+		 springrain.initValid(null,function(){window.location.href="${ctx}/system/contentcategory/list?springraintoken="+springraintoken});
+	 });
+	 
+	 function openLayer(){
+		 layer.open({
+			 type: 2,
+			  title: '选择父级',
+			  content: springrain.appendToken('${ctx}/system/contentcategory/tree'),
+			  area: ['500px', '600px'],
+			  btn: ['确认', '取消'],
+			  btn1:function(index, layero){
+				  /*
+				  var body = layer.getChildFrame('body', index);
+				  console.log(body.html()) //得到iframe页的body内容
+                  body.find("#dicDataTree");
+				  */
+                  var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                  var _node=iframeWin.getSelect();
+                  if(_node==null)return;
+            
+                  jQuery("#pname").val(_node[0].name);
+          		  jQuery("#pid").val(_node[0].id);
+          		layer.closeAll();
+			  },
+			  btn2: function(){
+				    layer.closeAll();
+			  }
+			});     
+			  
+	 }
+</script>
+</head>
+<body>
+	<div class="layui-layout layui-layout-admin">
+		<@h.naviHeader /><@h.leftMenu />
+		<!-- 主体内容开始 -->
+			<div class="layui-tab layui-tab-brief">
+				<ul class="layui-tab-title site-demo-title">
+		            <li class="layui-this">
+		            		<i class="layui-icon">&#xe630;</i>
+		             		<span class="layui-breadcrumb" style="visibility: visible;">
+							   <a href="${ctx}">首页<span class="layui-box">&gt;</span></a>
+							   <a><cite>内容分类管理</cite></a>
+							</span>
+		            </li>
+		             <li style="float:right;">
+				        <button type="button" onclick="history.go(-1)" class="layui-btn layui-btn-small" style="margin-top:8px;"><i class="layui-icon layui-icon-specil">&#xe603;</i>返回</button>
+		             </li>
+	       		</ul>
+				
+				<div class="layui-body layui-tab-content site-demo-body">
+					<div class="layui-tab-item layui-show">
+							<div class="layui-main">
+						          <div id="LAY_preview" class="layui-my-form">
+						          				<header class="larry-personal-tit">
+													<span>添加内容分类</span>
+												</header>
+												<div class="larry-personal-body clearfix changepwd">
+													<form id="validForm" class="layui-form <!--  -->"  method="post" action="${ctx}/system/contentcategory/update">
+																<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>	
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">父级</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input id="pname" type="text" name="parent_name"  readonly="readonly" autocomplete="off"  class="layui-input layui-disabled" value="">
+																		  	<input id="pid" type="hidden" name="parent_id" autocomplete="off"  class="layui-input"  value="${(returnDatas.data.parent_id)!'0'}">
+																		</div>
+																		<div class="layui-inline">
+																			<button type="button" onclick="openLayer()" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe64c;</i>选择父级</button>
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">分类名称*</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="name" id="name" datatype="*" nullmsg="不能为空" errormsg="为大于0的数字" autocomplete="off" class="layui-input" value="${(returnDatas.data.name)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">状态</label>
+																		<div class="layui-inline">  
+																		  	<select name="status" id="status" class="form-control   value="${(returnDatas.data.status)!''}">
+																		  		<#if (returnDatas.data.status)??&&returnDatas.data.status==1 >
+																		  			<option>请选择</option>
+																			  		<option value="1" selected="selected">正常</option>
+																			  		<option value="0">删除</option>
+																			  	<#elseif (returnDatas.data.status)??&&returnDatas.data.status==0>
+																			  		<option>请选择</option>
+																			  		<option value="1">正常</option>
+																			  		<option value="0" selected="selected">删除</option>
+																			  	<#else>
+																			  		<option selected="selected">请选择</option>
+																			  		<option value="1">正常</option>
+																			  		<option value="0">删除</option>
+																			  	</#if>
+																			</select>   
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">排列序号</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="sort_order" id="sort_order" datatype="n" nullmsg="不能为空" errormsg="不能为空！" autocomplete="off" class="layui-input" value="${(returnDatas.data.sort_order)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">是否为父类目</label>
+																		<div class="layui-inline col-lg-5">  
+																			<select name="is_parent" id="is_parent" class="form-control">
+																	  		<#if (returnDatas.data.is_parent)??&&returnDatas.data.is_parent==1 >
+																	  			<option>请选择</option>
+																		  		<option value="1" selected="selected">是</option>
+																		  		<option value="0">否</option>
+																		  	<#elseif (returnDatas.data.is_parent)??&&returnDatas.data.is_parent==0>
+																		  		<option>请选择</option>
+																		  		<option value="1">是</option>
+																		  		<option value="0" selected="selected">否</option>
+																		  	<#else>
+																		  		<option selected="selected">请选择</option>
+																		  		<option value="1">是</option>
+																		  		<option value="0">否</option>
+																		  	</#if>
+																			</select>   
+																		</div>
+																		
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+													<div class="layui-form-item change-submit">
+													<label class="layui-form-label"></label>
+															<div class="layui-inline">
+																<button type="button" class="layui-btn" id="smtbtn">保存</button>
+																<button type="button" class="layui-btn layui-btn-primary" id="rstbtn">重置</button>
+															</div>
+														</div>
+													</form>
+												</div>
+								  </div>
+							</div>
+					</div>
+			</div>
+		</div>
+		<!-- 主体内容结束 -->
+		<@h.footer />
+	</div>
+</body>
+</html>

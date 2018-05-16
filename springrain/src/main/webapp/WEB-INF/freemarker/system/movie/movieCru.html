@@ -1,0 +1,273 @@
+<#escape x as x?html>
+<@h.commonHead title="后台管理系统" keywords="开源,永久免费" description="springrain开源系统管理后台"/>
+<script src="${ctx}/js/validform/validform.min.js"></script>
+<link rel="stylesheet" href="${ctx}/js/validform/validform.css" media="all">
+<link href="${ctx}/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="${ctx}/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${ctx}/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script>
+	 function openLayer(){
+		 layer.open({
+			 type: 2,
+			  title: '选择父级',
+			  content: springrain.appendToken('${ctx}/system/dicdata/movieCat/tree'),
+			  area: ['500px', '600px'],
+			  btn: ['确认', '取消'],
+			  btn1:function(index, layero){
+				  /*
+				  var body = layer.getChildFrame('body', index);
+				  console.log(body.html()) //得到iframe页的body内容
+                  body.find("#dicDataTree");
+				  */
+                  var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                  //var _node=iframeWin.getSelect();
+                  //var _node=iframeWin.getCheck();
+                  //if(_node==null)return;
+                  //jQuery("#pname").val(_node[0].name);
+          		  //jQuery("#pid").val(_node[0].id);
+          		  var titleTolal = '';
+          		  $(iframeWin.document).find('.checkbox_true_full').each(function(){
+          			  titleTolal += $(this).next('a').attr('title') + ',';
+          		  });
+          		  titleTolal = titleTolal.slice(0,-1);
+          		  jQuery("#pname").val(titleTolal);
+          		  layer.closeAll();
+			  },
+			  btn2: function(){
+				    layer.closeAll();
+			  }
+			});     
+			  
+	 }
+</script>
+</head>
+<body>
+	<div class="layui-layout layui-layout-admin">
+		<@h.naviHeader /><@h.leftMenu />
+		<!-- 主体内容开始 -->
+			<div class="layui-tab layui-tab-brief">
+				<ul class="layui-tab-title site-demo-title">
+		            <li class="layui-this">
+		            </li>
+		             <li style="float:right;">
+				        <button type="button" onclick="history.go(-1)" class="layui-btn layui-btn-small" style="margin-top:8px;"><i class="layui-icon layui-icon-specil">&#xe603;</i>返回</button>
+		             </li>
+	       		</ul>
+				
+				<div class="layui-body layui-tab-content site-demo-body">
+					<div class="layui-tab-item layui-show">
+							<div class="layui-main">
+						          <div id="LAY_preview" class="layui-my-form">
+						          				<header class="larry-personal-tit">
+													<span>添加电影基本信息表</span>
+												</header>
+												<div class="larry-personal-body clearfix changepwd">
+													<form id="validForm" class="layui-form <!--  -->"  method="post" action="${ctx}/movie/update">
+																<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>	
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">豆瓣ID</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="doubanId" id="doubanId"  autocomplete="off" class="layui-input" value="${(returnDatas.data.doubanId)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">电影名*</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="name" id="name" datatype="*" nullmsg="不能为空" errormsg="不能为空！" autocomplete="off" class="layui-input" value="${(returnDatas.data.name)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">豆瓣评分</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="doubanRating" id="doubanRating"  autocomplete="off" class="layui-input" value="${(returnDatas.data.doubanRating)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">发行年份*</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="releaseYear" id="releaseYear" datatype="n4-4" nullmsg="不能为空" errormsg="请输入正确的年份（例如：2018）" autocomplete="off" class="layui-input" value="${(returnDatas.data.releaseYear)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">电影导演*</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="directors" id="directors" datatype="*" nullmsg="不能为空" errormsg="不能为空！" autocomplete="off" class="layui-input" value="${(returnDatas.data.directors)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+												
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">相关演员</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="actors" id="actors"  autocomplete="off" class="layui-input" value="${(returnDatas.data.actors)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">电影类型</label>
+																		<div class="layui-inline">  
+																			<input id="pname" type="text" name="types" datatype="*" nullmsg="不能为空" errormsg="不能为空！" readonly="readonly" autocomplete="off"  class="layui-input layui-disabled" value="${(returnDatas.data.types)!''}">
+																		</div>
+																		<div class="layui-inline">
+																			<button type="button" onclick="openLayer()" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe64c;</i>选择类目</button>
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">电影状态</label>
+																		<div class="layui-inline col-lg-5">  
+																			 <div class="layui-input-inline">
+														                        <select name="status" id="status" class="layui-input" datatype="*" nullmsg="不能为空" errormsg="不能为空！">
+														                        <#if (returnDatas.data.status)??&&returnDatas.data.status = 1>
+														                          <option value="">==请选择==</option>
+																				  <option value="1" selected="selected">正常</option>
+																				  <option value="2">下架</option>
+																				  <option value="3">删除</option>
+																				 <#elseif (returnDatas.data.status)??&&returnDatas.data.status = 2>
+																				  <option value="">==请选择==</option>
+																				  <option value="1">正常</option>
+																				  <option value="2" selected="selected">下架</option>
+																				  <option value="3">删除</option>
+																				 <#elseif (returnDatas.data.status)??&&returnDatas.data.status = 3>
+																				  <option value="">==请选择==</option>
+																				  <option value="1">正常</option>
+																				  <option value="2">下架</option>
+																				  <option value="3" selected="selected">删除</option>
+																				 <#else>
+																				  <option value="" selected="selected">==请选择==</option>
+																				  <option value="1">正常</option>
+																				  <option value="2">下架</option>
+																				  <option value="3">删除</option>
+																				 </#if>
+																				</select>   
+														                    </div>
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">国家*</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="originPlace" id="originPlace" datatype="*" nullmsg="不能为空" errormsg="不能为空！" autocomplete="off" class="layui-input" value="${(returnDatas.data.originPlace)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">上映时间</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="releaseDate" id="releaseDate"  autocomplete="off" class="layui-input" value="${(returnDatas.data.releaseDate)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">语言</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="languages" id="languages"  autocomplete="off" class="layui-input" value="${(returnDatas.data.languages)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">时长</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="runtime" id="runtime"  autocomplete="off" class="layui-input" value="${(returnDatas.data.runtime)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">优酷的电影链接</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="youkuLink" id="youkuLink"  autocomplete="off" class="layui-input" value="${(returnDatas.data.youkuLink)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">迅雷下载链接</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="xunleiDownloadLinks" id="xunleiDownloadLinks" autocomplete="off" class="layui-input" value="${(returnDatas.data.xunleiDownloadLinks)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">封面链接*</label>
+																		<div class="layui-inline col-lg-5">  
+																			<!-- <input type="text" name="coverLink" id="coverLink" datatype="*" nullmsg="不能为空" errormsg="不能为空！" autocomplete="off" class="layui-input" value="${(returnDatas.data.coverLink)!''}"> -->
+																			<a href="javascript:void(0)" class="layui-btn picFileUpload">上传图片</a>
+	              							   								<input type="hidden" id="coverLink" name="coverLink" value="${(returnDatas.data.coverLink)!''}"/>
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">剧情概要</label>
+																		<div class="layui-inline col-lg-5"> 
+																		    <textarea  name="synopsis" class="layui-textarea">${(returnDatas.data.synopsis)!''}</textarea> 
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">获奖</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="awards" id="awards"  autocomplete="off" class="layui-input" value="${(returnDatas.data.awards)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">喜欢这部电影的人同样喜欢的电影</label>
+																		<div class="layui-inline col-lg-5">  
+																			<input type="text" name="alsoLikeMovies" id="alsoLikeMovies"  autocomplete="off" class="layui-input" value="${(returnDatas.data.alsoLikeMovies)!''}">
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+													<div class="layui-form-item change-submit">
+															<div class="layui-inline">
+																<button type="button" class="layui-btn" id="smtbtn">立即提交</button>
+																<button type="button" class="layui-btn layui-btn-primary" id="rstbtn">重置</button>
+															</div>
+														</div>
+													</form>
+												</div>
+								  </div>
+							</div>
+					</div>
+			</div>
+		</div>
+		<!-- 主体内容结束 -->
+		<@h.footer />
+	</div>
+</body>
+</html>
+<script>
+var itemAddEditor ;
+jQuery(function(){
+	//页面初始化完毕后执行此方法
+	//创建富文本编辑器
+	 itemAddEditor = E3.createEditor("#validForm [name=synopsis]");
+	//初始化图片上传器
+		E3.init();
+	 /*
+		 init_valid(_before,_after)
+		 @_before:提交表单前，调用 的函数   可以为空，一般有validform处理不了，独自进行处理时使用
+		 @_after:保存成功后，调用的函数  可以为空，一般为对应的列表页面
+	 */
+	 springrain.initValid(function() {
+		 itemAddEditor.sync();
+	},function(data){
+		if(data.status!="success"){
+			 layer.closeAll("loading");
+			 layer.alert(data.message,{icon: 1}, function(){
+				 layer.closeAll("dialog");
+			 });
+		 }else{
+			 //layer.closeAll("loading");
+			 layer.alert(data.message,{icon: 1}, function(){
+				 $("#rstbtn").click();
+				 layer.closeAll();
+			 });
+		 }
+	 });
+});
+</script>
+</#escape>

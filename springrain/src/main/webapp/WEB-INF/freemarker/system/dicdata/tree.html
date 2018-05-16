@@ -1,0 +1,57 @@
+<#ftl output_format="HTML" auto_esc=true>
+<@h.commonHead title="后台管理系统" keywords="开源,永久免费" description="springrain开源系统管理后台"/>
+<style>
+	#dicDataTree .ico_docu{
+		display: none !important;
+	}
+</style>
+<SCRIPT type="text/javascript">
+	var dicDataSelectSetting = {
+		callback: {
+			onClick: clickDicDataValue
+		},
+		check: {
+	        enable: true,
+	        chkStyle: "checkbox",
+	        chkboxType: { "Y": "s", "N": "ps" }
+	    },
+		data : {
+			simpleData : {
+				enable : true,
+				idKey : "id",
+				pIdKey : "pid",
+				rootPId : "null",
+			}
+		}
+	};
+	
+	
+	function clickDicDataValue(event, treeId, treeNode) {
+	};
+	$(document).on('click','.curSelectedNode',function(){
+		$(this).prev().trigger('click');
+	})
+	function getSelect(){
+		var treeObj=$.fn.zTree.getZTreeObj("dicDataTree");
+		return treeObj.getSelectedNodes();
+	}
+	
+
+	$(document).ready(function() {
+		jQuery.post("${ctx}/system/dicdata/${returnDatas.data.typekey}/list/json?page=false",
+				function(_json) {
+					if (_json.status == "success") {
+						$.fn.zTree.init($("#dicDataTree"), dicDataSelectSetting,_json.data);
+					} else {
+						alert("error");
+					}
+				});
+	});
+</SCRIPT>
+
+
+
+
+<div>
+	<ul id="dicDataTree" class="ztree"></ul>
+</div>

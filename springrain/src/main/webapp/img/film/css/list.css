@@ -1,0 +1,43 @@
+.searchCondition .searchItem{
+	margin: 10px 0;	
+}
+.searchCondition span{
+	float: left;		
+	display: block;
+	width: 60px;
+	text-align: right;
+}
+.searchCondition ul{
+	margin-left: 80px;		
+}
+.searchCondition ul li{
+	list-style: none;
+	display: inline-block;
+	padding: 3px 15px;
+	background: #e8e8e8;
+	border-radius: 2px;
+	color: #666;
+	cursor: pointer;
+	margin: 0 5px;
+}
+.searchCondition ul li.active{
+	background: #06d995;
+	color: #fff;	
+}
+.starBox{
+	float: right;	
+	margin-right: 15px;
+	color: #a3a3a3;
+	font-size: 14px;
+}
+.starBox i{
+	font-size: 16px;
+	color: #e3e3e3;	
+	vertical-align: -1px;
+}
+.starBox .starResult{
+	padding-left: 8px;
+	visibility: hidden;
+	display: inline-block;
+	width: 60px;
+}

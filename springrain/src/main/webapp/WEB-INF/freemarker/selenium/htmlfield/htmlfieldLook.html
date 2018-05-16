@@ -1,0 +1,128 @@
+<#ftl output_format="HTML" auto_esc=true>
+<@h.commonHead title="后台管理系统" keywords="开源,永久免费" description="springrain开源系统管理后台"/>
+
+
+</head>
+<body>
+	<div class="layui-layout layui-layout-admin">
+		<@h.naviHeader /><@h.leftMenu />
+		<!-- 主体内容开始 -->
+			<div class="layui-tab layui-tab-brief">
+				<ul class="layui-tab-title site-demo-title">
+		            <li class="layui-this">
+		            		<i class="layui-icon">&#xe630;</i>
+		             		<span class="layui-breadcrumb" style="visibility: visible;">
+							   <a href="${ctx}">首页<span class="layui-box">&gt;</span></a>
+							   <a><cite>Htmlfield管理</cite></a>
+							</span>
+		            </li>
+		             <li style="float:right;">
+				        <button type="button" onclick="history.go(-1)" class="layui-btn layui-btn-small" style="margin-top:8px;"><i class="layui-icon layui-icon-specil">&#xe603;</i>返回</button>
+		             </li>
+	       		</ul>
+				
+				<div class="layui-body layui-tab-content site-demo-body">
+					<div class="layui-tab-item layui-show">
+							<div class="layui-main">
+						          <div id="LAY_preview" class="layui-my-form">
+						          				<header class="larry-personal-tit">
+													<span>添加Htmlfield</span>
+												</header>
+												<div class="larry-personal-body clearfix changepwd">
+													<form id="validForm" class="layui-form <!--  -->"  method="post" action="${ctx}/selenium/htmlfield/update">
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">功能Id*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.functionId)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">字段名称*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.name)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">查找方式:0dcoucment,1id,2name,3className,4cssSelector,5linkText,6.tagName,7xpath,8alert*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.findType)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">元素的Key,例如 userName*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.elementKey)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">元素值*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.elementValue)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">实际的xpath表达式*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.xpath)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">是否必填*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.required)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">字段类型:1text,2password*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.htmlFieldType)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">字段长度*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.htmlFieldLength)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">最小值*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.htmlMinValue)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">最大值*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.htmlMaxValue)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+																	<div class="layui-form-item col-lg-6">
+																		<label class="layui-form-label">排序*</label>
+																		<div class="layui-inline col-lg-5">  
+																			${(returnDatas.data.sortno)!''}
+																		</div>
+																		<div class="layui-inline valid-info"></div>
+																	</div>
+													</form>
+												</div>
+								  </div>
+							</div>
+					</div>
+			</div>
+		</div>
+		<!-- 主体内容结束 -->
+		<@h.footer />
+	</div>
+</body>
+</html>

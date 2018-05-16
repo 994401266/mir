@@ -1,0 +1,380 @@
+<#import "/movie/common.html" as common>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Home</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="${ctx}/img/film/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${ctx}/img/film/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="${ctx}/img/film/css/contactstyle.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${ctx}/img/film/css/faqstyle.css" type="text/css" media="all" />
+<link href="${ctx}/img/film/css/single.css" rel='stylesheet' type='text/css' />
+<link href="${ctx}/img/film/css/medile.css" rel='stylesheet' type='text/css' />
+<!-- banner-slider -->
+<link href="${ctx}/img/film/css/jquery.slidey.min.css" rel="stylesheet">
+<!-- //banner-slider -->
+<!-- pop-up -->
+<link href="${ctx}/img/film/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //pop-up -->
+<!-- font-awesome icons -->
+<link rel="stylesheet" href="${ctx}/img/film/css/font-awesome.min.css" />
+<!-- //font-awesome icons -->
+<!-- js -->
+<script type="text/javascript" src="${ctx}/img/film/js/jquery-2.1.4.min.js"></script>
+<!-- //js -->
+<!-- banner-bottom-plugin -->
+<link href="${ctx}/img/film/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+<script src="${ctx}/img/film/js/owl.carousel.js"></script>
+<script>
+	$(document).ready(function() { 
+		$("#owl-demo").owlCarousel({
+	 
+		  autoPlay: 3000, //Set AutoPlay to 3 seconds
+	 
+		  items : 5,
+		  itemsDesktop : [640,4],
+		  itemsDesktopSmall : [414,3]
+	 
+		});
+	 
+	}); 
+</script> 
+<!-- //banner-bottom-plugin -->
+<!---<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>--->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="${ctx}/img/film/js/move-top.js"></script>
+<script type="text/javascript" src="${ctx}/img/film/js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+</head>
+	
+<body>
+<@common.header />
+<div class="general_social_icons">
+	<nav class="social">
+		<ul>
+			<li class="w3_twitter"><a href="${ctx}/img/film/#">Twitter <i class="fa fa-twitter"></i></a></li>
+			<li class="w3_facebook"><a href="${ctx}/img/film/#">Facebook <i class="fa fa-facebook"></i></a></li>
+			<li class="w3_dribbble"><a href="${ctx}/img/film/#">Dribbble <i class="fa fa-dribbble"></i></a></li>
+			<li class="w3_g_plus"><a href="${ctx}/img/film/#">Google+ <i class="fa fa-google-plus"></i></a></li>				  
+		</ul>
+  </nav>
+</div>
+<!-- Latest-tv-series -->
+	<div class="Latest-tv-series" style="background: #f1f3f7;">
+		<h4 class="latest-text w3_latest_text w3_home_popular">观看历史</h4>
+		<div class="container">
+			<section class="slider">
+				<style type="text/css">
+					.flexslider{
+						margin-top: 20px;
+						padding-top: 0 !important;
+					    border-left: 1px solid #ccc !important;
+						margin-left: 30px;
+						overflow: visible !important;
+					}
+					.flexslider>div{
+						margin-bottom: 40px;
+					}
+					.flexslider>div>span{
+						display: block;
+						width: 100px;
+						height: 60px;
+						line-height: 20px;
+						background: #FF8D1B;
+						color: #fff;
+						margin-left: -50px;
+						float: left;
+						text-align: center;
+						padding-top: 10px;
+					}
+					.flexslider>div:after{
+						content: '';
+						display: block;
+						clear: both;
+					}
+					.flexslider>div ul{
+						margin-left: 80px;;
+					}
+					.flexslider>div ul li{
+						list-style: none;
+						width: 20%;
+						float: left;
+						padding-right: 15px;
+						box-sizing: border-box;
+						margin-bottom: 15px;
+					}
+					.flexslider .imgCover{
+						position: relative;
+					}
+					.flexslider .tagType,
+					.flexslider .tagTime{
+						position: absolute;
+						display: block;
+						height: 20px;
+						line-height: 20px;
+						background: rgba(0,0,0,.8);
+						padding: 0 8px;
+						bottom: 10px;
+						color: #fff;
+						border-radius: 4px;
+					}
+					.flexslider .tagType{
+						left: 10px;
+						background: #359eff;
+					}
+					.flexslider .tagTime{
+						right: 15px;
+					}
+					.flexslider .infoText{
+						width: 100%;
+						background: #fff;
+						padding: 8px;
+					}
+					.flexslider .infoText h4{
+						padding-bottom: 5px;
+						font-size: 14px;
+					}
+					.flexslider .infoText p{
+						color: #a3a3a3;
+						font-size: 12px;
+					}
+				</style>
+				<div class="flexslider">
+					<div>
+						<span style="background: #06d995;">
+							今天
+							<br />
+							4-16 周五
+						</span>
+						<ul>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<span>昨天</span>
+						<ul>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<span>一周内</span>
+						<ul>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<span>更早</span>
+						<ul>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+							<li>
+								<div class="imgCover">
+									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<span class="tagType">类型</span>
+									<span class="tagTime">81:35</span>
+								</div>
+								<div class="infoText">
+									<h4>名称</h4>
+									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+								</div>
+							</li>
+						</ul>
+					</div>
+						
+				</div>
+			</section>
+			<!-- flexSlider -->
+				<link rel="stylesheet" href="${ctx}/img/film/css/flexslider.css" type="text/css" media="screen" property="" />
+			<!-- //flexSlider -->
+		</div>
+	</div>
+<!-- //Latest-tv-series -->
+<@common.footer />
+<!-- Bootstrap Core JavaScript -->
+<script src="${ctx}/img/film/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
+<!-- //Bootstrap Core JavaScript -->
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+</body>
+</html>

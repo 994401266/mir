@@ -1,0 +1,246 @@
+<#escape x as x?html>
+<@h.commonHead title="后台管理系统" keywords="开源,永久免费" description="springrain开源系统管理后台"/>
+<script>
+	var _state;
+	jQuery(function(){ 
+		_state="${(returnDatas.queryBean.active)!''}";
+		jQuery("#active").val(_state);
+		/*
+		全选、反选
+		*/
+		jQuery("#checkAll").bind('click',function(){
+			var _is_check=jQuery(this).get(0).checked;
+			jQuery("input[name='check_li']").each(function(_i,_o){
+				jQuery(_o).get(0).checked=_is_check;
+			});
+		});
+	});
+	function del(_id){
+		springrain.mydelete(_id,"${ctx}/movie/delete");
+	}
+	function deleMore(){
+		if($("input[name='check_li']")){
+			springrain.mydeletemore(null,"${ctx}/movie/delete/more");
+		}else{
+			springrain.alert("请先选择！");
+		}
+	}
+</script>
+</head>
+<body>
+	<div class="layui-layout layui-layout-admin">
+		<@h.naviHeader /><@h.leftMenu />
+			<!-- 主体内容开始 -->
+			<div class="layui-tab layui-tab-brief">
+				<ul class="layui-tab-title site-demo-title">
+		             <li class="layui-this">
+		             </li>
+					 <li style="float:right;">
+		             	<@shiro.hasPermission name="/movie/update" >
+		             		<button type="button" class="layui-btn layui-btn-small" data-action="${ctx}/movie/update/pre"><i class="layui-icon layui-icon-specil">&#xe61f;</i>新增</button>
+		             	</@shiro.hasPermission>
+		             	<@shiro.hasPermission name="/movie/list/export" >
+				        	<button type="button" class="layui-btn layui-btn-small"><i class="layui-icon layui-icon-specil">&#xe609;</i>导出</button>
+				        </@shiro.hasPermission>
+		                <button type="button" class="layui-btn layui-btn-warm layui-btn-small"><i class="layui-icon layui-icon-specil">&#xe601;</i>导入</button>
+		                <@shiro.hasPermission name="/movie/delete" >
+		               		 <button type="button" onclick="deleMore();" class="layui-btn layui-btn-danger layui-btn-small"><i class="layui-icon">&#xe640;</i>批量删除</button>
+		                </@shiro.hasPermission>
+		             </li>
+	       		</ul>
+				
+				<div class="layui-body layui-tab-content site-demo-body">
+					<div class="layui-tab-item layui-show">
+							<div class="layui-main">
+						          <div id="LAY_preview">
+						          <!-- 查询  开始 -->
+							          <form class="layui-form layui-form-pane" id="searchForm" action="${ctx}/movie/list" method="post">
+							          <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}" /> 
+							          <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}" />
+							          <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}" />
+									  <table class="layui-table" >
+							          	<tbody>
+							          		<tr>
+							          			<th>电影搜索</th>
+							          		</tr>
+							          		<tr>
+							          			<td>
+							          				<div class="layui-inline">
+									                    <label class="layui-form-label">名称</label>
+									                    <div class="layui-input-inline">
+									                           <input type="text" name="name" value="${(returnDatas.queryBean.name)!''}" placeholder="请输入名称 " class="layui-input">
+									                    </div>
+							                		</div>
+									                 <div class="layui-inline">
+									                    <label class="layui-form-label">状态</label>
+									                    <div class="layui-input-inline">
+									                        <select name="status" id="status" class="layui-input">
+									                        <#if (returnDatas.queryBean.status)??&&returnDatas.queryBean.status = 1>
+									                          <option value="">==请选择==</option>
+															  <option value="1" selected="selected">正常</option>
+															  <option value="2">下架</option>
+															  <option value="3">删除</option>
+															 <#elseif (returnDatas.queryBean.status)??&&returnDatas.queryBean.status = 2>
+															  <option value="">==请选择==</option>
+															  <option value="1">正常</option>
+															  <option value="2" selected="selected">下架</option>
+															  <option value="3">删除</option>
+															 <#elseif (returnDatas.queryBean.status)??&&returnDatas.queryBean.status = 3>
+															  <option value="">==请选择==</option>
+															  <option value="1">正常</option>
+															  <option value="2">下架</option>
+															  <option value="3" selected="selected">删除</option>
+															 <#else>
+															  <option value="" selected="selected">==请选择==</option>
+															  <option value="1">正常</option>
+															  <option value="2">下架</option>
+															  <option value="3">删除</option>
+															 </#if>
+															</select>   
+									                    </div>
+									                </div>
+									                <div class="layui-inline">
+									                    <button class="layui-btn"><i class="layui-icon" style="top:4px;right:5px;">&#xe615;</i>搜索</button>
+									                </div>
+							          			</td>
+							          		</tr>
+							          	</tbody>
+							          </table>
+									  <!-- 查询  结束 -->
+									</form>
+									<!--start_export-->
+									<table class="layui-table" lay-even>
+										  <colgroup>
+										    <col width="40">
+										    <col width="120">
+										    <col>
+										  </colgroup>
+										  <!--end_no_export-->
+										  <!--first_start_export-->
+											<thead>
+												<tr>
+													<th colspan="9">电影列表</th>
+												</tr>
+												<tr>
+												  <!--first_start_no_export-->
+												  <th class="center">
+														<label class="position-relative">
+															<input id="checkAll"  class="ace" type="checkbox">
+														</label>
+												  </th>
+												  <th>操作</th>
+												  <!--first_end_no_export-->
+														<th id="th_doubanId" >豆瓣ID</th>
+														<th id="th_name" >电影名</th>
+														<th id="th_doubanRating" >豆瓣评分</th>
+														<th id="th_releaseYear" >发行年份</th>
+														<th id="th_directors" >导演</th>
+														<th id="th_screenwriters" >编剧</th>
+														<th id="th_actors" >演员</th>
+														<th id="th_types" >类型</th>
+														<th id="th_status" >状态</th>
+														<th id="th_originPlace" >国家</th>
+														<th id="th_languages" >语言</th>
+														<th id="th_runtime" >时长</th>
+												</tr> 
+											</thead>
+										  <!--first_end_export-->
+										  <!--start_export-->
+										   <tbody>
+										    <#if (returnDatas.data??)&&(returnDatas.data?size>0)> 
+										    	<#list	returnDatas.data as _data>
+										    		<!--start_no_export-->
+													<tr class="">
+														<td class="center">
+															<label class="position-relative">
+																<input name="check_li" value="${_data.id}" class="ace" type="checkbox"> <span class="lbl"></span>
+															</label>
+														</td>
+														<td>
+															<@shiro.hasPermission name="/movie/update" >
+								                           		 <a href="${ctx}/movie/update/pre?id=${(_data.id)!''}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+								                            </@shiro.hasPermission>
+								                            <@shiro.hasPermission name="/movie/delete" >
+								                            	<a href="javascript:del('${(_data.id)!''}')" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+								                            </@shiro.hasPermission>
+														</td>
+														<!--end_no_export-->
+														<td >
+															${(_data.doubanId)!''}
+														</td>
+														<td >
+														 <a href="${ctx}/movie/look?id=${(_data.id)!''}">${(_data.name)!''}</a>
+														</td>
+														<td >
+															${(_data.douban_rating)!''}
+														</td>
+														<td >
+															${(_data.releaseYear)!''}
+														</td>
+														<td >
+															${(_data.directors)!''}
+														</td>
+														<td >
+															${(_data.screenwriters)!''}
+														</td>
+														<td >
+															${(_data.actors)!''}
+														</td>
+														<td >
+															${(_data.types)!''}
+														</td>
+														<td >
+															<#if _data.status??&& _data.status == 1>
+																正常
+															<#elseif _data.status??&&_data.status == 2>
+																下架
+															<#else>
+																删除
+															</#if>
+														</td>
+														
+														<td >
+															${(_data.origin_place)!''}
+														</td>
+														
+														<td >
+															${(_data.languages)!''}
+														</td>
+														<td >
+															${(_data.runtime)!''}
+														</td>
+													</tr>
+												</#list>
+											 </#if>
+											</tbody>
+										</table>
+									<#if returnDatas.page??> 
+										<div id='laypageDiv'></div>
+										<@h.layPage page=returnDatas.page /> 
+									</#if>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		<!-- 主体内容结束 -->
+		<@h.footer />
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+<!--
+function toEdit(_title,url){
+	springrain.editWindow(_title,url);
+}
+function del(_id){
+	springrain.mydelete(_id,"${ctx}/movie/delete");
+}
+var _state;
+jQuery(function(){ 
+	_state="";
+	jQuery("#active").val(_state);
+});
+//-->
+</script>
+</#escape>
