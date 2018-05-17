@@ -173,6 +173,9 @@ public class UserRoleMenuServiceImpl extends BaseSpringrainServiceImpl implement
 			finder.append(" and password=:password ").setParam("password",
 					password);
 		}
+		if (userType != null) {
+			finder.append(" and userType=:userType ").setParam("userType", userType);
+		}
 		return super.queryForObject(finder, User.class);
 	}
 

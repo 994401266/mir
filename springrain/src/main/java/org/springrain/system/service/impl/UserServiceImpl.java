@@ -3,6 +3,7 @@ package org.springrain.system.service.impl;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -244,6 +245,16 @@ public class UserServiceImpl extends BaseSpringrainServiceImpl implements IUserS
 		
 		
 		return null;
+	}
+
+	@Override
+	public List<Map<String, Object>> findUserByAccound(String account) throws Exception {
+		Finder finder = new Finder(" SELECT * FROM ").append(Finder.getTableName(User.class))
+				.append(" WHERE 1=1 ");
+		if (StringUtils.isNotBlank(account)) {
+			finder.append(" AND account =:account ").setParam("account", account);
+		}
+		return super.queryForList(finder);
 	}
 
 }

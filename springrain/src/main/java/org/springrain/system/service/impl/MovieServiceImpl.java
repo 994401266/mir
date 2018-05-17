@@ -4,12 +4,17 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springrain.frame.entity.IBaseEntity;
 import org.springrain.frame.util.Finder;
 import org.springrain.frame.util.Page;
+import org.springrain.system.common.SystemEnum;
+import org.springrain.system.entity.DicData;
 import org.springrain.system.entity.Movie;
+import org.springrain.system.service.IDicDataService;
 import org.springrain.system.service.IMovieService;
 
 
@@ -23,6 +28,8 @@ import org.springrain.system.service.IMovieService;
 @Service("movieService")
 public class MovieServiceImpl extends BaseSpringrainServiceImpl implements IMovieService {
 
+	@Resource
+	private IDicDataService dicDataService;
    
     @Override
 	public String  save(Object entity ) throws Exception{
@@ -90,12 +97,100 @@ public class MovieServiceImpl extends BaseSpringrainServiceImpl implements IMovi
 				finder.append(" AND status=:status ").setParam("status", movie.getStatus());
 			}
 			if (StringUtils.isNotBlank(movie.getTypes())) {
-				finder.append(" AND types like:types ").setParam("types",
-						"%" + movie.getTypes().trim() + "%");
+				String types = movie.getTypes();
+				if (types.contains(",")) {
+					String[] split = types.split(",");
+					String rege = "";
+					for (int i = 0; i < split.length; i++) {
+						rege += split[i];
+						if (i != split.length - 1) {
+							rege += "|";
+						}
+					}
+					finder.append(" AND types regexp:rege ").setParam("rege",
+							rege.trim());
+				} else {
+					finder.append(" AND types like:types ").setParam("types",
+							"%" + movie.getTypes().trim() + "%");
+				}
 			}
 			if (StringUtils.isNotBlank(movie.getOriginPlace())) {
-				finder.append(" AND originPlace like:originPlace ").setParam("originPlace",
-						"%" + movie.getOriginPlace().trim() + "%");
+				String originPlaces = movie.getOriginPlace();
+				if (originPlaces.contains(",")) {
+					String[] split = originPlaces.split(",");
+					String rege = "";
+					for (int i = 0; i < split.length; i++) {
+						rege += split[i];
+						if (i != split.length - 1) {
+							rege += "|";
+						}
+					}
+					finder.append(" AND originPlace regexp:rege ").setParam("rege",
+							rege.trim());
+				} else if (originPlaces.equals("others")) {
+					DicData dicData = new DicData();
+					dicData.setActive(SystemEnum.Active.可用.getType());
+					dicData.setTypekey(SystemEnum.DicDataType.地区.getTypekey());
+					List<DicData> list = dicDataService.findListDataByFinder(null, null,
+							DicData.class, dicData);
+					String rege = "";
+					for (int i = 0; i < list.size(); i++) {
+						rege += list.get(i).getName();
+						if (i != list.size() - 1) {
+							rege += "|";
+						}
+					}
+					finder.append(" AND originPlace NOT regexp:rege ").setParam("rege",
+							rege.trim());
+				} else {
+					finder.append(" AND originPlace like:originPlace ").setParam("originPlace",
+							"%" + movie.getOriginPlace().trim() + "%");
+				}
+			}
+
+			if (StringUtils.isNotBlank(movie.getReleaseYear())) {
+				String releaseYear = movie.getReleaseYear();
+				if (releaseYear.contains(",")) {
+					String[] split = releaseYear.split(",");
+					String rege = "";
+					finder.append(" AND ( 1!=1 ");
+					for (int i = 0; i < split.length; i++) {
+						if (split[i].contains("-")) {
+							String[] split2 = split[i].split("-");
+							if (split2[0].equals("0")) {
+								finder.append(" OR releaseYear <:releaseYear ")
+										.setParam("releaseYear", split2[1]);
+							} else {
+								for (int j = Integer.parseInt(split2[0]); j < Integer
+										.parseInt(split2[1]); j++) {
+									rege += j + "|";
+								}
+							}
+						} else {
+							rege += split[i] + "|";
+						}
+					}
+					String subString = rege.substring(0, rege.length() - 1);
+					finder.append(" OR releaseYear regexp:rege ").setParam("rege",
+							subString.trim());
+					finder.append(" ) ");
+				} else {
+					if (releaseYear.contains("-")) {
+						String[] split2 = releaseYear.split("-");
+						if (split2[0].equals("0")) {
+							finder.append(" AND releaseYear <:releaseYear ").setParam("releaseYear",
+									split2[1]);
+						} else {
+							finder.append(" AND releaseYear <=:endReleaseYear ")
+									.setParam("endReleaseYear", split2[1]);
+							finder.append(" AND releaseYear >=:startReleaseYear ")
+									.setParam("startReleaseYear", split2[0]);
+						}
+					} else {
+						finder.append(" AND releaseYear =:releaseYear ").setParam("releaseYear",
+								releaseYear);
+					}
+				}
 			}
 		}
 		return super.queryForList(finder, page);

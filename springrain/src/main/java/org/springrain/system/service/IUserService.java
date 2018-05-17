@@ -1,5 +1,8 @@
 package org.springrain.system.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springrain.system.entity.User;
 
 /**
@@ -49,5 +52,6 @@ public interface IUserService extends IBaseSpringrainService {
 	
 	void updateRoleUser(String userId,String roleIds)throws Exception;
 
+	List<Map<String, Object>> findUserByAccound(String account) throws Exception;
 	
 }

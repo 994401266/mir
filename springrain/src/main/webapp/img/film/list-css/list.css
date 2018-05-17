@@ -50,6 +50,7 @@ td.w3-list-img a span{
 	text-decoration:none;
 	display:block;
 	margin:.5em 0 0 0;
+	width: 200px;
 }
 td.w3-list-info a {
     color: #424242;

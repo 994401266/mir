@@ -19,6 +19,29 @@ public class SystemEnum {
 	}
 
 	/**
+	 * 字典typekey枚举
+	 * 
+	 * @copyright {@link www.centforsoft.com}
+	 * @author 高永强
+	 * @version 2018年5月17日 下午2:50:38
+	 * @see org.springrain.system.common.DicDataType
+	 *
+	 */
+	public enum DicDataType {
+		电影类型("movieCat"), 地区("area"), 名族("minzu"), 学历("xueli");
+
+		private String typekey;
+
+		private DicDataType(String typekey) {
+			this.typekey = typekey;
+		}
+
+		public String getTypekey() {
+			return this.typekey;
+		}
+	}
+
+	/**
 	 * 部门类型
 	 * 
 	 * @author wxp_work
