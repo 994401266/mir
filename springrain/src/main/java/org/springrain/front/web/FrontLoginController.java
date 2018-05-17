@@ -1,10 +1,14 @@
 package org.springrain.front.web;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -56,7 +60,7 @@ public class FrontLoginController extends BaseController {
 		Subject user = SecurityUtils.getSubject();
 		// 通过账号和密码获取 UsernamePasswordToken token
 		FrameAuthenticationToken token = new FrameAuthenticationToken(currUser.getAccount(),
-				currUser.getPassword());
+				SecUtils.encoderByMd5With32Bit(currUser.getPassword()));
 
 		String rememberme = request.getParameter("rememberme");
 		if (StringUtils.isNotBlank(rememberme)) {
@@ -72,24 +76,28 @@ public class FrontLoginController extends BaseController {
 			user.login(token);
 		} catch (UnknownAccountException e) {
 			logger.error(e.getMessage(), e);
-			e.printStackTrace();
+			// e.printStackTrace();
 			returnDatas.setStatus(ReturnDatas.ERROR);
 			returnDatas.setMessage("账号不存在!");
+			return returnDatas;
 		} catch (IncorrectCredentialsException e) {
 			logger.error(e.getMessage(), e);
 			e.printStackTrace();
 			returnDatas.setStatus(ReturnDatas.ERROR);
 			returnDatas.setMessage("密码错误!");
+			return returnDatas;
 		} catch (LockedAccountException e) {
 			logger.error(e.getMessage(), e);
-			e.printStackTrace();
+			// e.printStackTrace();
 			returnDatas.setStatus(ReturnDatas.ERROR);
 			returnDatas.setMessage(e.getMessage());
+			return returnDatas;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			e.printStackTrace();
 			returnDatas.setStatus(ReturnDatas.ERROR);
 			returnDatas.setMessage("未知错误,请联系管理员.");
+			return returnDatas;
 		}
 		session.setAttribute("loginUser", currUser);
 		// 设置tokenkey
@@ -106,7 +114,8 @@ public class FrontLoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/register")
 	@ResponseBody
-	public ReturnDatas register(HttpServletRequest request, User user) {
+	public ReturnDatas register(HttpServletRequest request, User user, Model model,
+			HttpSession session, Object object) {
 		ReturnDatas returnDatas = ReturnDatas.getSuccessReturnDatas();
 		if (StringUtils.isBlank(user.getAccount())) {
 			returnDatas.setStatus(ReturnDatas.ERROR);
@@ -128,6 +137,21 @@ public class FrontLoginController extends BaseController {
 			returnDatas.setMessage("手机号不能为空！");
 			return returnDatas;
 		}
+		String password = user.getPassword();
+		List<Map<String, Object>> list = null;
+		try {
+			list = userService.findUserByAccound(user.getAccount());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			returnDatas.setStatus(ReturnDatas.ERROR);
+			returnDatas.setMessage("未知错误,请联系管理员.");
+			return returnDatas;
+		}
+		if (CollectionUtils.isNotEmpty(list)) {
+			returnDatas.setStatus(ReturnDatas.ERROR);
+			returnDatas.setMessage("此账号已存在");
+			return returnDatas;
+		}
 		user.setUserType(SystemEnum.UserType.前台用户.getType());
 		user.setPassword(SecUtils.encoderByMd5With32Bit(user.getPassword()));
 		user.setActive(SystemEnum.Active.可用.getType());
@@ -138,7 +162,11 @@ public class FrontLoginController extends BaseController {
 			e.printStackTrace();
 			returnDatas.setStatus(ReturnDatas.ERROR);
 			returnDatas.setMessage("注册失败！");
+			return returnDatas;
 		}
+		// 注册成功直接进行登录
+		user.setPassword(password);
+		loginPost(user, request, model, session, object);
 		return returnDatas;
 	}
 

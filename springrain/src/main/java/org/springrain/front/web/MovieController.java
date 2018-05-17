@@ -207,7 +207,7 @@ public class MovieController  extends BaseController {
 		// List<Movie>
 		// datas=movieService.findListDataByFinder(null,page,Movie.class,movie);
 		List<Map<String, Object>> datas = movieService.findByQueryBean(page, movie);
-			returnObject.setQueryBean(movie);
+		returnObject.setQueryBean(movie);
 		returnObject.setPage(page);
 		returnObject.setData(datas);
 		return returnObject;

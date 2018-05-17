@@ -54,6 +54,7 @@
 								<form id="loginForm">
 								  <input type="text" name="account" placeholder="Username" required="required">
 								  <input type="password" name="password" placeholder="Password" required="required" >
+								  <p id="loginErrorMsg" style="color: #ff3030; text-align: center; margin: 0;height: 20px;"></p>
 								  <input type="button" id="login" value="Login">
 								</form>
 							  </div>
@@ -64,6 +65,7 @@
 								  <input type="password" name="password" placeholder="password" required="required" maxlength="30">
 								  <input type="email" name="email" placeholder="Email Address" required="required">
 								  <input type="text" name="mobile" placeholder="Phone Number" required="required">
+								  <p id="registerErrorMsg" style="color: #ff3030; text-align: center; margin: 0;height: 20px;"></p>
 								  <input type="button" id="register" value="Register">
 								</form>
 							  </div>
@@ -79,6 +81,8 @@
 													if(res.status == 'success'){
 														alert("注册成功");
 														location.reload();
+													}else{
+														$("#registerErrorMsg").html(res.message);
 													}
 												}
 											});
@@ -92,6 +96,8 @@
 												success:function(res){
 													if(res.status == 'success'){
 														location.reload();
+													}else{
+														$("#loginErrorMsg").html(res.message);
 													}
 												}
 											});
@@ -269,7 +275,7 @@
 								</ul>
 							</li>
 							<li><a href="${ctx}/img/film/short-codes.html">Short Codes</a></li>
-							<li><a href="${ctx}/movie/list">A - z list</a></li>
+							<li><a href="${ctx}/front/movie/listMovie">A - z list</a></li>
 						</ul>
 					</nav>
 				</div>
