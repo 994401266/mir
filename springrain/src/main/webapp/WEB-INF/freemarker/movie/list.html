@@ -234,7 +234,11 @@
 									<li data-name="2016">2016</li>
 									<li data-name="2010-2015">2010-2015</li>
 									<li data-name="2000-2010">2000-2010</li>
+<<<<<<< HEAD
 									<li data-id="longAgo" data-name="0-2000">2000以前</li>
+=======
+									<li data-name="0-2000">2000以前</li>
+>>>>>>> branch 'master' of https://github.com/994401266/mir.git
 								</ul>
 							</div>
 						</div>
@@ -307,6 +311,7 @@ $(document).ready(function(){
 			typeStr = typeStr.slice(0,-1);
 			map[$(this).attr("id")] = typeStr;
 		});
+<<<<<<< HEAD
 		map["pageIndex"] = $('[name="pageIndex"]').val();
 		console.log(map);
 		//根据条件加载加载电影
@@ -337,6 +342,34 @@ $(document).ready(function(){
 								movieListText += '<td>'+data[key].doubanRating+'</td>';
 								movieListText += '</tr>';
 						    }
+=======
+		console.log(map);
+		
+		//根据条件加载加载电影
+		//加载电影类型
+		$.ajax({
+			type: "POST",
+			data:map,
+			url:'${ctx}/front/movie/list/json',
+			success:function(res){
+				if(res.status == 'success'){
+					var data = res.data;
+					var movieListText = '';
+					$("#totalSpan").html(res.page.totalCount);
+					if(!!data){
+						for(var key = 0; key < data.length; key++){
+								movieListText += '<tr>';
+								movieListText += '<td>'+(key+1)+'</td>';
+								movieListText += '<td class="w3-list-img"><a href="${ctx}/front/movie/single/'+data[key].id+'"><img src="${ctx}/img/film/images/n3.jpg" alt="" /> <span>'+data[key].name+'</span></a></td>';
+								movieListText += '<td>'+data[key].releaseYear+'</td>';
+								movieListText += '<td>'+data[key].runtime+'</td>';
+								movieListText += '<td class="w3-list-info"><a href="${ctx}/front/movie/single/'+data[key].id+'">'+data[key].name+'</a></td>';
+								movieListText += '<td class="w3-list-info"><a href="${ctx}/front/movie/single/'+data[key].id+'">'+data[key].types+'</a></td>';
+								movieListText += '<td>'+data[key].doubanRating+'</td>';
+								movieListText += '</tr>';
+						    }
+						console.log(movieListText);
+>>>>>>> branch 'master' of https://github.com/994401266/mir.git
 						$("#movieTbody").html(movieListText);
 					}
 				}
