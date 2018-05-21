@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2018-05-14 17:36:03
+Date: 2018-05-21 17:45:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -298,6 +298,25 @@ CREATE TABLE `cms_theme_template` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for m_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `m_comment`;
+CREATE TABLE `m_comment` (
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `userId` varchar(50) NOT NULL COMMENT '用户ID',
+  `movieId` varchar(50) NOT NULL COMMENT '电影ID',
+  `content` text COMMENT '内容',
+  `created` datetime DEFAULT NULL COMMENT '评论时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='电影评论';
+
+-- ----------------------------
+-- Records of m_comment
+-- ----------------------------
+INSERT INTO `m_comment` VALUES ('1', '36fc06b564b8444481fd1934167dc09f', '1080', '哈哈哈', '2018-05-21 14:49:15');
+INSERT INTO `m_comment` VALUES ('2', '36fc06b564b8444481fd1934167dc09f', '1080', '呵呵呵', '2018-05-21 15:37:40');
+
+-- ----------------------------
 -- Table structure for m_content
 -- ----------------------------
 DROP TABLE IF EXISTS `m_content`;
@@ -389,7 +408,7 @@ CREATE TABLE `m_movie` (
   KEY `idx_runtime` (`runtime`),
   KEY `idx_another_names` (`anotherNames`),
   KEY `douban_id` (`doubanId`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1094 DEFAULT CHARSET=utf8mb4 COMMENT='电影基本信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=1081 DEFAULT CHARSET=utf8mb4 COMMENT='电影基本信息表';
 
 -- ----------------------------
 -- Records of m_movie
@@ -1472,13 +1491,29 @@ INSERT INTO `m_movie` VALUES ('1077', '10727048', '无懈可击之蓝色梦想',
 INSERT INTO `m_movie` VALUES ('1078', '10727268', '破产姐妹 第二季 2 Broke Girls Season 2', '8.8', null, '2012', '[\'弗莱德·萨维奇\']', '[\'迈克尔·帕特里克·金\', \'MichelleNader\', \'JhoniMarchinko\']', '[\'凯特·戴琳斯\', \'贝丝·比厄\', \'GarrettMorris\', \'马修·摩伊\', \'JonathanKite\', \'詹妮佛·库里奇\', \'瑞恩·汉森\', \'斯蒂文·韦伯\', \'乔纳森·克特\', \'加勒特·莫里斯\', \'尼克·扎诺\']', '[\'喜剧\']', '1', '[\'美国\']', '', '[\'英语\']', '', '[\'打工姐妹花第二季\', \'追梦女孩第二季\', \'破产女孩第二季\', \'都市女孩第二季\', \'吐槽姐妹第二季\']', null, null, 'https://img1.doubanio.com/view/m_movie_poster_cover/lpst/public/p1756018498.jpg', '继上一季Max（凯特•戴琳斯KatDennings饰）的蛋糕得到了知名料理评论人在杂志上的称赞后，兴奋等待结果的Max和Caroline（贝丝•比厄BethBehrs饰）却迟迟未得到回音。二人只得继续在纽约布鲁克林区的小餐厅打工，应对形形色色的顾客。时不时的和亚裔老板HanLee（马修•摩伊MatthewMoy饰）、无时无刻都在讲荤段子的厨师Oleg（JonathanKite饰）及Max心爱的收银员Earl（GarrettMorris饰）调侃。Max和Caroline的邻居，来自波兰开着清洁公司的苏菲（詹妮佛•库里奇JenniferCoolidge饰）也经常光临餐馆。各色人物群聚的餐厅，时不时上演些爆笑惊险的故事。在这一季里，Caroline邂逅了帅气又贴心的糖果店老板Andy（瑞恩•汉森RyanHansen...(展开全部)', '[]', '[\'10561953\', \'6037429\', \'3754368\', \'10748074\', \'4905040\', \'6142597\', \'3286528\', \'3273895\', \'4729738\', \'2078864\']');
 INSERT INTO `m_movie` VALUES ('1079', '10727277', '风城大佬 第二季 Boss Season 2', '8.8', null, '2012', '[\'JimMcKay\']', '[\'FarhadSafinia\', \'DeeJohnson\']', '[\'KelseyGrammer\', \'ConnieNielsen\']', '[\'剧情\', \'犯罪\']', '1', '[\'美国\']', '', '[\'英语\']', '', '[\'风云市长\']', null, null, 'https://img1.doubanio.com/view/m_movie_poster_cover/lpst/public/p1626996427.jpg', '', '[]', '[\'11540888\', \'5300052\', \'10797516\', \'2133370\', \'26263605\', \'1418199\', \'5980667\', \'6859640\', \'5361545\', \'6810260\']');
 INSERT INTO `m_movie` VALUES ('1080', '10727322', '愿望鱼 The Wish Fish', '5.3', null, '2012', '[\'IvanOneka\', \'GorkaVázquez\']', '[\'SegundoAltolaguirre\', \'LuisSánchezPolack\']', '', '[\'冒险\']', '1', '[\'西班牙\', \'印度\']', '[\'2012-04-27(西班牙)\']', '[\'西班牙语\', \'英语\']', '74', '', null, null, 'https://img1.doubanio.com/view/m_movie_poster_cover/lpst/public/p2376768829.jpg', '欧比是一个胖胖的8岁的小男孩，他最爱吃的就是那些垃圾食品，妈妈想了很多办法都没能帮他戒掉。后来妈妈想出了一道菜，叫做愿望鱼，可欧比根本不喜欢，甚至希望外星人赶紧来地球上把所有的鱼都带走。第二天，他的这个愿望就实现了。掌管愿望的法师本来应该前来解救欧比，可他太生气了，因为欧比这个愿望实在是太不负责了。如果能够再吃一条愿望鱼，把原来的愿望取消，这个世界还有救，可是地球上几千年之内是不会再有鱼了。欧比要在卡巴拉队长及其女儿玛瑞亚、公爵夫人的帮助下经历千辛万苦，拯救世界上的鱼类。', '[\'第27届西班牙戈雅奖\', \'最佳动画片(提名)\', \'Eduardo Barinaga\\xa0/\\xa0Mathiseelan\\xa0/\\xa0Karmelo Vivanco\']', '[\'2044617\', \'10738133\', \'3927761\', \'25825755\', \'4915854\', \'26220731\', \'3718709\', \'25805054\', \'1309011\', \'4902100\']');
-INSERT INTO `m_movie` VALUES ('1081', '1111', '222', '', null, '2222', '2222', null, '', '运动', '1', 'cn', '', '', '', null, '', '', '', '', '', '');
-INSERT INTO `m_movie` VALUES ('1082', '2222', '测试', '', null, '2012', '订单', null, '', '恐怖,传记', '1', '中国', '', '', '', null, '', '', '', '', '', '');
-INSERT INTO `m_movie` VALUES ('1084', '100', '测试2', '111', null, '2013', '我', null, '', '战争,传记', '1', 'china', '', '', '', null, '', '', '', '', '', '');
-INSERT INTO `m_movie` VALUES ('1085', '', '测试3', '1', null, '2222', '花花', null, '', '纪实,传记', '1', 'China', '', '', '', null, '', '', '', '', '', '');
-INSERT INTO `m_movie` VALUES ('1091', null, 'cesa', null, null, null, null, null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `m_movie` VALUES ('1092', '', '3333', '', null, '3333', '大大', null, '', '浪漫,纪实', '1', '阿达', '', '', '', null, '', '', '', '', '', '');
-INSERT INTO `m_movie` VALUES ('1093', '', '测试10', '', null, '2222', '无', null, '', '动作', '1', '2222', '', '', '', null, '', '', '', '<img src=\"http://api.map.baidu.com/staticimage?center=121.474854%2C31.182952&zoom=12&width=558&height=360&markers=121.474854%2C31.182952&markerStyles=l%2CA\" alt=\"\" />222222', '', '');
+
+-- ----------------------------
+-- Table structure for m_user_history
+-- ----------------------------
+DROP TABLE IF EXISTS `m_user_history`;
+CREATE TABLE `m_user_history` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(50) DEFAULT NULL COMMENT '用户id',
+  `movieId` varchar(50) DEFAULT NULL COMMENT '电影id',
+  `createTime` datetime DEFAULT NULL COMMENT '添加时间',
+  `active` int(11) unsigned DEFAULT '1' COMMENT '是否有效 1是 0否',
+  `bak1` varchar(100) DEFAULT NULL COMMENT '备用1',
+  `bak2` varchar(100) DEFAULT NULL COMMENT '备用2',
+  `bak3` varchar(100) DEFAULT NULL COMMENT '备用3',
+  `bak4` varchar(100) DEFAULT NULL COMMENT '备用4',
+  `bak5` varchar(100) DEFAULT NULL COMMENT '备用5',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='观看历史记录表';
+
+-- ----------------------------
+-- Records of m_user_history
+-- ----------------------------
+INSERT INTO `m_user_history` VALUES ('1', '36fc06b564b8444481fd1934167dc09f', '1072', '2018-05-21 16:16:31', '1', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for m_user_movie
@@ -1486,18 +1521,19 @@ INSERT INTO `m_movie` VALUES ('1093', '', '测试10', '', null, '2222', '无', n
 DROP TABLE IF EXISTS `m_user_movie`;
 CREATE TABLE `m_user_movie` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-  `uid` int(11) NOT NULL COMMENT '用户ID',
+  `uid` varchar(50) NOT NULL COMMENT '用户ID',
   `mid` int(11) NOT NULL COMMENT '电影ID',
-  `score` enum('1','2','3','4','5') DEFAULT NULL COMMENT '用户对电影的评分，暂时定为1-5',
+  `score` enum('2','4','6','8','10') DEFAULT NULL COMMENT '用户对电影的评分，暂时定为2-10',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`,`mid`),
   KEY `idx_uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户对电影的评分表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户对电影的评分表';
 
 -- ----------------------------
 -- Records of m_user_movie
 -- ----------------------------
+INSERT INTO `m_user_movie` VALUES ('1', '36fc06b564b8444481fd1934167dc09f', '1080', '10', '2018-05-21 14:33:30');
 
 -- ----------------------------
 -- Table structure for m_user_recommended_movies
@@ -1695,24 +1731,47 @@ CREATE TABLE `t_dic_data` (
 -- ----------------------------
 -- Records of t_dic_data
 -- ----------------------------
-INSERT INTO `t_dic_data` VALUES ('09f2d69328fc40f9b00478856a022f40', '喜剧', '1010', null, '10', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('07e89c06f5c943cd9181d717ed89b490', '动作', 'action', null, '1', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('0b95d68329d14aca856354a8b5500786', '惊悚', 'thriller', null, '10', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('0eb72d2e0c24443a89b864c822cac27f', '奇幻', 'fantasy', null, '11', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('10e18ba01e934ce893d0dec0c898f6aa', '中国大陆', 'china', null, '1', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('141eeb7cdb664c738a32ee83d1ebd43b', '短片', 'short', null, '13', '', '1', 'movieCat', null, null, null, null, null);
 INSERT INTO `t_dic_data` VALUES ('16b80bfb-f0ee-47a0-ba94-cc256abaed17', '专科', '', null, null, '', '1', 'xueli', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('22da8ed23b534abda5d88742d1b51476', '冒险', '1009', null, '9', '', '1', 'movieCat', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('27e6606265944718a82f5075bc7c7276', '动作', '1001', null, '1', '动作片', '1', 'movieCat', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('38d321a5b29c4f9c98d620bc53df310f', '家庭', '1004', null, '4', '家庭', '1', 'movieCat', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('3bc4b6fe3e334fd1b7719393927b91ac', '运动', '1007', null, '7', '', '1', 'movieCat', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('4066259ff89a45f9aea10e326919b71a', '恐怖', '1005', null, '5', '恐怖', '1', 'movieCat', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('424eef2d32c74578804bd3eb512596b6', '犯罪', '1003', null, '3', '犯罪', '1', 'movieCat', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('536686893dac4a65a85dac19522d7826', '浪漫', '1006', null, '6', '浪漫', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('1d7af0cb45104547ad159b16c71fd142', '儿童', 'children', null, '15', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('294821f189fb4350a7e04ff1318412e6', '法国', 'France', null, '6', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('4cf4f4942b5c402d825a0d33f8595b81', '音乐', 'music', null, '19', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('4fc59607d7054ebc9acbfe22e4541171', '韩国', 'Korea', null, '8', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('558526200b3043a499966cb210bda992', '传记', 'biography', null, '6', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('6ed90aba6fb34daaa6df3aa22301fc5e', '加拿大', 'Canada', null, '10', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('7447539566964141ba2bd522cb9c3aac', '古装', 'costume', '', '16', '', '1', 'movieCat', null, null, null, null, null);
 INSERT INTO `t_dic_data` VALUES ('7ed23330-5538-4943-8678-0c5a2121cf57', '高中', '', null, null, '', '1', 'xueli', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('813d483619444611bfd304fef8c14a6c', '奇幻', 'feature', null, '12', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('8d0ac71abf40404d8ff4d92564b266ec', '科幻', 'science', null, '8', '', '1', 'movieCat', null, null, null, null, null);
 INSERT INTO `t_dic_data` VALUES ('936db407-ae1-45a7-a657-b60580e2a77a', '汉族', '101', null, null, '', '1', 'minzu', null, null, null, null, null);
 INSERT INTO `t_dic_data` VALUES ('936db407-ae2-45a7-a657-b60580e2a77a', '回族', '', null, null, '', '1', 'minzu', null, null, null, null, null);
 INSERT INTO `t_dic_data` VALUES ('936db407-ae3-45a7-a657-b60580e2a77a', '一级', '', null, null, '', '1', 'grade', null, null, null, null, null);
 INSERT INTO `t_dic_data` VALUES ('936db407-ae4-45a7-a657-b60580e2a77a', '二级', '', null, null, '', '1', 'grade', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('a1b6c522a12f4b44a000dafe1afdd02e', '战争', '1008', null, '8', '', '1', 'movieCat', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('bca7b5c78fd84c1d8a248e74a1c75a5f', '纪实', '1011', null, '11', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('953d4223ba4049aead8377a4cf61d68c', '冒险', 'adventure', null, '9', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('9e9ad4ba431c4cd6b107b6d23aa29552', '泰国', 'thailand', null, '4', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('a0f104cb241b4283a12e40416a548ab0', '美国', 'america', null, '3', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('a2bd860e98924d13858913389da17b23', '悬疑', 'suspense', null, '3', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('a6c67676519d45f3a897b5c71c5c87e9', '历史', 'history', null, '7', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('ab6993f84fee443d8437d903f5502c72', '动画', 'animation', null, '2', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('abb6a801ac4d4c3b9a1f1b095923515b', '纪录片', 'documentary', null, '5', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('aff3edf37ec5461f80ec3618805b5873', '犯罪', 'crime', null, '17', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('ba62a06f9e57417ba6826bd47ab028f9', '日本', 'japan', null, '2', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('c3da6c8cbf874a50bf7691a1f632047c', '家庭', 'family', null, '14', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('c4ea8963f65b4657bb76cb2b473b78c3', '爱情', 'romance', '', '4', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('cd34812a63774a4ca8445f62ae136a86', '恐怖', 'horror', null, '21', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('d048ac17a93b489ead77ac19524f894b', '俄罗斯', 'Russia', null, '11', '', '1', 'area', null, null, null, null, null);
 INSERT INTO `t_dic_data` VALUES ('d7d1744b-e69f-48d0-9760-b2eae6af039b', '本科', '', null, null, '', '1', 'xueli', null, null, null, null, null);
-INSERT INTO `t_dic_data` VALUES ('fb20cff6ea994008a0dcca8b4ca1a226', '传记', '1002', null, '2', '传记', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('d9347ec442644774817cf9c4767e22af', '喜剧', 'comedy', null, '18', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('df0c0aac390a4816bb0299d0c69eaa37', '香港', 'Hongkong', null, '12', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('e33bf441ed6440a585356c280706a298', '英国', 'England', null, '5', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('e9d84211ce5745bda8510dd47f53b9ff', '德国', 'Germany', null, '7', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('ec3ec2bd16a7403b8c8c53443e27b652', '战争', 'war', null, '21', '', '1', 'movieCat', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('f3bf2913a671485a8ae98923ccd7281b', '印度', 'India', null, '9', '', '1', 'area', null, null, null, null, null);
+INSERT INTO `t_dic_data` VALUES ('fa6f9de639c74690a42df73576db3f27', '灾难', 'disaster', null, '20', '', '1', 'movieCat', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_fwlog_history_2017
@@ -1799,9 +1858,12 @@ CREATE TABLE `t_fwlog_history_2018` (
 -- Records of t_fwlog_history_2018
 -- ----------------------------
 INSERT INTO `t_fwlog_history_2018` VALUES ('02607e46e3a54067bd09c3c71edf3ebd', '2018-04-24 14:36:26', '2018-04-24 14:36:25.0595', null, 'admin', '超级管理员', '4b3f0d63-d32c-4d11-b974-ea45e9495717', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
+INSERT INTO `t_fwlog_history_2018` VALUES ('092e9f73bda6451e99419d739dc6f010', '2018-05-15 10:28:25', '2018-05-15 10:28:24.0645', null, 'admin', '超级管理员', '0e3630d7-8eaa-4d62-9873-dead0b0040e3', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
+INSERT INTO `t_fwlog_history_2018` VALUES ('0a0c63f7ab28455b8416e7bb47633d5a', '2018-05-15 09:13:51', '2018-05-15 09:13:50.0830', null, 'admin', '超级管理员', 'd36cf3ca-4226-424d-ac12-903e8b9c1539', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('0ed602e8ecda43089f08519745f09922', '2018-05-14 10:51:18', '2018-05-14 10:51:17.0960', null, 'admin', '超级管理员', 'f39f9833-79b8-49dc-b57b-c1bc94fdf915', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('0fddf5be31874897b8fba54cf17c25c5', '2018-05-10 16:19:32', '2018-05-10 16:19:32.0183', null, 'admin', '超级管理员', '391aa727-f7fa-4dc9-a796-b2032de4f3a0', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('158cfe6ccdd5466fb9584306f734827b', '2018-05-14 11:15:22', '2018-05-14 11:15:21.0982', null, 'admin', '超级管理员', 'b2e79eee-aeb8-4c71-9f08-b985c794fd13', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
+INSERT INTO `t_fwlog_history_2018` VALUES ('1bdf15c9615c4e2aace4d623d733dd5c', '2018-05-17 10:28:13', '2018-05-17 10:28:13.0347', null, 'admin', '超级管理员', '3585c859-4a78-4373-9dcf-a131b8f3bec6', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('222d2d72cdae4e448f0090aecc6c86c1', '2018-05-11 09:30:04', '2018-05-11 09:30:03.0935', null, 'admin', '超级管理员', '22f261a1-50c3-448b-b423-95b01e0ee0b3', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('22899ffb8ead4c83832a13ecec359b71', '2018-04-26 11:20:38', '2018-04-26 11:20:38.0400', null, 'admin', '超级管理员', '710ea154-9688-4076-90cc-348f5457138b', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('25cef1e592e14c6395fcc452ef63fa37', '2018-05-10 11:55:59', '2018-05-10 11:55:58.0950', null, 'admin', '超级管理员', '339badfb-5b63-4e39-b73a-967190ec8f4e', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
@@ -1813,15 +1875,19 @@ INSERT INTO `t_fwlog_history_2018` VALUES ('30321cebac454472951552e8e00677af', '
 INSERT INTO `t_fwlog_history_2018` VALUES ('341acf861aa94b30ab76893b949558db', '2018-04-24 15:01:23', '2018-04-24 15:01:23.0360', null, 'admin', '超级管理员', '45306b15-f8fc-4667-bef4-59bfc614394c', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('35bbdc55c391455b89c6b55c27015f96', '2018-04-24 16:13:15', '2018-04-24 16:13:14.0829', null, 'admin', '超级管理员', '8a2898dd-fab1-482b-ab7a-6f36339322b9', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('3692959a6f514da1baa2c25d372c7fdb', '2018-04-24 15:22:11', '2018-04-24 15:22:10.0667', null, 'admin', '超级管理员', 'f99dc9d9-12ae-499e-a3ee-d9b6b0fc3108', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
+INSERT INTO `t_fwlog_history_2018` VALUES ('3ce8dd735d274c9f82f0e4f86d2691cb', '2018-05-17 17:50:11', '2018-05-17 17:50:10.0521', null, 'admin', '超级管理员', 'e65823e9-eb2f-46ce-b2d1-76baeec27690', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('3e25f6cc34b54bd3b6b42633e05a5262', '2018-04-25 16:01:59', '2018-04-25 16:01:59.0048', null, 'admin', '超级管理员', 'bfb24bd9-5ee7-46e9-8cdf-ee7af4906388', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('4262d75a7f1b4331b2b9798960e64fe7', '2018-05-10 16:09:58', '2018-05-10 16:09:58.0324', null, 'admin', '超级管理员', '8e1cfd9c-055e-4081-8baa-2f26127fb2be', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('48e84befa6f5420590a3e8714d1ce315', '2018-04-26 16:07:06', '2018-04-26 16:07:05.0576', null, 'admin', '超级管理员', '0b439f10-1fc5-49f2-a7e1-898a96c9c2dc', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('4f5bdb2bc87740e49bb06f537af4f1ee', '2018-05-10 11:06:38', '2018-05-10 11:06:37.0898', null, 'admin', '超级管理员', '150a5b5b-2c97-4e28-b317-b472198e408e', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
+INSERT INTO `t_fwlog_history_2018` VALUES ('51bb6f19e4664de0b4ad72d2a6cf6c82', '2018-05-15 10:27:34', '2018-05-15 10:27:33.0614', null, 'admin', '超级管理员', 'fda93a40-2a96-4024-a478-25cea1ec7fe0', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('559a25f243fb418983c682de58b5499c', '2018-04-24 15:13:45', '2018-04-24 15:13:45.0467', null, 'admin', '超级管理员', 'f99dc9d9-12ae-499e-a3ee-d9b6b0fc3108', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
+INSERT INTO `t_fwlog_history_2018` VALUES ('5da662bb1c3640aca56d0d4081f5fdd4', '2018-05-15 16:46:30', '2018-05-15 16:46:30.0409', null, 'admin', '超级管理员', 'fa37cf98-634a-4c04-b4d7-c22f10c7a199', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('5e9c0e1fcb6346aa93829dffdacc95e3', '2018-04-26 14:14:11', '2018-04-26 14:14:10.0715', null, 'admin', '超级管理员', 'a1bfd9eb-cb09-43f3-b9be-21ff1acec6d7', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('6a058df2a49045f791d289a08b4a4b01', '2018-04-26 09:54:47', '2018-04-26 09:54:46.0681', null, 'admin', '超级管理员', 'bc9aad5f-4b5e-4463-8546-eb129ed9a4db', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('6b3a75e4d0364f7f8c17d0e324b7199f', '2018-05-11 16:12:14', '2018-05-11 16:12:14.0473', null, 'admin', '超级管理员', '769d36db-e32e-4e6a-81fe-2873e763358f', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('6cb8e806775b4da286b9f177c921d5af', '2018-04-26 14:20:45', '2018-04-26 14:20:45.0292', null, 'admin', '超级管理员', '5b852f5f-1073-485a-acf0-29f1db644792', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
+INSERT INTO `t_fwlog_history_2018` VALUES ('7163179b7ea0468c9f129caccec1a4ca', '2018-05-15 15:30:49', '2018-05-15 15:30:48.0717', null, 'admin', '超级管理员', 'c018d5d5-431c-4c70-84f5-295af84223ca', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('76e403a4e673449d967d7c53b958b207', '2018-04-26 13:36:52', '2018-04-26 13:36:52.0228', null, 'admin', '超级管理员', '5b2da408-baee-444e-b9a3-ad15376e820b', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('7b10e5c970354a6987b1f2d9b7c7db54', '2018-05-11 17:06:25', '2018-05-11 17:06:25.0113', null, 'admin', '超级管理员', '8bc1fdd3-72bb-46bf-a47d-18a45a946a1c', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('7b197b26f42c490abe5b76b188387ea8', '2018-05-14 16:28:10', '2018-05-14 16:28:09.0738', null, 'admin', '超级管理员', '32556ce4-d7b5-4401-876a-5dd7a1b3af54', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
@@ -1833,6 +1899,7 @@ INSERT INTO `t_fwlog_history_2018` VALUES ('8adff044e65a49d2b3975d66efaa5668', '
 INSERT INTO `t_fwlog_history_2018` VALUES ('8b9f566fa5974572adf7310afc1df80c', '2018-04-24 14:40:35', '2018-04-24 14:40:35.0093', null, 'admin', '超级管理员', '9b17e3df-bbef-4035-b1be-940524574b1f', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('8e3886ddfa4b4bf4809709e35185fdaa', '2018-04-26 14:02:55', '2018-04-26 14:02:55.0467', null, 'admin', '超级管理员', '2fa0e637-465f-44d1-b888-ee1bbf6b3389', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('9a471adeab0b4b72b5735da49d2518f2', '2018-04-26 16:02:05', '2018-04-26 16:02:05.0494', null, 'admin', '超级管理员', '5d3973dd-4fcb-49d7-86d7-9f774c18dbe9', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
+INSERT INTO `t_fwlog_history_2018` VALUES ('9d659e50e35046b2a1d87b13697e1ee8', '2018-05-15 10:27:00', '2018-05-15 10:26:59.0807', null, 'admin', '超级管理员', '95f4aede-ac4f-46cc-a5e9-773208e958fa', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('a4fbbd9b0dec41208ea190e8380e2cd4', '2018-04-24 15:22:09', '2018-04-24 15:22:09.0290', null, 'admin', '超级管理员', 'f99dc9d9-12ae-499e-a3ee-d9b6b0fc3108', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('adcf0b56d74743e0978d85861daf5d1f', '2018-05-10 16:22:13', '2018-05-10 16:22:13.0362', null, 'gaoyongqiang', '高永强', '0c40775a-ce59-4cf4-8ed5-df41a9a9c711', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('ae19f8728f054e9589d6cd9ea9c8aee9', '2018-05-10 16:12:25', '2018-05-10 16:12:24.0768', null, 'admin', '超级管理员', '41e6e136-a891-4956-a294-10995d8e24f4', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
@@ -1843,6 +1910,7 @@ INSERT INTO `t_fwlog_history_2018` VALUES ('c7e548c079b6448186e917ba71539042', '
 INSERT INTO `t_fwlog_history_2018` VALUES ('caaa9ae1c84f45e58e8bef629faabcdd', '2018-04-26 15:14:56', '2018-04-26 15:14:56.0296', null, 'admin', '超级管理员', 'ac97c40d-135b-48c5-b489-f3e074cc9aaf', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('d19fe80f214b414f98e438f04eae503d', '2018-04-26 13:37:32', '2018-04-26 13:37:31.0672', null, 'admin', '超级管理员', '08f10524-b098-446b-b3cc-e7320cb2dff1', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('d5d4317795b94f74903063b9f825dc45', '2018-05-11 17:02:19', '2018-05-11 17:02:18.0550', null, 'admin', '超级管理员', '5d7bdf3d-81b1-4e4c-a3f6-9e0470033c13', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
+INSERT INTO `t_fwlog_history_2018` VALUES ('da4e89168f994719ae121d8570ffddc8', '2018-05-15 10:29:03', '2018-05-15 10:29:03.0133', null, 'admin', '超级管理员', '1465e5ae-731d-4887-9407-976a6c1cd617', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('ddd9ca6fdb84482b911409db373cd366', '2018-05-10 11:30:12', '2018-05-10 11:30:12.0137', null, 'admin', '超级管理员', 'dd0336a2-4550-4a2f-850a-d3758953cf04', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('ed387f77350d4864832600d036c71f53', '2018-04-24 15:02:58', '2018-04-24 15:02:57.0567', null, 'admin', '超级管理员', '45306b15-f8fc-4667-bef4-59bfc614394c', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
 INSERT INTO `t_fwlog_history_2018` VALUES ('eee414012e3340edba2ef50f1929c2a6', '2018-05-14 11:12:46', '2018-05-14 11:12:45.0794', null, 'admin', '超级管理员', 'cca518db-8830-4bc1-bb26-56fbf807970a', '127.0.0.1', 'http://127.0.0.1:8080/springrain/system/index', null, '否', null, null, null, null, null);
@@ -1880,6 +1948,7 @@ CREATE TABLE `t_menu` (
 -- ----------------------------
 INSERT INTO `t_menu` VALUES ('0e65fd142f3545f685b0641e47cce9db', '树形结构', 'm_content_category_list', '', '/system/contentcategory/tree', '0', '1', null, '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('169815aca9cf41d390e7feb6629d361d', '栏目管理', 'business_manager', '', '/system/cms/channel/list', '1', '1', '4', '&#xe60a;', null, null, null, null, null);
+INSERT INTO `t_menu` VALUES ('1af3df57f05946d298d9b8cef1ff499b', '国家管理', 'dic_manager', '', '/system/dicdata/area/list', '1', '1', '11', '&#xe617;', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('34879cc1f1db43da91d51fe33771902b', '展示类目', 'm_movie_list', '', '/system/dicdata/movieCate/tree', '0', '1', null, '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('3488d32dca4f46498879ef6850c05a1b', '修改类型', 't_dic_data_movieCat_list', '', '/system/dicdata/movieCat/update', '0', '1', '3', '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('3501ed1e23da40219b4f0fa5b7b2749a', '菜单列表', 't_menu_list', '', '/system/menu/list', '0', '1', null, '', null, null, null, null, null);
@@ -1888,15 +1957,20 @@ INSERT INTO `t_menu` VALUES ('482a55387095474db4cea8b852ff8662', '删除电影',
 INSERT INTO `t_menu` VALUES ('49f909712c084593a6fa4cbc73bb3940', '类型树形结构', 't_dic_data_movieCat_list', '', '/system/dicdata/movieCat/tree', '0', '1', '2', '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('4adc1e3e3e244c0991d9dab66c63badf', '目录创建', 'f5203235547342f094a2c126ad4603bb', '', '/system/file/uploadDic', '0', '1', '2', '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('5442d67bcdf8401da675bb5e09650f36', '测试用例', 'business_manager', '', null, '1', '1', null, '', null, null, null, null, null);
+INSERT INTO `t_menu` VALUES ('582368b6b55d4f2380e6f96dba8b2da1', '修改国家信息', '1af3df57f05946d298d9b8cef1ff499b', '', '/system/dicdata/area/update', '0', '1', null, '', null, null, null, null, null);
+INSERT INTO `t_menu` VALUES ('5e7726517dd9455f909ddf1ae41ff71e', '删除国家', '1af3df57f05946d298d9b8cef1ff499b', '', '/system/dicdata/area/delete', '0', '1', null, '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('6badb804554a48abb181122c4d112fd7', '批量删除电影', 'm_movie_list', '', '/movie/delete', '0', '1', null, '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('7cd0678633d5407dba2bd6a1553cadce', '文件下载', 'f5203235547342f094a2c126ad4603bb', '', '/system/file/downfile', '0', '1', '3', '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('91779a0d304f4b91932b63dec87a8536', '角色管理-系统', 'system_manager', '', '/system/role/list/all', '1', '1', null, '&#xe60a;', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('962b358325644fc7807655434eaf2c2f', '查看电影类型', 't_dic_data_movieCat_list', '', '/system/dicdata/movieCat/look', '0', '1', '1', '', null, null, null, null, null);
+INSERT INTO `t_menu` VALUES ('97b9c005fd4348d5aafd241eb02d44a2', '查看国家', '1af3df57f05946d298d9b8cef1ff499b', '', '/system/dicdata/area/look', '0', '1', null, '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('b94392f7b8714f64819c5c0222eb134a', '角色修改-系统', 't_role_list', '', '/system/role/update/admin', '0', '1', null, '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('b9c4e8ecffe949c0b346e1fd0d6b9977', '内容管理', 'business_manager', '内容管理', '/system/cms/content/list', '1', '1', '5', '&#xe63c;', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('business_manager', '业务管理', null, null, null, '1', '1', null, null, null, null, null, null, null);
+INSERT INTO `t_menu` VALUES ('c59d2bc1915c4c5289d93a9b0f21b886', '类型树结构', '1af3df57f05946d298d9b8cef1ff499b', '', '/system/dicdata/area/tree', '0', '1', null, '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('ca152df1a7b44d4f81162f34b808934a', '验证老密码', '36ab9175f7b7423eadda974ba046be05', '', '/system/user/modifiypwd/ispwd', '0', '1', null, '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('ca28235dbd234b7585e133e70cc7999a', '文件上传', 'f5203235547342f094a2c126ad4603bb', '', '/system/file/uploadFile', '0', '1', '1', '', null, null, null, null, null);
+INSERT INTO `t_menu` VALUES ('cb9d08e091594103b9398c663f3809eb', '批量删除国家', '1af3df57f05946d298d9b8cef1ff499b', '', '/system/dicdata/area/delete/more', '0', '1', null, '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('cff2f1826ed94f2fab692f940214d4e2', '删除类型', 't_dic_data_movieCat_list', '', '/system/dicdata/movieCat/delete', '0', '1', '2', '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('d1d9c37f5dec498fba82122993da6cf3', '批量删除类型', 't_dic_data_movieCat_list', '', '/system/dicdata/movieCat/delete/more', '0', '1', '4', '', null, null, null, null, null);
 INSERT INTO `t_menu` VALUES ('d6abe682007849869c3a168215ae40d4', 'WEB-INF文件管理', 'system_manager', '', '/system/file/web/list', '1', '0', '7', '&#xe61d;', null, null, null, null, null);
@@ -2080,171 +2154,177 @@ CREATE TABLE `t_role_menu` (
 -- ----------------------------
 INSERT INTO `t_role_menu` VALUES ('016870cef251455cb8bd7de953407761', '14a9fc454b3e44b095f06439f18b00f6', 'tc_validaterule_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('01f6723f2c54417bb62ada739d353007', '14a9fc454b3e44b095f06439f18b00f6', 't_user_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('026f7a01e8b344a0baa759c69d9d5ad6', 'r_10001', 'tc_htmlfunction_export', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('053cd2735b9b41c9ac1bd132ea2d2202', 'r_10001', 't_org_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('0bf9e440fe0c45f29617c83476911020', 'r_10001', 't_dic_data_grade_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('0213c14d9c824ce782959079870b0bf7', 'r_10001', 'e51808e351c24a7e9fb4d47392930a2d', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('0445f45ca8744180a217f3522b542de7', 'r_10001', 'system_manager', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('04aca60d863344d6982dc22eeeae3061', 'r_10001', 'dic_manager', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('07b4cd49c8484327a932ae8e43b04fae', 'r_10001', 't_dic_data_xueli_tree', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('0953888a93844068aeda30bd4e36b160', 'r_10001', '36ab9175f7b7423eadda974ba046be05', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('0a3d10f7efd44c1faa87c0112790137b', 'r_10001', 'm_movie_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('0d5f101a8ba84cd3863f17921e6300cf', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfield_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('0f2c6b55088e4cc9b318d2ba998b08cf', 'r_10001', 't_auditlog_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('13d4591717274b519597d3a959edb1f9', 'r_10001', 't_dic_data_grade_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('178c0355f3114700abbcda111c57d963', 'r_10001', 'tc_htmlcase_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('1b76a312f7c64a17ab27fd3804229fa6', 'r_10001', 'tc_htmlfield_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('1c14fc4df751461facc69029b4264658', 'r_10001', 't_dic_data_grade_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('1d1f7e4c4878480eb58fce436e821816', 'r_10001', 'tc_validaterule_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('1fbe6cb655744f34870358a6db623bba', 'r_10001', 'm_content_category_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('229a4e8f6ff4491b8a17b4df31d59756', 'r_10001', 't_dic_data_grade_tree', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('24388b3aee45428399f42e15fca1e1c1', 'r_10001', 't_role_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('0dc0f0fecc844bdb940e82bd1b2393be', 'r_10001', 't_menu_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('0e746ae954c543ffbfbbae82d9df6225', 'r_10001', 'c59d2bc1915c4c5289d93a9b0f21b886', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('117ded086d12428e8611a4ba05655bbf', 'r_10001', 'tc_htmlfunction_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('138c37392a304cd7ad4f3dfe295541ca', 'r_10001', 'tc_htmlfield_upload', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('14b05fa6710145ef9e46fc388cd5568e', 'r_10001', 't_menu_tree', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('16eeb6fe40364029828960662c376245', 'r_10001', 'm_content_category_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('1844b10d2e8e47e99256e536de61a1ae', 'r_10001', 't_dic_data_minzu_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('1992544cc3624bc9aaf66bca2c6a1f15', 'r_10001', 't_role_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('1edb158a428743749977433aea4cc5b3', 'r_10001', 'tc_validaterule_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('1fd984c966074e718a26891c51751b51', 'r_10001', '5442d67bcdf8401da675bb5e09650f36', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('21746d35896142f29c5aee3d39c5282e', 'r_10001', '582368b6b55d4f2380e6f96dba8b2da1', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('220eb496eae24f3d8842c13e1e55fda0', 'r_10001', '0e65fd142f3545f685b0641e47cce9db', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('240f642652784197bbe1be287d7efc38', 'r_10001', '169815aca9cf41d390e7feb6629d361d', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('2503c969b73d4a488b71277640020c7f', 'r_10001', '1af3df57f05946d298d9b8cef1ff499b', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('261c85d1b5754e2db2eb167e8ab66b47', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfunction_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('26445e1f11a34deb9cd4df7260576a15', 'r_10001', 't_menu_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('26685817f80240488d12c0ccd0aada56', 'r_10001', 'm_content_upload', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('26b44aa8a85e4d8c8951b7d6d8ebdd8d', 'r_10001', 't_dic_data_xueli_list', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('277493618bd242cf9ff6a6a7a62df2dc', '14a9fc454b3e44b095f06439f18b00f6', 'tc_validaterule_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('2820074297fd438e8fb6ecc9cfade3c2', 'r_10001', 'm_content_category_deletemore', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('28549e76ffb842fcbb1f7fe09ef3f0d6', '14a9fc454b3e44b095f06439f18b00f6', 't_org_tree', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('2bdd98464bf24dacbf78a732c27bee53', 'r_10001', 'm_movie_export', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('2cb8ae18e5c44be69f6d6aa04542d166', 'r_10001', 'm_content_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('2b84443bc8a24513b5d23d669bc90857', 'r_10001', 'm_content_category_export', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('2d7ae640a53e4f2cb9819de6ab825d9e', '14a9fc454b3e44b095f06439f18b00f6', 'f41b9f3b4a0d45f5a3b5842ee40e0e96', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('2ef7de150a334cc78541acec94e18259', '14a9fc454b3e44b095f06439f18b00f6', 't_user_list_export', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('2f64bc5003b54cafae23c25a2fa9fbfa', 'r_10001', 't_menu_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('2ff61e58284d45f6862ca12eecd98e82', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfunction_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('34010dc4c6ac41f7886ff5b3c01e3644', 'r_10001', 't_org_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('303cc7cda4114435ac6f7eff5f8f949a', 'r_10001', '3501ed1e23da40219b4f0fa5b7b2749a', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('31d60e2c41f547aa974bea6a1582ad34', 'r_10001', 't_user_deletemore', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('3408f78c931f412681dedc8ff4e10c23', '14a9fc454b3e44b095f06439f18b00f6', 't_user_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('35c5815737a143d7a05f4c3716b26eb2', 'r_10001', 'tc_htmlfield_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('351a59edca914956ab2730efb08a54a2', 'r_10001', 't_dic_data_minzu_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('3535f0bba40a40648d86aac55e108b16', 'r_10001', 't_user_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('35f1c45ce1654ad997b671574d032823', 'r_10001', 'm_content_category_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('37a2731022954c2a91bf4e39e54a1880', 'r_10001', 'tc_htmlfunction_upload', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('37f4181dfa4d48a695bca0e788ce3bdd', 'r_10001', 't_role_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('383f2ac3d9de4211b4afb1d6092bc3b9', '14a9fc454b3e44b095f06439f18b00f6', 't_org_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('389024350d91422488c94c4b027bc278', 'r_10001', 'tc_htmlfield_export', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('3a72583396904a018ea8de424c10b83e', 'r_10001', 't_dic_data_minzu_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('3c8a55e3e1144bc2a72731aded8c084b', 'r_10001', 't_user_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('38bf97144f8241efbb4e141bb554f09c', 'r_10001', 'm_content_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('3b10897683c14c6292d845813cb19470', 'r_10001', 'f41b9f3b4a0d45f5a3b5842ee40e0e96', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('3d7cc33c65b04dec973197a35cf5313c', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfield_upload', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('3e7129e29a1d48878531bbe405cd06de', 'r_10001', 'tc_htmlfunction_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('3f3982db81154ca3886243da57bdf892', 'r_10001', 'ca28235dbd234b7585e133e70cc7999a', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('3fa1891304f44e7c8d8fb3f1ceeda05e', 'r_10001', 'tc_htmlcase_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('407a88ae2e524442b8ead30b393e286b', 'r_10001', '36ab9175f7b7423eadda974ba046be05', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('3dc8492a980947ed9638ddbe3b325c45', 'r_10001', 'tc_htmlcase_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('406aab5fc7114b989d76745377849edf', 'r_10001', 'tc_htmlfunction_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('40762264f595466faef6d76c90edcd33', 'r_10001', 't_dic_data_grade_deletemore', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('4101649dd613485dbf0e1d8c380c4a48', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlcase_look', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('41b892345d8a4ae591d150c19ac93ca4', '14a9fc454b3e44b095f06439f18b00f6', 'b9c4e8ecffe949c0b346e1fd0d6b9977', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('41dd638d199a4fa0a29c1e7830158f2f', 'r_10001', 'tc_validaterule_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('41e969833430404b8dbddf9cb2822b3e', 'r_10001', 'tc_htmlfield_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('420edee1d3894af19432baa540e0ab91', 'r_10001', 'm_movie_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('4291f654fe8c472d959e0f1e8b1785b2', 'r_10001', '49f909712c084593a6fa4cbc73bb3940', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('42dce081bf3b48f18847a817d5e568e0', 'r_10001', '3488d32dca4f46498879ef6850c05a1b', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('446b87b53c8d4824871f1d154efd5517', 'r_10001', 'tc_htmlfunction_upload', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('44d82f6cc93445ceb412970f3a28fbab', 'r_10001', 't_auditlog_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('45a467d7ebf046ad8ed36d125065af35', 'r_10001', 'dic_manager', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('4823354cef4a4793b2418a31d678775e', 'r_10001', '0e65fd142f3545f685b0641e47cce9db', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('49ff9f15ce174675807df9c6958f41fc', 'r_10001', 'm_content_category_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('4a1e5a276bea4bfc8b581ec334ae819c', 'r_10001', '169815aca9cf41d390e7feb6629d361d', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('461e51d98c8d4f02b0135608ceb24abb', 'r_10001', 't_dic_data_grade_tree', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('4667bd8705fd46c8b64b08a06948e30b', 'r_10001', 'business_manager', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('47181a87bbb4494a840bf054ba600f6b', 'r_10001', 't_user_list_export', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('4aa928d401b842d9b285ca8c680b09df', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfunction_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('4b43e3f5a95948f88ed6369364d358b2', 'r_10001', 'tc_validaterule_upload', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('4d84d7dcf5ff47d592531121b89d57af', 'r_10001', '5442d67bcdf8401da675bb5e09650f36', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('4e66d46c7ea040e49c1afdfca569f568', 'r_10001', 't_dic_data_xueli_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('516e22d9102b4d00bf8db1e2a114c9fb', 'r_10001', 't_dic_data_minzu_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('4c1c5b28d5734abbab50407a1a0efb7a', 'r_10001', 'm_movie_export', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('4d09228e1a2348fa848648b3b9677878', 'r_10001', '97b9c005fd4348d5aafd241eb02d44a2', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('4e724366ba364284ba923e03fb8b08dd', 'r_10001', 'ca152df1a7b44d4f81162f34b808934a', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('4f6a285bc9564b56bc5cf722ab884892', 'r_10001', '91779a0d304f4b91932b63dec87a8536', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('505b817f0df448529048f53b1bc187ef', 'r_10001', 't_dic_data_minzu_tree', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('514236690f954ae7b45c60a276b82c4f', 'r_10001', 't_org_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('51646a188bd54fa58b07c281d1b2a1e5', 'r_10001', 't_dic_data_minzu_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('533e079445e74f53976704e34a0c804d', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfunction_upload', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('55f3aaa85bcb424d9b1e8333a5e3804c', 'r_10001', '6badb804554a48abb181122c4d112fd7', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('536878b58e0548c689daf10777619bab', 'r_10001', 't_auditlog_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('54a8aace17884f96aaeee6cf4b8b9e31', 'r_10001', '49f909712c084593a6fa4cbc73bb3940', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('57e824ff83a546b6b42f0650f3a1dac2', '14a9fc454b3e44b095f06439f18b00f6', 'tc_validaterule_export', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('57ea1bc1e24b44f98ae854d0f78b013a', 'r_10001', '3501ed1e23da40219b4f0fa5b7b2749a', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('58d6dd8b19874a26b1cdfa228097492b', 'r_10001', 't_menu_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('58e67ff9dc7a4275b28ec8662498b944', 'r_10001', 'tc_htmlcase_upload', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('590cb80a4f27431c901b8ad7dc3bd13d', 'r_10001', 't_org_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('59a6843ace704ce991685bcc4eae7ac7', 'r_10001', 'tc_htmlcase_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('5a19a8a3324441e5afb8482d7368103f', 'r_10001', 't_dic_data_grade_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('5afd18551c3d4080a0cfc3f1ae207e04', '14a9fc454b3e44b095f06439f18b00f6', 't_org_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('5c0a6195cd83464e8ba9f09ee49a1ed3', 'r_10001', 't_dic_data_xueli_tree', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('5ceb228290334d9a9b23bcfe4fc229a0', 'r_10001', 't_role_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('5e1652be529d4c8a8a5101408cf34543', 'r_10001', 'system_manager', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('5e831e348d0147038751c8d1c89ad19a', 'r_10001', 't_dic_data_grade_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('5b7e9a31d7af4e2e8bba7921b8d92e6b', 'r_10001', 't_dic_data_xueli_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('5e91e36438874ed2987a5e06d62dc470', 'r_10001', 'tc_validaterule_look', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('60bcbc520e46427085957f5800dd0714', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfunction_export', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('61c45c7eaadd487b83ff4932920a2803', 'r_10001', 'd6abe682007849869c3a168215ae40d4', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('620444bfae204218bc2aa6b229579f35', 'r_10001', 'f5203235547342f094a2c126ad4603bb', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('6322f2cc9cae4616837806a3a8bc7d45', 'r_10001', 'tc_htmlcase_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('61619755975548139d1cc2d55e67ec0e', 'r_10001', 't_user_update', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('6254f647a88d469ca6439224326ba477', 'r_10001', 't_menu_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('62562ba644c74505a57d80ca2ab42ee2', 'r_10001', 'm_content_category_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('6354ede734784eb9a20241ac31584cfa', 'r_10001', 't_role_list', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('636eace30c6a4f42bcaab0dd9c4b9144', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlcase_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('63b1f12560b84365869498a7519e4e52', 'r_10001', 'tc_htmlcase_export', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('67662a92e0834d778402fbc1cb85cd1e', '14a9fc454b3e44b095f06439f18b00f6', '5442d67bcdf8401da675bb5e09650f36', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('6bfd89f715c14ffca2824d3908b37512', 'r_10001', 't_dic_data_xueli_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('679ddf719aaf4b4995f3e5555b108276', 'r_10001', '6badb804554a48abb181122c4d112fd7', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('6b06e80ef9d748e191058d5b012d87ae', 'r_10001', 't_fwlog_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('6be12479d4484896882f977c6b5b2c57', 'r_10001', 'cff2f1826ed94f2fab692f940214d4e2', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('6c9502bda6b34d11a77fb4a2d4b5ae31', '14a9fc454b3e44b095f06439f18b00f6', 't_org_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('6f1ccbc549b04cf0b2199bd09ec76d80', 'r_10001', 't_user_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('7124df18552741248306e9cf4bf17251', 'r_10001', 't_dic_data_minzu_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('72eba80f1d99436f9621819a0f89bf56', 'r_10001', 'm_content_category_export', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('7717c3ac12944ef3b0b5dea88dd7b72f', 'r_10001', 'd1d9c37f5dec498fba82122993da6cf3', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('6d190a77c3044a15a223ad4b4c2d33ad', 'r_10001', 'm_content_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('6da2b7b6859f4202981de974cec19d13', 'r_10001', 'tc_htmlfunction_update', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('7019d4901cf34f2c8c2ad56440c3df84', 'r_10001', 'tc_htmlfunction_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('7150eeb1d62049389c7e3349cdc9c1af', 'r_10001', 'tc_htmlfield_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('747c45fcc78f4939ab0f62b405f48647', 'r_10001', 't_role_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('752e07efd8c84e8098caec2f9e1c565b', 'r_10001', 'tc_htmlcase_export', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('77a99bea186645e6a21fc0bea35b2311', '14a9fc454b3e44b095f06439f18b00f6', 'tc_validaterule_upload', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('7851263192e4479aa12d1c6172ad49c9', 'r_10001', 'business_manager', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('790cc55552ea4125a8578325ce74a12d', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlcase_delete', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('7af120ec01db4ea38940ddc8b6c1bc77', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfunction_list', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('7daf5ccbade043048ee384ea02f7e439', '14a9fc454b3e44b095f06439f18b00f6', 'tc_validaterule_look', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('7e85aa1ade8a44f5b451deb52ef61806', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfield_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('7ea2664d80dc4e5f984f3e4701827a42', 'r_10001', 'tc_htmlfunction_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('7f5788e8bc424ba587641ef036375f0d', 'r_10001', '7cd0678633d5407dba2bd6a1553cadce', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('7f95b8cfd3ea4d79acb6e9588f45b71e', 'r_10001', 'm_content_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('7ee2fd6acddf40b993750705c3925319', 'r_10001', 'tc_validaterule_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('7fc708ae798c41f792381258560a7482', 'r_10001', 'm_content_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('800ba3b8e589403fab9209bc4d6904f4', '14a9fc454b3e44b095f06439f18b00f6', 't_user_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('81964676eae54841a8accc3121b32ccf', 'r_10001', 'tc_htmlfunction_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('82dfa6616e6d4e0cb5093db492501b48', 'r_10001', 'm_content_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('8413f7264d2b441f9e6daf898f12a6b9', 'r_10001', 'tc_htmlfunction_delete', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('849dd94094fd47a6b4f6e1b5cc8c68e9', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlcase_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('84a3f082754b41c9b03a75bb16730f5e', 'r_10001', 't_dic_data_minzu_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('84cbd6b4cf4b4383b175d7108883a462', 'r_10001', 't_menu_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('898e5a86854d4108992071562eca6519', 'r_10001', 't_dic_data_minzu_tree', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('8baa1737d2e2432c8adf793afae713eb', 'r_10001', 'm_content_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('87349e08ebab40c9bfd5c8c27d78cd70', 'r_10001', 't_dic_data_xueli_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('8a93c09792874f4aa1456fb0e04487c2', 'r_10001', 'tc_htmlfunction_export', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('8b62c1e1281442439760185ddcf52c50', 'r_10001', 'tc_htmlfield_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('8bbde07bfed440b3a29682c0886730d8', 'r_10001', 't_org_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('8c31171988614ff98dec959832a350ed', 'r_10001', '962b358325644fc7807655434eaf2c2f', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('8c584bb371354431b19421211c9a2ffd', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfield_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('8d304cfdac4a43699dc21ffd06480fd0', 'r_10001', 't_menu_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('8d79519eed4848539895c47d7f9506cd', 'r_10001', 'm_content_category_look', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('8e3db65c52ff4b5bb435d05267d32f33', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfunction_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('939dbaed60cd45eabbb11df168d46301', 'r_10001', 'm_movie_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('94401af51078472ebaf30a470d3fa9bf', 'r_10001', 't_menu_tree', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('8f54d9aa04214752849ef9ab689ebcea', 'r_10001', 't_dic_data_minzu_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('8f969a0f25cc4abda8101763d59e71cf', 'r_10001', 't_dic_data_xueli_update', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('8ff86fc547e049bd8070d5df9dbbfb84', 'r_10001', 't_auditlog_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('90b14a78130b4d23822e8c32fb906ae3', 'r_10001', 't_dic_data_minzu_deletemore', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('94482b0f2e4c4a6e807e6f5faf4bc3df', '14a9fc454b3e44b095f06439f18b00f6', 'tc_validaterule_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('955f847028804a879a36f5cace91dcb2', 'r_10001', '91779a0d304f4b91932b63dec87a8536', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('94a2b25d67d64a2e85b60f854d64ae0f', 'r_10001', 'tc_validaterule_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('95971522a78e44e6847b433f741967d4', '14a9fc454b3e44b095f06439f18b00f6', 't_org_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('96156afddb7841f3a765c516efcca247', 'r_10001', 't_dic_data_movieCat_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('985f146504564f9796b7a76331862037', 'r_10001', 't_org_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('986a7ddd3d2a40d0ac6654a4623b96ea', 'r_10001', 'm_content_category_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('99d27f3d46e94143821948b5a61edc68', 'r_10001', 't_dic_data_xueli_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('9ece81cf11fc465fb00d521ebf5f15ee', 'r_10001', 'tc_htmlfield_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('97f58eb61e934370bc1bf6fa8c849ce5', 'r_10001', '5e7726517dd9455f909ddf1ae41ff71e', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('99dfa154325e4dd0aa0301b00f92da2b', 'r_10001', 't_dic_data_grade_look', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('9ed5b435d07c4610bf2b3f3478a4c6ef', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfield_export', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('a040ce1325574eea8a5da2dc64214d57', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlcase_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('a2ede0b41f1a4afd9f06e63f72fbb34a', 'r_10001', 'tc_htmlcase_upload', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('a37e907dcd154dc68d05ff6cdb736dd4', 'r_10001', 'm_content_export', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('a3b9ccdad4fb4909a15025694644a8c8', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfield_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('a5088f23627a4474a02fee129940497c', 'r_10001', 't_role_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('a4d5603ee7974aaa8de90a5289b309bc', 'r_10001', 'm_movie_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('a578f055ded9470f9c09a206eb4487ea', 'r_10001', 'tc_htmlfield_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('a67ad6e64227463e9ebe24aa6f6dde41', 'r_10001', 'tc_htmlfield_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('a924512136e247718e1b2f07d36e263c', '14a9fc454b3e44b095f06439f18b00f6', 't_user_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('ac33f09ca8724d50bdf06650decf3c60', 'r_10001', 'm_content_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('ac68a69b5d85499ebf04b78fe769dd2b', 'r_10001', 'tc_htmlcase_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('adac45d366714490a76b7a674c745592', 'r_10001', 'ca152df1a7b44d4f81162f34b808934a', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('ab8f6f1fe0d646228c611ad1ce8f1ed5', 'r_10001', 't_role_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('adc136325c2a4cb4bb3cbc3ee1f59b42', 'r_10001', 'f5203235547342f094a2c126ad4603bb', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('ae2596b4221c4cc5947cb1ba6a7eaff1', 'r_10001', 'b94392f7b8714f64819c5c0222eb134a', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('aec8f157150942ad97e79672f18db339', '14a9fc454b3e44b095f06439f18b00f6', 'tc_validaterule_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('af88dcdae874401b8cb91234426473a9', 'r_10001', 'm_content_category_upload', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('b1cec743a205422187f3ac20f104dd8c', 'r_10001', 'm_content_look', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('b408550a2a2d47b28273437d2ea9afb4', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlfield_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('b4c4ea8c5ec142c4ab8a4c0dc6082088', 'r_10001', 'm_content_export', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('bbcd540c88f74cfa9719d60675541212', 'r_10001', 't_fwlog_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('bc9726f67be3488fae8680f64e8d3136', 'r_10001', 'tc_validaterule_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('b4ee482ac9f64f1395d127653a7596b4', 'r_10001', 'm_content_category_upload', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('b56066e7facf48bfa95f88679569432a', 'r_10001', 't_org_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('b6ec91c8f5e3467f997a00595a88b988', 'r_10001', '7cd0678633d5407dba2bd6a1553cadce', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('b7fbbd1a40194c69aebbbf37bbf18a6e', 'r_10001', 'd1d9c37f5dec498fba82122993da6cf3', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('b854ebf818154d6c9be90e6906a74e5f', 'r_10001', 'tc_validaterule_upload', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('bbe9020f058141b4b5d817aa1c37215f', 'r_10001', 'tc_htmlcase_update', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('bc707548dd2d43e98419b4bcd124f7fd', 'r_10001', '34879cc1f1db43da91d51fe33771902b', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('bebb126c162741cca465f92e076a60f8', '14a9fc454b3e44b095f06439f18b00f6', 'ca152df1a7b44d4f81162f34b808934a', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('c3d0ba2a98f44b29a8f1e9b2ec2fe893', 'r_10001', 'tc_htmlfield_upload', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('c43208c7e54c48ddb2147e75c7f0a4b2', 'r_10001', 'tc_validaterule_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('c6f7813842ee4ea4b721f930427b0856', 'r_10001', 'm_content_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('c872548170d24ae894857dba4097a581', 'r_10001', 'f41b9f3b4a0d45f5a3b5842ee40e0e96', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('cab4df627187400480346485e5700d0e', 'r_10001', 'tc_validaterule_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('cc28c4ff9e3743cbaf788fc3471e4bdd', 'r_10001', 't_dic_data_xueli_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('cc8465b79266490288b26517328ded25', 'r_10001', 't_user_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('cdec70426b624f6083be2b5a8725b56a', 'r_10001', 't_role_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('cffc82bfa8684c14adcf6ec4fb28e470', 'r_10001', 'tc_htmlfield_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('bed125db2c6b4d969d351d42dd63a141', 'r_10001', 'm_movie_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('bf86245973e04418992ca94e458793c8', 'r_10001', 't_dic_data_xueli_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('c2519f3c93a441169cbea735d3aa6ecf', 'r_10001', '4adc1e3e3e244c0991d9dab66c63badf', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('c32f28fbe1b8409d83ebe5f0475ea6b5', 'r_10001', 'tc_validaterule_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('c8f4da0015964ddf8c0e7f73ecdd7193', 'r_10001', 't_fwlog_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('cb54036c03994816bf236026a2e7d441', 'r_10001', '482a55387095474db4cea8b852ff8662', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('ce2fbb83300944b683539d7ae34ef174', 'r_10001', 'tc_htmlcase_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('ce330de7e3bc42f7afac86cbea029aa2', 'r_10001', 'tc_htmlfield_look', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('d112b02743634a85951eae08ca9125c2', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlcase_export', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('d1413bf308e248e1818db24f087f9bed', 'r_10001', 't_user_delete', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('d158ddcd9d2e47daae1079f48e3bca2a', 'r_10001', 'b9c4e8ecffe949c0b346e1fd0d6b9977', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('d18828f034f04bcf8cd4dab507d6a93e', 'r_10001', 'b94392f7b8714f64819c5c0222eb134a', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('d284f98d26dc4a6f838ff0decc29de28', 'r_10001', 't_org_tree', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('d2cd0c7407d94c42b7c202151efb7b17', 'r_10001', 'tc_htmlfunction_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('d63565d5505b482999bfc7481053bd03', 'r_10001', 't_org_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('d8ebb87b3ec745ffac283c3cd444963c', 'r_10001', 'tc_htmlcase_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('da68e0d1c6fe4493930ae51e54827081', 'r_10001', 't_dic_data_minzu_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('d2576ba1d0c8401c8ea152503c6d3c83', 'r_10001', '3488d32dca4f46498879ef6850c05a1b', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('d609dc9902c84e339fbbf5dc04b7cd52', 'r_10001', 'm_content_category_update', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('da98c53eb4554dd2819dc9e3b2dc541f', '14a9fc454b3e44b095f06439f18b00f6', '169815aca9cf41d390e7feb6629d361d', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('dc6c00d369ec4da885750f16dbab39b2', 'r_10001', 't_org_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('e11da76ebede46bf9824b14cee2a1be9', 'r_10001', 't_user_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('e1b116206e154e1cb390c739ae387dc6', 'r_10001', 't_dic_data_xueli_deletemore', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('e23e79e9be5542c1b48c9248bd17631a', 'r_10001', '34879cc1f1db43da91d51fe33771902b', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('da9ea879e45c4a8b9ef47a6eb50cdda7', 'r_10001', 't_dic_data_grade_delete', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('dcd8699ef8cb432d881841e41a80310e', 'r_10001', 'ca28235dbd234b7585e133e70cc7999a', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('ddec8979c4424494bd3dd0dea7724ec1', 'r_10001', 't_menu_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('debd5df30dcd405c9854a7bd2f514db2', 'r_10001', 't_menu_update', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('df0558fd62d24804b12ba9e8860adadc', 'r_10001', 't_org_update', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('df86659cb3114b58a8af0f0c8ee4fd75', 'r_10001', 't_org_tree', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('dfa95613e2b74fa1853051fd82a29537', 'r_10001', 'tc_htmlcase_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('e031c9c9088b4516b175758861267702', 'r_10001', 't_dic_data_grade_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('e39da500cb584236a77694c01cb4e5c1', 'r_10001', 't_user_delete', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('e6540ffe4a9647dfaa6db25eab844b25', '14a9fc454b3e44b095f06439f18b00f6', 't_user_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('e6b259c7ba194d838976169a125d0250', 'r_10001', 'cff2f1826ed94f2fab692f940214d4e2', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('e6f90bdc0f1a43f8acc0163c9fbb6903', 'r_10001', 't_menu_look', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('e8471d068a7c4112be28b77e19095eea', 'r_10001', 't_role_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('ebe27b3b729942b6b1e8e730b6a6e480', 'r_10001', '962b358325644fc7807655434eaf2c2f', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('ec6715a33a1c40809e4f2bbdd8987217', 'r_10001', 'e51808e351c24a7e9fb4d47392930a2d', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('ed48da3f22a94ac499062c48612b6393', '14a9fc454b3e44b095f06439f18b00f6', 'tc_htmlcase_upload', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('ee0f08de065549eb81d997ec00f97324', 'r_10001', 't_dic_data_grade_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('eed5b32b4c924298b8a228c3f6b2a762', 'r_10001', 'm_content_upload', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('efa43f194188480cbb5b25fea96c5282', 'r_10001', 'tc_htmlfunction_deletemore', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('ed97bf6656e043c2b23115c3c6858041', 'r_10001', 't_dic_data_movieCat_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('ef3a024eb3da4530833655d10b1d5104', 'r_10001', 'b9c4e8ecffe949c0b346e1fd0d6b9977', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('efa906e3df2444d6a230b5c24d119bc5', '14a9fc454b3e44b095f06439f18b00f6', 't_org_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('f019074677cf4f21bebc780ee42ce6dc', 'r_10001', 'm_movie_update', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('f0faece8dcb943f3ad4884281e17b4bb', 'r_10001', '482a55387095474db4cea8b852ff8662', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('f50f362b34f944099b0ae64c4f63e729', 'r_10001', 'm_content_category_list', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('f63980f543da4965bee985cbfd6f0d68', 'r_10001', '4adc1e3e3e244c0991d9dab66c63badf', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('f77707af0c084e5987d33e7975b44d74', 'r_10001', 't_fwlog_list', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('f007c7ed74ec4bd4b55162c299508147', 'r_10001', 't_user_look', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('f36aa49bb3a94bbb8df47a9c41868146', 'r_10001', 'cb9d08e091594103b9398c663f3809eb', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('f3b6d09e0f6d40a5b980b8b3c5efe181', 'r_10001', 'd6abe682007849869c3a168215ae40d4', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('f7b7a23582524947a053fd94894a6097', '14a9fc454b3e44b095f06439f18b00f6', 'business_manager', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('f9263198af6d42c8849b8b9a6e528a0c', 'r_10001', 't_user_list_export', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('f976f5f4bffd4bb2ae84bcb069f74471', '14a9fc454b3e44b095f06439f18b00f6', 'e51808e351c24a7e9fb4d47392930a2d', null, null, null, null, null);
 INSERT INTO `t_role_menu` VALUES ('fa1613ceb09f4fe68ffa36228007bf24', '14a9fc454b3e44b095f06439f18b00f6', '36ab9175f7b7423eadda974ba046be05', null, null, null, null, null);
-INSERT INTO `t_role_menu` VALUES ('fd4eebde8a344c8dbd164b443b60afeb', 'r_10001', 'tc_validaterule_export', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('fb2ff7f1a5e549fb8a8d40fff6e3977d', 'r_10001', 'tc_validaterule_export', null, null, null, null, null);
+INSERT INTO `t_role_menu` VALUES ('ffe7c3b8ea5f40bda35a4e8df8badd4a', 'r_10001', 'tc_htmlfield_export', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_role_org
@@ -2321,8 +2401,11 @@ CREATE TABLE `t_user` (
 -- Records of t_user
 -- ----------------------------
 INSERT INTO `t_user` VALUES ('072c117c37b94af2b1940062f403b1ab', '高永强', 'gaoyongqiang', '21232f297a57a5a743894a0e4a801fc3', '男', '15639091892', '994401266@qq.com', '', '0', '1', null, null, null, null, null);
-INSERT INTO `t_user` VALUES ('aad0d5e64da74993b6ee990f74b8a1bf', null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `t_user` VALUES ('b7f9f2c7e35f4d59a28122d8a8536886', 'sss', 'admin1', '21232f297a57a5a743894a0e4a801fc3', '男', '', '', '', '1', '0', null, null, null, null, null);
+INSERT INTO `t_user` VALUES ('36fc06b564b8444481fd1934167dc09f', '花花', 'huahua', 'e10adc3949ba59abbe56e057f20f883e', null, '13693434444', '994401266@qq.com', null, '1', '1', null, null, null, null, null);
+INSERT INTO `t_user` VALUES ('b7f9f2c7e35f4d59a28122d8a8536886', 'sss', 'admin1', '21232f297a57a5a743894a0e4a801fc3', '男', '', '', '', '1', '1', null, null, null, null, null);
+INSERT INTO `t_user` VALUES ('bbeb8d44ee3b42ee802350cd0188af37', null, 'ceshi3', 'e10adc3949ba59abbe56e057f20f883e', null, '13693434444', 'admin@qq.com', null, '1', '1', null, null, null, null, null);
+INSERT INTO `t_user` VALUES ('bd1801b4f6e945c698fae6e1376b9585', null, 'ceshi', 'e10adc3949ba59abbe56e057f20f883e', null, '13693434444', 'admin@qq.com', null, '1', '1', null, null, null, null, null);
+INSERT INTO `t_user` VALUES ('d160833b9f104d1ba3ed5eeee93947cb', null, 'ceshi2', '21232f297a57a5a743894a0e4a801fc3', null, '13693434444', 'admin@qq.com', null, '1', '1', null, null, null, null, null);
 INSERT INTO `t_user` VALUES ('u_10001', '超级管理员', 'admin', '21232f297a57a5a743894a0e4a801fc3', '男', null, null, null, '0', '1', null, null, null, null, null);
 
 -- ----------------------------
