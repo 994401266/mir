@@ -94,11 +94,16 @@
                            <div class="show-top-grids-w3lagile">
 				<div class="col-sm-8 single-left">
 					<div class="song">
+					<input type="hidden" id="mid" value="${returnDatas.data.id}">
 						<div class="song-info">
 							<h3>
 								${returnDatas.data.name}
 								<ul id="tagList">
-									<li>科幻</li>
+									<#if (returnDatas.data.typeList??)&&(returnDatas.data.typeList?size>0)>
+									<#list returnDatas.data.typeList as type>
+									<li><a href="${ctx}/front/movie/types/${type}">${type}</a></li>
+									</#list>
+									</#if>
 								</ul>
 							</h3>	
 					</div>
@@ -133,6 +138,22 @@
 												setStarStyle(starNum);
 												$('.starBox').unbind('mouseleave');
 												$('.starBox').data('star',starNum)
+												//保存打分
+												var map = {};
+												map["mid"] = $("#mid").val();
+												map["score"] = starNum*2;
+												$.ajax({
+													type: "POST",
+													data:map,
+													url:'${ctx}/front/usermovie/update',
+													success:function(res){
+														if(res.status == 'success'){
+															alert("打分成功");
+														}else{
+															alert(res.message);
+														}
+													}
+												});
 											});
 											$('.starBox').mouseleave(function(){
 												$('.starBox i').css('color','#e3e3e3');
@@ -158,83 +179,51 @@
 							<div class="agile-info-wthree-box">
 								<form >
 									<textarea id="movieComment" placeholder="请填写你的评论" required="required"></textarea>
-									<input type="submit" value="发送" id="commentButton">
+									<input type="button" value="发送" id="commentButton">
 									<div class="clearfix"> </div>
 								</form>
 								<script type="text/javascript">
 									$("#commentButton").click(function() {
 										var comment = $("#movieComment").val();
-										/* if(!!comment){
+										if(!!comment){
 											//添加评论
+											var map = {};
+												map["movieId"] = $("#mid").val();
+												map["content"] = comment;
 											$.ajax({
 												type: "POST",
-												data:{page:false},
-												url:'${ctx}/front/comment/area/list/json',
+												data:map,
+												url:'${ctx}/front/comment/update',
 												success:function(res){
 													if(res.status == 'success'){
-														var data = res.data;
-														var movieAreaLiText = "";
-														if(!!data){
-															for(var key = 0; key < data.length; key++){
-																if(key==0|| (key+1)%4==1){
-																	movieAreaLiText += '<div class="col-sm-4">';
-																	movieAreaLiText += '<ul class="multi-column-dropdown">';
-																}
-																movieAreaLiText += '<li><a href="${ctx}/front/movie/originPlace/'+data[key].name+'">'+data[key].name+'</a></li>';
-															    if((key>0&&(key+1)%4==0)||key==data.length-1){
-															    	movieAreaLiText += '</ul></div>';
-															    }
-															}
-															movieAreaLiText += '<div class="clearfix"></div>';
-															$("#movieAreaLi").html(movieAreaLiText);
-														}
+														alert("评分成功");
+													}else{
+														alert(res.message);
 													}
 												}
 											});
-										});
-										} */
+										} 
 									});					
 								</script>
 							</div>
 						</div>
 						<div class="media-grids">
+						<#if (returnDatas.data.comments??)&&(returnDatas.data.comments?size>0)>
+						<#list returnDatas.data.comments as comment>
 							<div class="media">
-								<h5>TOM BROWN</h5>
+								<h5>${comment.userName}</h5>
 								<div class="media-left">
-									<a href="${ctx}/img/film/#">
+									<a href="#">
 										<img src="${ctx}/img/film/images/user.jpg" title="One movies" alt=" " />
 									</a>
 								</div>
 								<div class="media-body">
-									<p>Maecenas ultricies rhoncus tincidunt maecenas imperdiet ipsum id ex pretium hendrerit maecenas imperdiet ipsum id ex pretium hendrerit</p>
-									<span>View all posts by :<a href="${ctx}/img/film/#"> Admin </a></span>
+									<p>${comment.content}</p>
+									<span>评论时间 :<a href="#">${comment.created}</a></span>
 								</div>
 							</div>
-							<div class="media">
-								<h5>MARK JOHNSON</h5>
-								<div class="media-left">
-									<a href="${ctx}/img/film/#">
-									<img src="${ctx}/img/film/images/user.jpg" title="One movies" alt=" " />
-									</a>
-								</div>
-								<div class="media-body">
-									<p>Maecenas ultricies rhoncus tincidunt maecenas imperdiet ipsum id ex pretium hendrerit maecenas imperdiet ipsum id ex pretium hendrerit</p>
-									<span>View all posts by :<a href="${ctx}/img/film/#"> Admin </a></span>
-								</div>
-							</div>
-							<div class="media">
-								<h5>STEVEN SMITH</h5>
-								<div class="media-left">
-									<a href="${ctx}/img/film/#">
-									<img src="${ctx}/img/film/images/user.jpg" title="One movies" alt=" " />
-									</a>
-								</div>
-								<div class="media-body">
-									<p>Maecenas ultricies rhoncus tincidunt maecenas imperdiet ipsum id ex pretium hendrerit maecenas imperdiet ipsum id ex pretium hendrerit</p>
-									<span>View all posts by :<a href="${ctx}/img/film/#"> Admin </a></span>
-								</div>
-							</div>
-
+						</#list>
+						</#if>
 						</div>
 					</div>
 				</div>

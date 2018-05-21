@@ -23,7 +23,7 @@
 				<ul>
 					<li><i class="fa fa-phone" aria-hidden="true"></i> (+000) 123 345 653</li>|
 					<#if (Session.loginUser.account)??>
-						<li><a href="#">观看历史</a></li>
+						<li><a href="${ctx}/front/movie/history">观看历史</a></li>
 					<#else>
 						<li><a href="#" data-toggle="modal" data-target="#myModal">登录中心</a></li>
 					</#if>
@@ -63,6 +63,7 @@
 								<form id="registerForm">
 								  <input type="text" name="account" placeholder="account" required="required">
 								  <input type="password" name="password" placeholder="password" required="required" maxlength="30">
+								  <input type="text" name="name" placeholder="name" required="required">
 								  <input type="email" name="email" placeholder="Email Address" required="required">
 								  <input type="text" name="mobile" placeholder="Phone Number" required="required">
 								  <p id="registerErrorMsg" style="color: #ff3030; text-align: center; margin: 0;height: 20px;"></p>

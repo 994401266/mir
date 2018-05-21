@@ -1,5 +1,8 @@
 package org.springrain.system.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -9,6 +12,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springrain.frame.annotation.WhereSQL;
 import org.springrain.frame.entity.BaseEntity;
+import org.springrain.front.entity.Comment;
 /**
  * TODO 在此加入类描述
  * @copyright {@link weicms.net}
@@ -135,6 +139,7 @@ public class Movie  extends BaseEntity {
 	private java.lang.String alsoLikeMovies;
 	//columns END 数据库字段结束
 	
+	private List<Comment> comments;
 	//concstructor
 
 	public Movie(){
@@ -147,6 +152,15 @@ public class Movie  extends BaseEntity {
 	}
 
 	@Transient
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	@Transient
 	public Double getDoubanRatingDouble() {
 		if (StringUtils.isNoneBlank(this.doubanRating)) {
 			return Double.parseDouble(this.doubanRating);
@@ -155,6 +169,22 @@ public class Movie  extends BaseEntity {
 		}
 	}
 
+	public List<String> getTypeList() {
+		if (StringUtils.isNotBlank(this.types)) {
+			List<String> typeList = new ArrayList<>();
+			if (this.types.contains(",")) {
+				String[] split = this.types.split(",");
+				for (String string : split) {
+					typeList.add(string.replaceAll("[^\u4E00-\u9FA5]", ""));
+				}
+			} else {
+				typeList.add(types.replaceAll("[^\u4E00-\u9FA5]", ""));
+			}
+			return typeList;
+		} else {
+			return null;
+		}
+	}
 	//get and set
 		/**
 		 * 电影ID

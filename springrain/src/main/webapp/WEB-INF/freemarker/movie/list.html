@@ -282,7 +282,8 @@ $(document).ready(function(){
     );
     $(document).on("click",".searchCondition ul li",function(){
     	$(this).toggleClass('active');
-    	if($(this).data("name")==''){
+    	$(this).siblings().removeClass("active");
+    	/* if($(this).data("name")==''){
     		$(this).siblings().removeClass("active");
     	}else if($(this).data("name")=='others'||$(this).data("id")=='longAgo'){
     		$(this).siblings().removeClass("active");
@@ -291,7 +292,7 @@ $(document).ready(function(){
     		if($(this).siblings().last().data("name") == "others"){
     			$(this).siblings().last().removeClass("active");
     		}
-    	}
+    	} */
     	loadMovies();
     });
     loadMovies();

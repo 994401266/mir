@@ -2,6 +2,8 @@ package org.springrain.front.web;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,20 +11,26 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springrain.frame.common.SessionUser;
 import org.springrain.frame.controller.BaseController;
+import org.springrain.frame.util.DateUtils;
 import org.springrain.frame.util.GlobalStatic;
 import org.springrain.frame.util.Page;
 import org.springrain.frame.util.ReturnDatas;
 import org.springrain.frame.util.property.MessageUtils;
+import org.springrain.front.entity.Comment;
+import org.springrain.front.entity.UserHistory;
+import org.springrain.front.service.ICommentService;
+import org.springrain.front.service.IUserHistoryService;
 import org.springrain.system.entity.Movie;
 import org.springrain.system.service.IMovieService;
-
 
 /**
  * 前端展示电影数据的controller
@@ -36,7 +44,10 @@ import org.springrain.system.service.IMovieService;
 public class MovieController  extends BaseController {
 	@Resource
 	private IMovieService movieService;
-	
+	@Resource
+	private ICommentService commentService;
+	@Resource
+	private IUserHistoryService userHistoryService;
 	private String listurl = "/system/movie/movieList";
 	
 	/**
@@ -117,7 +128,7 @@ public class MovieController  extends BaseController {
 	 */
 	@RequestMapping("/originPlace/{movieOriginPlace}")
 	public String originPlace(@PathVariable String movieOriginPlace, HttpServletRequest request,
-			Model model, Movie movie) throws Exception {
+			Model model, Movie movie) {
 		ReturnDatas returnDatas = ReturnDatas.getSuccessReturnDatas();
 		Page page = newPage(request);
 		page.setPageSize(24);
@@ -149,7 +160,39 @@ public class MovieController  extends BaseController {
 
 	@RequestMapping("/history")
 	public String history(HttpServletRequest request, Model model,Movie movie) 
-			throws Exception {
+	{
+		ReturnDatas returnDatas = ReturnDatas.getSuccessReturnDatas();
+		Page page = newPage(request);
+		page.setPageSize(10);
+		String userId = SessionUser.getUserId();
+		try {
+			// 查询今天的历史记录
+			UserHistory userHistory = new UserHistory();
+			userHistory.setUserId(userId);
+			userHistory.setStartTime(new Date());
+			userHistory.setEndTime(new Date());
+			List<Map<String, Object>> today = userHistoryService.finderByQueryBean(page,
+					userHistory);
+			// 一周以内
+			userHistory.setStartTime(DateUtils.addDay(-7, new Date()));
+			userHistory.setEndTime(DateUtils.addDay(-1, new Date()));
+			List<Map<String, Object>> week = userHistoryService.finderByQueryBean(page,
+					userHistory);
+			// 更早
+			userHistory.setStartTime(null);
+			userHistory.setEndTime(DateUtils.addDay(-8, new Date()));
+			List<Map<String, Object>> longAgo = userHistoryService.finderByQueryBean(page,
+					userHistory);
+			Map<String, Object> map = new HashMap<>();
+			map.put("today", today);
+			map.put("week", week);
+			map.put("longAgo", longAgo);
+			returnDatas.setData(map);
+			model.addAttribute(GlobalStatic.returnDatas, returnDatas);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+		}
 		return "/movie/history";
 	}
 
@@ -157,11 +200,31 @@ public class MovieController  extends BaseController {
 	public String single(@PathVariable String movieId, HttpServletRequest request, Model model)
 			throws Exception {
 		ReturnDatas returnDatas = ReturnDatas.getSuccessReturnDatas();
+		// Page page = newPage(request);
+		// page.setPageSize(3);
 		Movie movie = null;
 		if (StringUtils.isNotBlank(movieId)) {
 
+			if (StringUtils.isNotBlank(SessionUser.getUserId())) {
+				UserHistory userHistory = new UserHistory();
+				userHistory.setMovieId(movieId);
+				userHistory.setActive(1);
+				userHistory.setUserId(SessionUser.getUserId());
+				List<UserHistory> list = userHistoryService.findListDataByFinder(null, null,
+						UserHistory.class, userHistory);
+				if (CollectionUtils.isNotEmpty(list)) {
+					userHistory.setId(list.get(0).getId());
+				}
+				userHistory.setCreateTime(new Date());
+				userHistoryService.saveorupdate(userHistory);
+			}
+
 			try {
 				movie = movieService.findMovieById(movieId);
+				Comment queryBean = new Comment();
+				queryBean.setMovieId(movieId);
+				List<Comment> commetList = commentService.findByQueryBean(null, queryBean);
+				movie.setComments(commetList);
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);
 				e.printStackTrace();
