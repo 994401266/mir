@@ -57,6 +57,12 @@
 	 
 	}); 
 </script> 
+<style type="text/css">
+	.myImg{
+		width: 150px; 
+		heigth: 150px;
+	}
+</style>
 </head>
 	
 <body>
@@ -95,7 +101,7 @@
 							<#if (returnDatas.data??)&&(returnDatas.data?size>0)> 
 							   <#list	returnDatas.data as movie>
 							   <div class="col-md-2 w3l-movie-gride-agile">
-										 <a href="${ctx}/front/movie/single/${movie.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m7.jpg" title="${movie.name!''}" alt=" " />
+										 <a href="${ctx}/front/movie/single/${movie.id}" class="hvr-shutter-out-horizontal"><img class="myImg" src="${ctx}/img/film/images/m7.jpg" title="${movie.name!''}" alt=" " />
 									     <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
 									</a>
 									  <div class="mid-1">
