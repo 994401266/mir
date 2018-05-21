@@ -154,182 +154,101 @@
 					}
 				</style>
 				<div class="flexslider">
+				<script type="text/javascript">
+					var show_day=new Array('星期一','星期二','星期三','星期四','星期五','星期六','星期日'); 
+					function formatDate(val){
+						if (val != null) {
+				            var date = new Date(val);
+				            var day = date.getDay();
+				            return  (date.getMonth() + 1) + '-' + date.getDate() +show_day[day-1];
+				        }
+					}
+					$(function() {
+						$("#timeSpan").html("今天<br/>"+formatDate(new Date()));
+					});
+				</script>
 					<div>
-						<span style="background: #06d995;">
+						<span id="timeSpan" style="background: #06d995;">
 							今天
 							<br />
 							4-16 周五
 						</span>
 						<ul>
+						<#if (returnDatas.data.today??)&&(returnDatas.data.today?size>0)>
+						<#list returnDatas.data.today as movieHistory>
 							<li>
 								<div class="imgCover">
 									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
 									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
+									<span class="tagTime">${movieHistory.runtime} min</span>
 								</div>
 								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+									<h4>${movieHistory.name}</h4>
+									<p><i class="fa fa-desktop"></i> 观看时间：<br/>${movieHistory.createTime}</p>	
 								</div>
 							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
+						</#list>
+						</#if>
 						</ul>
 					</div>
 					<div>
 						<span>昨天</span>
 						<ul>
+						<#if (returnDatas.data.dayBefore??)&&(returnDatas.data.dayBefore?size>0)>
+						<#list returnDatas.data.dayBefore as movieHistory>
 							<li>
 								<div class="imgCover">
 									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
 									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
+									<span class="tagTime">${movieHistory.runtime} min</span>
 								</div>
 								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+									<h4>${movieHistory.name}</h4>
+									<p><i class="fa fa-desktop"></i> 观看时间：<br/>${movieHistory.createTime}</p>	
 								</div>
 							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
+						</#list>
+						</#if>
 						</ul>
 					</div>
 					<div>
 						<span>一周内</span>
 						<ul>
+						<#if (returnDatas.data.week??)&&(returnDatas.data.week?size>0)>
+						<#list returnDatas.data.week as movieHistory>
 							<li>
 								<div class="imgCover">
 									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
 									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
+									<span class="tagTime">${movieHistory.runtime} min</span>
 								</div>
 								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+									<h4>${movieHistory.name}</h4>
+									<p><i class="fa fa-desktop"></i> 观看时间：<br/>${movieHistory.createTime}</p>	
 								</div>
 							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
+						</#list>
+						</#if>
 						</ul>
 					</div>
 					<div>
 						<span>更早</span>
 						<ul>
+							<#if (returnDatas.data.longAgo??)&&(returnDatas.data.longAgo?size>0)>
+						<#list returnDatas.data.longAgo as movieHistory>
 							<li>
 								<div class="imgCover">
 									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
 									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
+									<span class="tagTime">${movieHistory.runtime} min</span>
 								</div>
 								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
+									<h4>${movieHistory.name}</h4>
+									<p><i class="fa fa-desktop"></i> 观看时间：<br/>${movieHistory.createTime}</p>	
 								</div>
 							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
-							<li>
-								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
-									<span class="tagType">类型</span>
-									<span class="tagTime">81:35</span>
-								</div>
-								<div class="infoText">
-									<h4>名称</h4>
-									<p><i class="fa fa-desktop"></i> 看到18:40 60%</p>	
-								</div>
-							</li>
+						</#list>
+						</#if>
 						</ul>
 					</div>
 						

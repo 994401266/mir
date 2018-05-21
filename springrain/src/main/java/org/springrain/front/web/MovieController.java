@@ -173,6 +173,12 @@ public class MovieController  extends BaseController {
 			userHistory.setEndTime(new Date());
 			List<Map<String, Object>> today = userHistoryService.finderByQueryBean(page,
 					userHistory);
+			// 昨天
+			userHistory.setUserId(userId);
+			userHistory.setStartTime(DateUtils.addDay(-1, new Date()));
+			userHistory.setEndTime(DateUtils.addDay(-1, new Date()));
+			List<Map<String, Object>> dayBefore = userHistoryService.finderByQueryBean(page,
+					userHistory);
 			// 一周以内
 			userHistory.setStartTime(DateUtils.addDay(-7, new Date()));
 			userHistory.setEndTime(DateUtils.addDay(-1, new Date()));
@@ -185,6 +191,7 @@ public class MovieController  extends BaseController {
 					userHistory);
 			Map<String, Object> map = new HashMap<>();
 			map.put("today", today);
+			map.put("dayBefore", dayBefore);
 			map.put("week", week);
 			map.put("longAgo", longAgo);
 			returnDatas.setData(map);
