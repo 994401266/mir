@@ -14,14 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import org.springrain.system.entity.Content;
-import org.springrain.system.service.IContentService;
 import org.springrain.frame.controller.BaseController;
 import org.springrain.frame.util.GlobalStatic;
-import org.springrain.frame.util.property.MessageUtils;
 import org.springrain.frame.util.Page;
 import org.springrain.frame.util.ReturnDatas;
+import org.springrain.frame.util.property.MessageUtils;
+import org.springrain.system.entity.Content;
+import org.springrain.system.service.IContentService;
 
 
 /**
@@ -74,7 +73,7 @@ public class ContentController  extends BaseController {
 		// ==构造分页请求
 		Page page = newPage(request);
 		// ==执行分页查询
-		List<Content> datas=contentService.findListDataByFinder(null,page,Content.class,content);
+		List<Content> datas = contentService.findByQueryBean(page, content);
 			returnObject.setQueryBean(content);
 		returnObject.setPage(page);
 		returnObject.setData(datas);

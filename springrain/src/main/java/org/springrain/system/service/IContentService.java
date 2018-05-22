@@ -1,7 +1,9 @@
 package org.springrain.system.service;
 
+import java.util.List;
+
+import org.springrain.frame.util.Page;
 import org.springrain.system.entity.Content;
-import org.springrain.system.service.IBaseSpringrainService;
 /**
  * TODO 在此加入类描述
  * @copyright {@link weicms.net}
@@ -18,6 +20,8 @@ public interface IContentService extends IBaseSpringrainService {
 	 * @throws Exception
 	 */
 	Content findContentById(Object id) throws Exception;
+
+	List<Content> findByQueryBean(Page page, Content content) throws Exception;
 	
 	
 	

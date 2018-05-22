@@ -29,6 +29,7 @@ import org.springrain.front.entity.Comment;
 import org.springrain.front.entity.UserHistory;
 import org.springrain.front.service.ICommentService;
 import org.springrain.front.service.IUserHistoryService;
+import org.springrain.system.common.SystemEnum;
 import org.springrain.system.entity.Movie;
 import org.springrain.system.service.IMovieService;
 
@@ -162,44 +163,50 @@ public class MovieController  extends BaseController {
 	public String history(HttpServletRequest request, Model model,Movie movie) 
 	{
 		ReturnDatas returnDatas = ReturnDatas.getSuccessReturnDatas();
-		Page page = newPage(request);
-		page.setPageSize(10);
-		String userId = SessionUser.getUserId();
-		try {
-			// 查询今天的历史记录
-			UserHistory userHistory = new UserHistory();
-			userHistory.setUserId(userId);
-			userHistory.setStartTime(new Date());
-			userHistory.setEndTime(new Date());
-			List<Map<String, Object>> today = userHistoryService.finderByQueryBean(page,
-					userHistory);
-			// 昨天
-			userHistory.setUserId(userId);
-			userHistory.setStartTime(DateUtils.addDay(-1, new Date()));
-			userHistory.setEndTime(DateUtils.addDay(-1, new Date()));
-			List<Map<String, Object>> dayBefore = userHistoryService.finderByQueryBean(page,
-					userHistory);
-			// 一周以内
-			userHistory.setStartTime(DateUtils.addDay(-7, new Date()));
-			userHistory.setEndTime(DateUtils.addDay(-1, new Date()));
-			List<Map<String, Object>> week = userHistoryService.finderByQueryBean(page,
-					userHistory);
-			// 更早
-			userHistory.setStartTime(null);
-			userHistory.setEndTime(DateUtils.addDay(-8, new Date()));
-			List<Map<String, Object>> longAgo = userHistoryService.finderByQueryBean(page,
-					userHistory);
-			Map<String, Object> map = new HashMap<>();
-			map.put("today", today);
-			map.put("dayBefore", dayBefore);
-			map.put("week", week);
-			map.put("longAgo", longAgo);
-			returnDatas.setData(map);
-			model.addAttribute(GlobalStatic.returnDatas, returnDatas);
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage(), e);
+		Map<String, Object> map = new HashMap<>();
+		if (SessionUser.getUserType() == SystemEnum.UserType.前台用户.getType()
+				|| StringUtils.isNotBlank(SessionUser.getUserId())) {
+			Page page = newPage(request);
+			page.setPageSize(10);
+			String userId = SessionUser.getUserId();
+			try {
+				// 查询今天的历史记录
+				UserHistory userHistory = new UserHistory();
+				userHistory.setUserId(userId);
+				userHistory.setStartTime(new Date());
+				userHistory.setEndTime(new Date());
+				List<Map<String, Object>> today = userHistoryService.finderByQueryBean(page,
+						userHistory);
+				// 昨天
+				userHistory.setUserId(userId);
+				userHistory.setStartTime(DateUtils.addDay(-1, new Date()));
+				userHistory.setEndTime(DateUtils.addDay(-1, new Date()));
+				List<Map<String, Object>> dayBefore = userHistoryService.finderByQueryBean(page,
+						userHistory);
+				// 一周以内
+				userHistory.setStartTime(DateUtils.addDay(-7, new Date()));
+				userHistory.setEndTime(DateUtils.addDay(-2, new Date()));
+				List<Map<String, Object>> week = userHistoryService.finderByQueryBean(page,
+						userHistory);
+				// 更早
+				userHistory.setStartTime(null);
+				userHistory.setEndTime(DateUtils.addDay(-8, new Date()));
+				List<Map<String, Object>> longAgo = userHistoryService.finderByQueryBean(page,
+						userHistory);
+				map.put("today", today);
+				map.put("dayBefore", dayBefore);
+				map.put("week", week);
+				map.put("longAgo", longAgo);
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.error(e.getMessage(), e);
+			}
+		} else {
+			returnDatas.setStatus(ReturnDatas.WARNING);
+			returnDatas.setMessage("请先登录！");
 		}
+		returnDatas.setData(map);
+		model.addAttribute(GlobalStatic.returnDatas, returnDatas);
 		return "/movie/history";
 	}
 

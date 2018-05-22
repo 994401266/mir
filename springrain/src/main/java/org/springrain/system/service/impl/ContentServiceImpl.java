@@ -8,6 +8,7 @@ import org.springrain.frame.entity.IBaseEntity;
 import org.springrain.frame.util.Finder;
 import org.springrain.frame.util.Page;
 import org.springrain.system.entity.Content;
+import org.springrain.system.entity.ContentCategory;
 import org.springrain.system.service.IContentService;
 
 
@@ -41,7 +42,11 @@ public class ContentServiceImpl extends BaseSpringrainServiceImpl implements ICo
     }
     @Override
 	public Content findContentById(Object id) throws Exception{
-	 return super.findById(id,Content.class);
+		Finder finder = new Finder(" SELECT a.*,b.name as categoryName FROM ");
+		finder.append(Finder.getTableName(Content.class)).append(" a INNER JOIN  ")
+				.append(Finder.getTableName(ContentCategory.class))
+				.append(" b ON a.category_id=b.id Where a.id=:id").setParam("id", id);
+		return super.queryForObject(finder, Content.class);
 	}
 	
 /**
@@ -74,5 +79,14 @@ public class ContentServiceImpl extends BaseSpringrainServiceImpl implements ICo
 			throws Exception {
 			 return super.findDataExportExcel(finder,ftlurl,page,clazz,o);
 		}
+
+	@Override
+	public List<Content> findByQueryBean(Page page, Content content) throws Exception {
+		Finder finder = new Finder(" SELECT a.*,b.name as categoryName FROM ");
+		finder.append(Finder.getTableName(Content.class)).append(" a INNER JOIN  ")
+				.append(Finder.getTableName(ContentCategory.class))
+				.append(" b ON a.category_id=b.id ");
+		return super.queryForList(finder, Content.class, page);
+	}
 
 }

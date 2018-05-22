@@ -2,6 +2,7 @@ package org.springrain.system.entity;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -86,6 +87,7 @@ public class Content  extends BaseEntity {
 	private java.util.Date updated;
 	//columns END 数据库字段结束
 	
+	private java.lang.String categoryName;
 	//concstructor
 
 	public Content(){
@@ -97,7 +99,16 @@ public class Content  extends BaseEntity {
 		this.id = id;
 	}
 
-	//get and set
+	@Transient
+	public java.lang.String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(java.lang.String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	// get and set
 		/**
 		 * id
 		 */

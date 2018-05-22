@@ -77,7 +77,7 @@
 																	<div class="layui-form-item col-lg-6">
 																		<label class="layui-form-label">内容类目*</label>
 																		<div class="layui-inline col-lg-5">  
-																			<input id="pname" type="text" name="parent_name"  readonly="readonly" autocomplete="off"  class="layui-input layui-disabled" value="">
+																			<input id="pname" type="text" name="parent_name"  readonly="readonly" autocomplete="off"  class="layui-input layui-disabled" value="${(returnDatas.data.categoryName)!''}">
 																		  	<input id="pid" type="hidden" name="category_id" datatype="*" nullmsg="不能为空" errormsg="不能为空！" autocomplete="off"  class="layui-input"  value="${(returnDatas.data.category_id)!''}">
 																		</div>
 																		<div class="layui-inline">
@@ -93,21 +93,21 @@
 																		<div class="layui-inline valid-info"></div>
 																	</div>
 																	<div class="layui-form-item col-lg-6">
-																		<label class="layui-form-label">子标题*</label>
+																		<label class="layui-form-label">子标题</label>
 																		<div class="layui-inline col-lg-5">  
 																			<input type="text" name="sub_title" id="sub_title"  autocomplete="off" class="layui-input" value="${(returnDatas.data.sub_title)!''}">
 																		</div>
 																		<div class="layui-inline valid-info"></div>
 																	</div>
 																	<div class="layui-form-item col-lg-6">
-																		<label class="layui-form-label">标题描述*</label>
+																		<label class="layui-form-label">标题描述</label>
 																		<div class="layui-inline col-lg-5">  
 																			<input type="text" name="title_desc" id="title_desc" autocomplete="off" class="layui-input" value="${(returnDatas.data.title_desc)!''}">
 																		</div>
 																		<div class="layui-inline valid-info"></div>
 																	</div>
 																	<div class="layui-form-item col-lg-6">
-																		<label class="layui-form-label">链接*</label>
+																		<label class="layui-form-label">链接</label>
 																		<div class="layui-inline col-lg-5">  
 																			<input type="text" name="url" id="url"  autocomplete="off" class="layui-input" value="${(returnDatas.data.url)!''}">
 																		</div>
@@ -117,7 +117,7 @@
 																		<label class="layui-form-label">图片绝对路径*</label>
 																		<div class="layui-inline col-lg-5">  
 																			<a href="javascript:void(0)" class="layui-btn picFileUpload">上传图片</a>
-	              							   								<input type="hidden" id="coverLink" name="pic" datatype="*" nullmsg="不能为空" errormsg="不能为空！" value="${(returnDatas.data.pic)!''}"/>
+	              							   								<input type="hidden" id="coverLink" name="pic" value="${(returnDatas.data.pic)!''}"/>
 																		</div>
 																		<div class="layui-inline valid-info"></div>
 																	</div>
