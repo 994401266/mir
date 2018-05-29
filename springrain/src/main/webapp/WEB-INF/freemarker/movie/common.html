@@ -7,6 +7,109 @@
 <script type="text/javascript" src="${ctx}/img/film/js/page.js"></script>
 </#macro>
 <#macro header>
+<style>
+body .modal-backdrop ~ .modal-backdrop{
+			display: none !important;
+		} 
+#confirmModal{
+			z-index: 999998;
+		}
+		#confirm1Modal{
+			z-index: 999999;
+		}
+		#confirm1Modal .modal-dialog{
+			max-width: 426px !important; 
+			margin-top: 100px !important;
+		}
+		#confirm1Modal .modal-body{
+			font-size: 16px;
+		}
+		#confirmModal .modal-dialog{
+			max-width: 426px !important; 
+			margin-top: 100px !important;
+		}
+		#alertModal{
+			z-index: 999999;
+		}
+		#alertModal .modal-dialog{
+			max-width: 426px !important; 
+			margin-top: 100px !important;
+		}
+		.modal-footer{
+			border: none;
+		}
+		.modal-header{
+			background: #eee;
+			padding: 10px;
+			border-radius: .3rem .3rem 0 0;
+		}
+</style>
+<script type="text/javascript">
+function myConfirm1(str,callback){
+	$('#confirm1Modal').modal('show');
+	$('#confirm1Modal').find('.modal-body').html(str);
+	$('#confirm1Modal .modal-footer [data-dismiss="modal"]').eq(0)[0].onclick=function(e){
+		if($(this).text() == '确定'){
+			var e = e || event;
+			e.stopPropagation();
+			$('#confirm1Modal').modal('hide');
+			callback();
+		}
+	}
+}
+function myAlert(str,status,timeout,fn){
+	var timer,timers; 
+	if(this != window){
+		fn = arguments[2];
+		timeout = arguments[1];
+		status = arguments[0];
+		str = this;
+	};
+	switch (status){
+		case 'success':
+			$('#alertModal').find('.modal-body').html('<i class="mdi mdi-check-circle-outline text-success m-r-5"></i>' + str);
+			break;
+		case 'fail':
+			$('#alertModal').find('.modal-body').html('<i class="mdi mdi-close-circle m-r-5"></i>' + str);
+			break;
+		case 'wait':
+			$('#alertModal').find('.modal-body').html('<i class="mdi mdi-clock text-info m-r-5"></i>' + str + ' <span class="wait"></span>');
+			var i = 0, waitStr = '.....'
+			timer = setInterval(function(){
+				$('.wait').html(waitStr.slice(0, (++ i) % 6));
+			},300);
+			$('#alertModal').one('hide.bs.modal',function(){
+				clearInterval(timer);
+			});
+			break;
+		case 'warn':
+			$('#alertModal').find('.modal-body').html('<i class="mdi mdi-alert-circle-outline text-danger m-r-5"></i>' + str);
+			break;
+		default:
+			$('#alertModal').find('.modal-body').html(str);
+			break;
+	};
+	if(timeout){
+		timers = setTimeout(function(){
+			$('#alertModal').modal('hide');
+			if(fn && typeof fn == 'function'){
+				fn();
+			};
+		},timeout*1000);
+		$('#alertModal').one('hidden.bs.modal',function(){
+			clearTimeout(timers);
+		});
+	}else{
+		$('#alertModal').one('hidden.bs.modal',function(){
+			if(fn && typeof fn == 'function'){
+				fn();
+			};
+		});
+	}
+	$('#alertModal').modal('show');
+}
+
+</script>
 <!-- header -->
 	<div class="header">
 		<div class="container">
@@ -23,7 +126,7 @@
 				<ul>
 					<li><i class="fa fa-phone" aria-hidden="true"></i> (+000) 123 345 653</li>|
 					<#if (Session.loginUser.account)??>
-						<li><a href="${ctx}/front/movie/history">观看历史</a></li>
+						<li><a href="${ctx}/front/movie/history">观看历史</a>&nbsp;<a href="javascript:exit();" >注销</a></li>
 					<#else>
 						<li><a href="#" data-toggle="modal" data-target="#myModal">登录中心</a></li>
 					</#if>
@@ -71,6 +174,11 @@
 								</form>
 							  </div>
 							  <script type="text/javascript">
+							  function exit() {
+								  myConfirm1("确认退出吗？",function(){
+									  location.href='${ctx}/front/logout';
+								  });
+								}
 							  		$(function() {
 										//注册							  			
 							  			$("#register").click(function() {
@@ -287,6 +395,66 @@
 
 </#macro>
 <#macro footer>
+	<div id="alertModal" class="modal bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false">
+	    <div class="modal-dialog modal-lg">
+	   		<div class="modal-content">
+	            <div class="modal-header">
+	                <h4 class="modal-title" id="myLargeModalLabel">信息</h4>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	            </div>
+	            <div class="modal-body">
+	            	
+	            </div>
+	            <div class="modal-footer">
+	            	<button type="button" class="btn btn-info waves-effect text-left" data-dismiss="modal">确定</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div id="loadModal" class="modal bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" data-backdrop="static" style="z-index: 19921212">
+	    <div class="modal-dialog modal-lg"style=" height: 100%; margin:  0 auto; ">
+	   		<div class="modal-content" style=" width:  200px; padding:  40px 0; text-align:  center; top: 50%; left:  50%; transform: translate(-50%,-50%); ">
+	            <div class="modal-body">
+	            	<img alt="" src="${ctx}/img/attend/wechat/loading.gif">
+	            	<p class="m-t-20 m-b-0"></p>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div id="confirmModal" class="modal bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" data-backdrop="static">
+	    <div class="modal-dialog modal-lg">
+	   		<div class="modal-content">
+	            <div class="modal-header">
+	                <h4 class="modal-title" id="myLargeModalLabel">提示信息</h4>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	            </div>
+	            <div class="modal-body">
+	            	
+	            </div>
+	            <div class="modal-footer">
+	            	<button type="button" class="btn btn-info waves-effect text-left" data-dismiss="modal">确定</button>
+	                <button type="button" class="btn btn-secondary waves-effect text-left" data-dismiss="modal">取消</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div id="confirm1Modal" class="modal bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" data-backdrop="static">
+	    <div class="modal-dialog modal-lg">
+	   		<div class="modal-content">
+	            <div class="modal-header">
+	                <h4 class="modal-title" id="myLargeModalLabel">提示信息</h4>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	            </div>
+	            <div class="modal-body">
+	            	
+	            </div>
+	            <div class="modal-footer">
+	            	<button type="button" class="btn btn-info waves-effect text-left" data-dismiss="modal">确定</button>
+	                <button type="button" class="btn btn-secondary waves-effect text-left" data-dismiss="modal">取消</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 	<div class="footer">
 		<div class="container">
 			<div class="w3ls_footer_grid">
