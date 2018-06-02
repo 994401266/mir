@@ -28,7 +28,7 @@ public class MahoutTest2 {
 	@Test
 	public final void test() {
 		// 准备数据 这里是电影评分数据
-		File file = new File("D:\\ratings.dat");
+		File file = new File("D:\\movie_preferences.txt");
 		// 将数据加载到内存中，GroupLensDataModel是针对开放电影评论数据的
 		DataModel dataModel = null;
 		try {

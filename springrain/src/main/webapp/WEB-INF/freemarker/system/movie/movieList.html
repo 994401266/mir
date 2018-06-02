@@ -25,6 +25,19 @@
 			springrain.alert("请先选择！");
 		}
 	}
+	
+	function importSolr(){
+		springrain.confirm("确认导入所有电影到solr索引库吗？",function(){
+			$.post("${ctx}/front/movie/importSolr",null,function(res){
+				console.log(res);
+				if(res.status == 'success'){
+					springrain.alert("数据导入成功");
+				}else{
+					springrain.alert(res.message);
+				}
+			});
+		});
+	}
 </script>
 </head>
 <body>
@@ -42,7 +55,7 @@
 		             	<@shiro.hasPermission name="/movie/list/export" >
 				        	<button type="button" class="layui-btn layui-btn-small"><i class="layui-icon layui-icon-specil">&#xe609;</i>导出</button>
 				        </@shiro.hasPermission>
-		                <button type="button" class="layui-btn layui-btn-warm layui-btn-small"><i class="layui-icon layui-icon-specil">&#xe601;</i>导入</button>
+		                <button type="button" onclick="importSolr();" class="layui-btn layui-btn-warm layui-btn-small"><i class="layui-icon layui-icon-specil">&#xe601;</i>导入Solr索引库</button>
 		                <@shiro.hasPermission name="/movie/delete" >
 		               		 <button type="button" onclick="deleMore();" class="layui-btn layui-btn-danger layui-btn-small"><i class="layui-icon">&#xe640;</i>批量删除</button>
 		                </@shiro.hasPermission>

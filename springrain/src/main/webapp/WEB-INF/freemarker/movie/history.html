@@ -178,7 +178,7 @@
 						<#list returnDatas.data.today as movieHistory>
 							<li>
 								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<a href="${ctx}/front/movie/single/${movieHistory.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/2.jpg" width="100%"/></a>
 									<span class="tagType">类型</span>
 									<span class="tagTime">${movieHistory.runtime} min</span>
 								</div>
@@ -198,7 +198,7 @@
 						<#list returnDatas.data.dayBefore as movieHistory>
 							<li>
 								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<a href="${ctx}/front/movie/single/${movieHistory.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/2.jpg" width="100%"/></a>
 									<span class="tagType">类型</span>
 									<span class="tagTime">${movieHistory.runtime} min</span>
 								</div>
@@ -218,7 +218,7 @@
 						<#list returnDatas.data.week as movieHistory>
 							<li>
 								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<a href="${ctx}/front/movie/single/${movieHistory.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/2.jpg" width="100%"/></a>
 									<span class="tagType">类型</span>
 									<span class="tagTime">${movieHistory.runtime} min</span>
 								</div>
@@ -238,7 +238,7 @@
 						<#list returnDatas.data.longAgo as movieHistory>
 							<li>
 								<div class="imgCover">
-									<img src="${ctx}/img/film/images/2.jpg" width="100%"/>
+									<a href="${ctx}/front/movie/single/${movieHistory.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/2.jpg" width="100%"/></a>
 									<span class="tagType">类型</span>
 									<span class="tagTime">${movieHistory.runtime} min</span>
 								</div>

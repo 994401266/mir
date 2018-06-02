@@ -31,6 +31,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.util.Version;
 import org.springrain.frame.util.IK.core.IKSegmenter;
 import org.springrain.frame.util.IK.core.Lexeme;
 
@@ -121,7 +122,7 @@ public class SWMCQueryBuilder {
 		}
 
 		//借助lucene queryparser 生成SWMC Query
-		QueryParser qp = new QueryParser(fieldName, new StandardAnalyzer());
+		QueryParser qp = new QueryParser(fieldName, new StandardAnalyzer(Version.LATEST));
 		qp.setDefaultOperator(QueryParser.AND_OPERATOR);
 		qp.setAutoGeneratePhraseQueries(true);
 		

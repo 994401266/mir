@@ -28,6 +28,7 @@ import org.springrain.frame.util.property.MessageUtils;
 import org.springrain.front.entity.Comment;
 import org.springrain.front.entity.UserHistory;
 import org.springrain.front.service.ICommentService;
+import org.springrain.front.service.ISearchMovieService;
 import org.springrain.front.service.IUserHistoryService;
 import org.springrain.system.common.SystemEnum;
 import org.springrain.system.entity.Movie;
@@ -49,6 +50,8 @@ public class MovieController  extends BaseController {
 	private ICommentService commentService;
 	@Resource
 	private IUserHistoryService userHistoryService;
+	@Resource
+	private ISearchMovieService searchMovieService;
 	private String listurl = "/system/movie/movieList";
 	
 	/**
@@ -424,5 +427,19 @@ public class MovieController  extends BaseController {
 		
 		
 	}
-
+	
+	/**
+	 *导入所有电影到solr索引库 
+	*
+	* @param request
+	* @return
+	* @author 高永强
+	* @version 2018年6月2日 下午4:18:42
+	 */
+	@RequestMapping("/importSolr")
+	@ResponseBody
+	public ReturnDatas importSolr(HttpServletRequest request){
+		
+		return searchMovieService.importAllItems();
+	}
 }

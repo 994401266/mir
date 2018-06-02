@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springrain.frame.util.Page;
+import org.springrain.front.entity.SearchMovie;
 import org.springrain.system.entity.Movie;
 /**
  * TODO 在此加入类描述
@@ -33,6 +34,14 @@ public interface IMovieService extends IBaseSpringrainService {
 	 */
 	List<Map<String, Object>> findByQueryBean(Page page, Movie movie) throws Exception;
 	
-	
+	/**
+	 *查询所有电影信息写入solr索引库 
+	*
+	* @return
+	* @throws Exception
+	* @author 高永强
+	* @version 2018年6月2日 下午3:06:51
+	 */
+	List<SearchMovie> findMovieList() throws Exception;
 	
 }

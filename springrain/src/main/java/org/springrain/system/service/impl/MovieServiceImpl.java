@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springrain.frame.entity.IBaseEntity;
 import org.springrain.frame.util.Finder;
 import org.springrain.frame.util.Page;
+import org.springrain.front.entity.SearchMovie;
 import org.springrain.system.common.SystemEnum;
 import org.springrain.system.entity.DicData;
 import org.springrain.system.entity.Movie;
@@ -194,6 +195,14 @@ public class MovieServiceImpl extends BaseSpringrainServiceImpl implements IMovi
 			}
 		}
 		return super.queryForList(finder, page);
+	}
+
+	@Override
+	public List<SearchMovie> findMovieList() throws Exception {
+		Finder finder = new Finder(" select id,name,doubanRating,releaseYear,directors,coverLink,types,actors,originPlace,languages,anotherNames from ")
+				.append(Finder.getTableName(Movie.class))
+				.append(" where status =:status ").setParam("status", 1);
+		return super.queryForList(finder, SearchMovie.class);
 	}
 
 }
