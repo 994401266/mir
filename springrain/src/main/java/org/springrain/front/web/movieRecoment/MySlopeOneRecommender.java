@@ -4,16 +4,14 @@ import java.io.File;
 import java.util.List;
 
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
-import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericBooleanPrefItemBasedRecommender;
-import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
 
 public class MySlopeOneRecommender {
-	public List<RecommendedItem> mySlopeOneRecommender(long userID,int size){
+	public static List<RecommendedItem> mySlopeOneRecommender(long userID,int size){
 		List<RecommendedItem> recommendations = null;
 		try {
 			DataModel model = new FileDataModel(new File("D:/ml-1m/movie_preferences.txt"));//构造数据模型

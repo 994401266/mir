@@ -137,6 +137,14 @@ public class Movie  extends BaseEntity {
 	 * 喜欢这部电影的人同样喜欢的电影
 	 */
 	private java.lang.String alsoLikeMovies;
+	/**
+	 * 添加时间
+	 */
+	private java.util.Date addTime;
+	/**
+	 * 观看次数
+	 */
+	private java.lang.Long viewCount;
 	//columns END 数据库字段结束
 	
 	private List<Comment> comments;
@@ -599,6 +607,23 @@ public class Movie  extends BaseEntity {
 	public java.lang.String getAlsoLikeMovies() {
 		return this.alsoLikeMovies;
 	}
+     
+     public void setAddTime(java.util.Date value) {
+ 		this.addTime = value;
+ 	}
+ 	
+      @WhereSQL(sql="addTime=:Movie_addTime")
+ 	public java.util.Date getAddTime() {
+ 		return this.addTime;
+ 	}
+ 	public void setViewCount(java.lang.Long value) {
+ 		this.viewCount = value;
+ 	}
+ 	
+      @WhereSQL(sql="viewCount=:Movie_viewCount")
+ 	public java.lang.Long getViewCount() {
+ 		return this.viewCount;
+ 	}
 	@Override
 	public String toString() {
 		return new StringBuilder()
@@ -624,6 +649,8 @@ public class Movie  extends BaseEntity {
 			.append("剧情概要[").append(getSynopsis()).append("],")
 			.append("获奖[").append(getAwards()).append("],")
 			.append("喜欢这部电影的人同样喜欢的电影[").append(getAlsoLikeMovies()).append("],")
+			.append("添加时间[").append(getAddTime()).append("],")
+			.append("观看次数[").append(getViewCount()).append("],")
 			.toString();
 	}
 	@Override

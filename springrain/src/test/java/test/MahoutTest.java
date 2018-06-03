@@ -61,13 +61,8 @@ public class MahoutTest {
 																								// 的用户设置为该用户的“邻居”。
 			Recommender recommender = new CachingRecommender(
 					new GenericUserBasedRecommender(model, neighborhood, similarity));// 采用
-																						// CachingRecommender
-																						// 为
-																						// RecommendationItem
-																						// 进行缓存
-			MemoryIDMigrator thing2long = new MemoryIDMigrator();
 			recommendations = recommender
-					.recommend(thing2long.toLongID("36fc06b564b8444481fd1934167dc09f"), 10);// 得到推荐的结果，size是推荐结果的数目
+					.recommend(5, 10);// 得到推荐的结果，size是推荐结果的数目
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

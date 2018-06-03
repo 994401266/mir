@@ -86,7 +86,7 @@ public class MovieServiceImpl extends BaseSpringrainServiceImpl implements IMovi
 		}
 
 	@Override
-	public List<Map<String, Object>> findByQueryBean(Page page, Movie movie) throws Exception {
+	public List<Movie> findByQueryBean(Page page, Movie movie) throws Exception {
 		Finder finder = Finder.getSelectFinder(Movie.class);
 		finder.append(" where 1=1 ");
 		if (movie != null) {
@@ -194,7 +194,7 @@ public class MovieServiceImpl extends BaseSpringrainServiceImpl implements IMovi
 				}
 			}
 		}
-		return super.queryForList(finder, page);
+		return super.queryForList(finder, Movie.class, page);
 	}
 
 	@Override

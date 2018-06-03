@@ -81,7 +81,8 @@ public class CommentServiceImpl extends BaseSpringrainServiceImpl implements ICo
 	public List<Comment> findByQueryBean(Page page, Comment queryBean) throws Exception {
 		Finder finder = new Finder(" SELECT u.name AS userName ,c.* FROM ");
 		finder.append(Finder.getTableName(Comment.class)).append(" c INNER JOIN  ")
-				.append(Finder.getTableName(User.class)).append(" u ON c.userId=u.id ");
+				.append(Finder.getTableName(User.class)).append(" u ON c.userId=u.id ")
+				.append(" where c.movieId =:movieId ").setParam("movieId", queryBean.getMovieId());
 		finder.append(" ORDER BY c.created DESC ");
 		return super.queryForList(finder, Comment.class, page);
 	}

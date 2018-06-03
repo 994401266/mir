@@ -24,7 +24,7 @@ public class PictureController {
 			//取扩展名
 			String originalFilename = uploadFile.getOriginalFilename();
 			String extName = originalFilename.substring(originalFilename.lastIndexOf(".")+1);
-			FastDFSClient dfsClient = new FastDFSClient("classpath:conf/client.conf");
+			FastDFSClient dfsClient = new FastDFSClient("classpath:client.conf");
 			String path = dfsClient.uploadFile(uploadFile.getBytes(), extName);
 			String url = IMAGE_SERVER_URL+path;
 			Map result = new HashMap<>();

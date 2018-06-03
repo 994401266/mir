@@ -32,7 +32,7 @@ public interface IMovieService extends IBaseSpringrainService {
 	 * @author 高永强
 	 * @version 2018年4月26日 下午3:41:43
 	 */
-	List<Map<String, Object>> findByQueryBean(Page page, Movie movie) throws Exception;
+	List<Movie> findByQueryBean(Page page, Movie movie) throws Exception;
 	
 	/**
 	 *查询所有电影信息写入solr索引库 

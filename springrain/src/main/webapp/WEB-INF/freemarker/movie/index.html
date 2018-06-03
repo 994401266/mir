@@ -66,12 +66,11 @@
 <!-- banner -->
 	<div id="slidey" style="display:none;">
 		<ul>
-			<li><img src="${ctx}/img/film/images/5.jpg" alt=" "><p class='title'>Tarzan</p><p class='description'> Tarzan, having acclimated to life in London, is called back to his former home in the jungle to investigate the activities at a mining encampment.</p></li>
-			<li><img src="${ctx}/img/film/images/2.jpg" alt=" "><p class='title'>Maximum Ride</p><p class='description'>Six children, genetically cross-bred with avian DNA, take flight around the country to discover their origins. Along the way, their mysterious past is ...</p></li>
-			<li><img src="${ctx}/img/film/images/3.jpg" alt=" "><p class='title'>Independence</p><p class='description'>The fate of humanity hangs in the balance as the U.S. President and citizens decide if these aliens are to be trusted ...or feared.</p></li>
-			<li><img src="${ctx}/img/film/images/4.jpg" alt=" "><p class='title'>Central Intelligence</p><p class='description'>Bullied as a teen for being overweight, Bob Stone (Dwayne Johnson) shows up to his high school reunion looking fit and muscular. Claiming to be on a top-secret ...</p></li>
-			<li><img src="${ctx}/img/film/images/6.jpg" alt=" "><p class='title'>Ice Age</p><p class='description'>In the film's epilogue, Scrat keeps struggling to control the alien ship until it crashes on Mars, destroying all life on the planet.</p></li>
-			<li><img src="${ctx}/img/film/images/7.jpg" alt=" "><p class='title'>X - Man</p><p class='description'>In 1977, paranormal investigators Ed (Patrick Wilson) and Lorraine Warren come out of a self-imposed sabbatical to travel to Enfield, a borough in north ...</p></li>
+			<#if (contentList??)&&(contentList?size>0)> 
+			<#list	contentList as content>
+			<li><img src="${content.pic!''}" alt=" "><p class='title'>${content.title!''}</p><p class='description'>${content.content!''}</p></li>
+			</#list>
+			</#if>
 		</ul>   	
     </div>
     <script src="${ctx}/img/film/js/jquery.slidey.js"></script>
@@ -92,17 +91,19 @@
 		<div class="container">
 			<div class="w3_agile_banner_bottom_grid">
 				<div id="owl-demo" class="owl-carousel owl-theme">
+				<#if (recommendedMovies??)&&(recommendedMovies?size>0)> 
+				<#list	recommendedMovies as movie>
 					<div class="item">
 						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m13.jpg" title="album-name" class="img-responsive" alt=" " />
+							<a href="${ctx}/front/movie/singleRecommend/${movie.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m${movie_index+1}.jpg" title="album-name" class="img-responsive" alt=" " />
 								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
 							</a>
 							<div class="mid-1 agileits_w3layouts_mid_1_home">
 								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Citizen Soldier</a></h6>							
+									<h6><a href="${ctx}/img/film/single.html">${movie.title!''}</a></h6>							
 								</div>
 								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
+									<p>${movie.releaseYear!''}</p>
 									<div class="block-stars">
 										<ul class="w3l-ratings">
 											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
@@ -120,230 +121,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="item">
-						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m11.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">X-Men</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m12.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Greater</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m7.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Light B/t Oceans</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m8.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">The BFG</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m9.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Central Intelligence</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m10.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Don't Think Twice</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m17.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Peter</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m15.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">God’s Compass</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-					</div>
+					</#list>
+					</#if>
 				</div>
 			</div>			
 		</div>
@@ -373,24 +152,61 @@
 				<div id="myTabContent" class="tab-content">
 					<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 						<div class="w3_agile_featured_movies">
+						<#if (actions??)&&(actions?size>0)> 
+						<#list	actions as movie>
 							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m15.jpg" title="album-name" class="img-responsive" alt=" " />
+								<a href="${ctx}/front/movie/single/${movie.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m${movie_index+1}.jpg" title="album-name" class="img-responsive" alt=" " />
 									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
 								</a>
 								<div class="mid-1 agileits_w3layouts_mid_1_home">
 									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">God’s Compass</a></h6>							
+										<h6><a href="${ctx}/front/movie/single/${movie.id}">${movie.name!''} </a></h6>							
 									</div>
 									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
+										<p>${movie.releaseYear!''}</p>
 										<div class="block-stars">
 											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											</ul>
+													     <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=2)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<2)&&(movie.doubanRatingDouble>0)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														<li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=4)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<4)&&(movie.doubanRatingDouble>2)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														 <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=6)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<6)&&(movie.doubanRatingDouble>4)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														 <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=8)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<8)&&(movie.doubanRatingDouble>6)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														<li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble==10)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<10)&&(movie.doubanRatingDouble>8)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+												</ul>
 										</div>
 										<div class="clearfix"></div>
 									</div>
@@ -399,614 +215,225 @@
 									<p>NEW</p>
 								</div>
 							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m2.jpg" title="album-name" class="img-responsive" alt=" "  />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">Bad Moms</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m5.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">Jason Bourne</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m16.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">Rezort</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m17.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">Peter</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m18.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">ISRA 88</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m1.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">War Dogs</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m14.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">The Other Side</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m19.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">Civil War</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m20.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">The Secret Life of Pets</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m21.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">The Jungle Book</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m22.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="${ctx}/img/film/single.html">Assassin's Creed 3</a></h6>							
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
+							<#if  (movie_index>0)&&((movie_index+1)%6==0)>
+								<div class="clearfix"> </div>
+							</#if>
+							</#list>
+							</#if> 
 							<div class="clearfix"> </div>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m22.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Assassin's Creed 3</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
+						<#if (topViewed??)&&(topViewed?size>0)> 
+						<#list	topViewed as movie>
+							<div class="col-md-2 w3l-movie-gride-agile">
+								<a href="${ctx}/front/movie/single/${movie.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m${movie_index+1}.jpg" title="album-name" class="img-responsive" alt=" " />
+									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+								</a>
+								<div class="mid-1 agileits_w3layouts_mid_1_home">
+									<div class="w3l-movie-text">
+										<h6><a href="${ctx}/front/movie/single/${movie.id}">${movie.name!''} </a></h6>							
 									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m2.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Bad Moms</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
+									<div class="mid-2 agile_mid_2_home">
+										<p>${movie.releaseYear!''}</p>
+										<div class="block-stars">
+											<ul class="w3l-ratings">
+													     <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=2)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<2)&&(movie.doubanRatingDouble>0)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														<li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=4)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<4)&&(movie.doubanRatingDouble>2)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														 <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=6)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<6)&&(movie.doubanRatingDouble>4)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														 <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=8)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<8)&&(movie.doubanRatingDouble>6)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														<li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble==10)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<10)&&(movie.doubanRatingDouble>8)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+												</ul>
+										</div>
+										<div class="clearfix"></div>
 									</div>
-									<div class="clearfix"></div>
+								</div>
+								<div class="ribben">
+									<p>NEW</p>
 								</div>
 							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m9.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Central Intelligence</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
+							<#if  (movie_index>0)&&((movie_index+1)%6==0)>
+								<div class="clearfix"> </div>
+							</#if>
+							</#list>
+							</#if> 
 						<div class="clearfix"> </div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="rating" aria-labelledby="rating-tab">
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m7.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Light B/t Oceans</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
+					<#if (topRating??)&&(topRating?size>0)> 
+						<#list	topRating as movie>
+							<div class="col-md-2 w3l-movie-gride-agile">
+								<a href="${ctx}/front/movie/single/${movie.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m${movie_index+1}.jpg" title="album-name" class="img-responsive" alt=" " />
+									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+								</a>
+								<div class="mid-1 agileits_w3layouts_mid_1_home">
+									<div class="w3l-movie-text">
+										<h6><a href="${ctx}/front/movie/single/${movie.id}">${movie.name!''} </a></h6>							
 									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m11.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">X-Men</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
+									<div class="mid-2 agile_mid_2_home">
+										<p>${movie.releaseYear!''}  ${movie.doubanRatingDouble!''}</p>
+										<div class="block-stars">
+											<ul class="w3l-ratings">
+													     <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=2)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<2)&&(movie.doubanRatingDouble>0)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														<li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=4)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<4)&&(movie.doubanRatingDouble>2)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														 <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=6)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<6)&&(movie.doubanRatingDouble>4)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														 <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=8)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<8)&&(movie.doubanRatingDouble>6)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														<li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble==10)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<10)&&(movie.doubanRatingDouble>8)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+												</ul>
+										</div>
+										<div class="clearfix"></div>
 									</div>
-									<div class="clearfix"></div>
+								</div>
+								<div class="ribben">
+									<p>NEW</p>
 								</div>
 							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m8.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">The BFG</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m17.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Peter</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
+							<#if  (movie_index>0)&&((movie_index+1)%6==0)>
+								<div class="clearfix"> </div>
+							</#if>
+							</#list>
+							</#if> 
 						<div class="clearfix"> </div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="imdb" aria-labelledby="imdb-tab">
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m22.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Assassin's Creed 3</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
+					<#if (recentlyAdded??)&&(recentlyAdded?size>0)> 
+						<#list	recentlyAdded as movie>
+							<div class="col-md-2 w3l-movie-gride-agile">
+								<a href="${ctx}/front/movie/single/${movie.id}" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m${movie_index+1}.jpg" title="album-name" class="img-responsive" alt=" " />
+									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+								</a>
+								<div class="mid-1 agileits_w3layouts_mid_1_home">
+									<div class="w3l-movie-text">
+										<h6><a href="${ctx}/front/movie/single/${movie.id}">${movie.name!''} </a></h6>							
 									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m2.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Bad Moms</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
+									<div class="mid-2 agile_mid_2_home">
+										<p>${movie.releaseYear!''}</p>
+										<div class="block-stars">
+											<ul class="w3l-ratings">
+													     <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=2)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<2)&&(movie.doubanRatingDouble>0)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														<li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=4)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<4)&&(movie.doubanRatingDouble>2)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														 <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=6)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<6)&&(movie.doubanRatingDouble>4)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														 <li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble>=8)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<8)&&(movie.doubanRatingDouble>6)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+														<li><a href="#"><i 
+													     <#if movie.doubanRatingDouble??&&(movie.doubanRatingDouble==10)>
+													        class="fa fa-star"
+													     <#elseif movie.doubanRatingDouble??&&(movie.doubanRatingDouble<10)&&(movie.doubanRatingDouble>8)>
+													        class="fa fa-star-half-o"
+													     <#else> 
+													        class="fa fa-star-o" 
+													     </#if> aria-hidden="true"></i></a></li>
+												</ul>
+										</div>
+										<div class="clearfix"></div>
 									</div>
-									<div class="clearfix"></div>
+								</div>
+								<div class="ribben">
+									<p>NEW</p>
 								</div>
 							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m9.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Central Intelligence</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m10.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Don't Think Twice</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${ctx}/img/film/single.html" class="hvr-shutter-out-horizontal"><img src="${ctx}/img/film/images/m23.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${ctx}/img/film/single.html">Dead Island 2</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="${ctx}/img/film/#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
+							<#if  (movie_index>0)&&((movie_index+1)%6==0)>
+								<div class="clearfix"> </div>
+							</#if>
+							</#list>
+							</#if> 
 						<div class="clearfix"> </div>
 					</div>
 				</div>

@@ -73,7 +73,7 @@ public class User  extends BaseEntity {
 	 */
 	private Integer userType;
 	
-	
+	private String bak1;
 	//columns END 数据库字段结束
 	
 
@@ -195,6 +195,15 @@ public class User  extends BaseEntity {
 
 		public void setUserType(Integer userType) {
 			this.userType = userType;
+		}
+		
+		 @WhereSQL(sql="bak1=:User_bak1")
+		public String getBak1() {
+			return bak1;
+		}
+
+		public void setBak1(String bak1) {
+			this.bak1 = bak1;
 		}
 
 		@Override

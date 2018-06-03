@@ -74,7 +74,7 @@ public class MovieController  extends BaseController {
 		// ==执行分页查询
 		// List<Movie>
 		// datas=movieService.findListDataByFinder(null,page,Movie.class,movie);
-		List<Map<String, Object>> datas = movieService.findByQueryBean(page, movie);
+		List<Movie> datas = movieService.findByQueryBean(page, movie);
 			returnObject.setQueryBean(movie);
 		returnObject.setPage(page);
 		returnObject.setData(datas);

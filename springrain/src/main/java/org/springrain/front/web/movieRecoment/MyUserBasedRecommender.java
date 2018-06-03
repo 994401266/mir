@@ -1,9 +1,11 @@
 package org.springrain.front.web.movieRecoment;
 
+import java.io.File;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
 import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
@@ -20,18 +22,24 @@ import org.springrain.front.entity.UserMovie;
 
 public class MyUserBasedRecommender {
 
-	@Autowired
+/*	@Autowired
 	private DataSource dataSource;
-
-	public List<RecommendedItem> userBasedRecommender(long userID,int size) {
+*/
+	public static List<RecommendedItem> userBasedRecommender(long userID,int size) {
 		// step:1 构建模型 2 计算相似度 3 查找k紧邻 4 构造推荐引擎
 		List<RecommendedItem> recommendations = null;
 		try {
-			DataModel model = new MySQLJDBCDataModel(dataSource,
-					Finder.getTableName(UserMovie.class), "uid", "mid", "score", "update_time");// 构造数据模型
-			UserSimilarity similarity = new PearsonCorrelationSimilarity(model);//用PearsonCorrelation 算法计算用户相似度
-			UserNeighborhood neighborhood = new NearestNUserNeighborhood(3, similarity, model);//计算用户的“邻居”，这里将与该用户最近距离为 3 的用户设置为该用户的“邻居”。
-			Recommender recommender = new CachingRecommender(new GenericUserBasedRecommender(model, neighborhood, similarity));//采用 CachingRecommender 为 RecommendationItem 进行缓存
+			 //准备数据 这里是电影评分数据
+	        File file = new File("D:\\ml-latest\\ratings.csv");
+	        //将数据加载到内存中，GroupLensDataModel是针对开放电影评论数据的
+	        DataModel dataModel = new FileDataModel(file);
+	        //计算相似度，相似度算法有很多种，欧几里得、皮尔逊等等。
+	        UserSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);
+	        //计算最近邻域，邻居有两种算法，基于固定数量的邻居和基于相似度的邻居，这里使用基于固定数量的邻居
+	        UserNeighborhood userNeighborhood = new NearestNUserNeighborhood(3, similarity, dataModel);
+	        //构建推荐器，协同过滤推荐有两种，分别是基于用户的和基于物品的，这里使用基于用户的协同过滤推荐
+	        Recommender recommender = new GenericUserBasedRecommender(dataModel, userNeighborhood, similarity);
+	        //给用户ID等于5的用户推荐10部电影
 			recommendations = recommender.recommend(userID, size);//得到推荐的结果，size是推荐结果的数目
 		} catch (Exception e) {
 			// TODO: handle exception

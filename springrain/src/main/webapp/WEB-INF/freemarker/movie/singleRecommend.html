@@ -94,14 +94,14 @@
                            <div class="show-top-grids-w3lagile">
 				<div class="col-sm-8 single-left">
 					<div class="song">
-					<input type="hidden" id="mid" value="${returnDatas.data.id!''}">
+					<input type="hidden" id="mid" value="${returnDatas.data.id}">
 						<div class="song-info">
 							<h3>
-								${returnDatas.data.name!''}
+								${returnDatas.data.title!''}
 								<ul id="tagList">
 									<#if (returnDatas.data.typeList??)&&(returnDatas.data.typeList?size>0)>
 									<#list returnDatas.data.typeList as type>
-									<li><a href="${ctx}/front/movie/types/${type}">${type!''}</a></li>
+									<li><a href="${ctx}/front/movie/types/${type}">${type}</a></li>
 									</#list>
 									</#if>
 								</ul>
@@ -211,7 +211,7 @@
 						<#if (returnDatas.data.comments??)&&(returnDatas.data.comments?size>0)>
 						<#list returnDatas.data.comments as comment>
 							<div class="media">
-								<h5>${comment.userName!''}</h5>
+								<h5>${comment.userName}</h5>
 								<div class="media-left">
 									<a href="#">
 										<img src="${ctx}/img/film/images/user.jpg" title="One movies" alt=" " />
@@ -219,7 +219,7 @@
 								</div>
 								<div class="media-body">
 									<p>${comment.content}</p>
-									<span>评论时间 :<a href="#">${comment.created!''}</a></span>
+									<span>评论时间 :<a href="#">${comment.created}</a></span>
 								</div>
 							</div>
 						</#list>
@@ -230,95 +230,21 @@
 				<div class="col-md-4 single-right">
 					<h3>Up Next</h3>
 					<div class="single-grid-right">
+					<#if (recommendedMovies??)&&(recommendedMovies?size>0)> 
+					<#list	recommendedMovies as movie>
 						<div class="single-right-grids">
 							<div class="col-md-4 single-right-grid-left">
-								<a href="${ctx}/img/film/single.html"><img src="${ctx}/img/film/images/m1.jpg" alt="" /></a>
+								<a href="${ctx}/front/movie/singleRecommend/${movie.id}"><img src="${ctx}/img/film/images/m${movie_index+1}.jpg" alt="" /></a>
 							</div>
 							<div class="col-md-8 single-right-grid-right">
-								<a href="${ctx}/img/film/single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="${ctx}/img/film/#" class="author">John Maniya</a></p>
+								<a href="${ctx}/front/movie/singleRecommend/${movie.id}l" class="title">${movie.title!''}</a>
+								<p class="author"><a href="${ctx}/front/movie/singleRecommend/${movie.id}" class="author">${movie.types!''}</a></p>
 								<p class="views">2,114,200 views</p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="${ctx}/img/film/single.html"><img src="${ctx}/img/film/images/m2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="${ctx}/img/film/single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="${ctx}/img/film/#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views </p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="${ctx}/img/film/single.html"><img src="${ctx}/img/film/images/m3.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="${ctx}/img/film/single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="${ctx}/img/film/#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="${ctx}/img/film/single.html"><img src="${ctx}/img/film/images/m4.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="${ctx}/img/film/single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="${ctx}/img/film/#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="${ctx}/img/film/single.html"><img src="${ctx}/img/film/images/m5.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="${ctx}/img/film/single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="${ctx}/img/film/#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="${ctx}/img/film/single.html"><img src="${ctx}/img/film/images/c5.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="${ctx}/img/film/single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="${ctx}/img/film/#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="${ctx}/img/film/single.html"><img src="${ctx}/img/film/images/m6.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="${ctx}/img/film/single.html" class="title"> Nullam interdum metus</a>
-								<p class="author">By <a href="${ctx}/img/film/#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="${ctx}/img/film/single.html"><img src="${ctx}/img/film/images/m15.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="${ctx}/img/film/single.html" class="title"> Nullam interdum metus</a>
-								<p class="author">By <a href="${ctx}/img/film/#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-
+					</#list>
+					</#if>
 					</div>
 				</div>
 				

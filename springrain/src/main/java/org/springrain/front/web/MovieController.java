@@ -1,6 +1,7 @@
 package org.springrain.front.web;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,13 +28,21 @@ import org.springrain.frame.util.Page;
 import org.springrain.frame.util.ReturnDatas;
 import org.springrain.frame.util.property.MessageUtils;
 import org.springrain.front.entity.Comment;
+import org.springrain.front.entity.RecommendMovie;
 import org.springrain.front.entity.UserHistory;
 import org.springrain.front.service.ICommentService;
+import org.springrain.front.service.IRecommendMovieService;
 import org.springrain.front.service.ISearchMovieService;
 import org.springrain.front.service.IUserHistoryService;
+import org.springrain.front.web.movieRecoment.MyItemBasedRecommender;
+import org.springrain.front.web.movieRecoment.MyUserBasedRecommender;
 import org.springrain.system.common.SystemEnum;
+import org.springrain.system.entity.Content;
 import org.springrain.system.entity.Movie;
+import org.springrain.system.entity.User;
+import org.springrain.system.service.IContentService;
 import org.springrain.system.service.IMovieService;
+import org.springrain.system.service.IUserService;
 
 /**
  * 前端展示电影数据的controller
@@ -47,9 +57,15 @@ public class MovieController  extends BaseController {
 	@Resource
 	private IMovieService movieService;
 	@Resource
+	private IRecommendMovieService recommendMovieService;
+	@Resource
+	private IUserService userService;
+	@Resource
 	private ICommentService commentService;
 	@Resource
 	private IUserHistoryService userHistoryService;
+	@Resource
+	private IContentService contentService;
 	@Resource
 	private ISearchMovieService searchMovieService;
 	private String listurl = "/system/movie/movieList";
@@ -66,8 +82,53 @@ public class MovieController  extends BaseController {
 	 * @version 2018年5月15日 下午4:20:46
 	 */
 	@RequestMapping("/index")
-	public String index(HttpServletRequest request, Model model,Movie movie) 
+	public String index(HttpServletRequest request, Model model) 
 			throws Exception {
+		//准备首页数据
+		//轮播图
+		Content content = new Content();
+		content.setCategory_id(4L);
+		List<Content> contentList = contentService.findListDataByFinder(null, null, Content.class, content);
+		//最近添加的电影
+		Page page = new Page();
+		page.setPageSize(12);
+		
+		Movie movie = new Movie();
+		page.setOrder("addTime");
+		page.setSort("desc");
+		List<Movie> recentlyAdded = movieService.findByQueryBean(page, movie );
+		//看的最多的
+		page.setOrder("viewCount");
+		List<Movie> topViewed = movieService.findByQueryBean(page, movie );
+		//分最高
+		page.setOrder("doubanRating");
+		List<Movie> topRating = movieService.findByQueryBean(page, movie );
+		//动作
+		movie.setTypes("动作");
+		List<Movie> actions = movieService.findByQueryBean(page, movie );
+		//为当前登录用户推荐电影
+		List<RecommendMovie> recommendMovieList = null;
+		if(StringUtils.isNotBlank(SessionUser.getUserId())){
+			User user = userService.findUserById(SessionUser.getUserId());
+			//使用基于用户的方法进行推荐
+			List<RecommendedItem> recommendedItems = MyUserBasedRecommender.userBasedRecommender(Long.parseLong(user.getBak1()), 9);
+			List<Integer> ids = new ArrayList<>();
+			for (RecommendedItem recommendedItem : recommendedItems) {
+				ids.add((int) recommendedItem.getItemID());
+			}
+			recommendMovieList = recommendMovieService.findListByIds(ids);
+		}else{
+			//当前没有用户登录的话  则直接推荐动作的
+			RecommendMovie queryBean = new RecommendMovie();
+			queryBean.setTypes("action");
+			recommendMovieList = recommendMovieService.findByQueryBean(queryBean , 9);
+		}
+		model.addAttribute("recommendedMovies", recommendMovieList);
+		model.addAttribute("recentlyAdded", recentlyAdded);
+		model.addAttribute("topViewed", topViewed);
+		model.addAttribute("topRating", topRating);
+		model.addAttribute("actions", actions);
+		model.addAttribute("contentList", contentList);
 		return "/movie/index";
 	}
 
@@ -93,19 +154,10 @@ public class MovieController  extends BaseController {
 			movie.setTypes(movieType);
 		}
 		movie.setStatus(1);
-		List<Map<String, Object>> datas = null;
+		List<Movie> datas = null;
 		try {
 
 			datas = movieService.findByQueryBean(page, movie);
-
-			for (Map<String, Object> map : datas) {
-				String doubanRating = (String) map.get("doubanRating");
-				if (StringUtils.isNotBlank(doubanRating)) {
-					map.put("doubanRatingDouble", Double.parseDouble(doubanRating));
-				} else {
-					map.put("doubanRatingDouble", null);
-				}
-			}
 
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -140,7 +192,7 @@ public class MovieController  extends BaseController {
 			movie.setOriginPlace(movieOriginPlace);
 		}
 		movie.setStatus(1);
-		List<Map<String, Object>> datas = null;
+		List<Movie> datas = null;
 		try {
 
 			datas = movieService.findByQueryBean(page, movie);
@@ -242,6 +294,14 @@ public class MovieController  extends BaseController {
 				queryBean.setMovieId(movieId);
 				List<Comment> commetList = commentService.findByQueryBean(null, queryBean);
 				movie.setComments(commetList);
+				
+				//增加观看次数
+				if(movie.getViewCount() != null){
+					movie.setViewCount(movie.getViewCount()+1);
+				}else{
+					movie.setViewCount(1L);
+				}
+				movieService.update(movie, true);
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);
 				e.printStackTrace();
@@ -250,6 +310,48 @@ public class MovieController  extends BaseController {
 		returnDatas.setData(movie);
 		model.addAttribute(GlobalStatic.returnDatas, returnDatas);
 		return "/movie/single";
+	}
+	@RequestMapping("/singleRecommend/{movieId}")
+	public String singleRecommend(@PathVariable String movieId, HttpServletRequest request, Model model)
+			throws Exception {
+		ReturnDatas returnDatas = ReturnDatas.getSuccessReturnDatas();
+		// Page page = newPage(request);
+		// page.setPageSize(3);
+		RecommendMovie movie = null;
+		if (StringUtils.isNotBlank(movieId)) {
+			try {
+				movie = recommendMovieService.findRecommendMovieById(movieId);
+				//取基于内容的推荐电影
+				//为当前登录用户推荐电影
+				List<RecommendMovie> movieList = null;
+				if(StringUtils.isNotBlank(SessionUser.getUserId())){
+					User user = userService.findUserById(SessionUser.getUserId());
+					//使用基于用户的方法进行推荐
+					//List<RecommendedItem> recommendedItems = MyUserBasedRecommender.userBasedRecommender(Long.parseLong(user.getBak1()), 9);
+					List<RecommendedItem> recommendedItems =MyItemBasedRecommender.myItemBasedRecommender(Long.parseLong(user.getBak1()), Long.parseLong(movieId), 9);
+					List<Integer> ids = new ArrayList<>();
+					for (RecommendedItem recommendedItem : recommendedItems) {
+						ids.add((int) recommendedItem.getItemID());
+					}
+					movieList = recommendMovieService.findListByIds(ids);
+				}else{
+					//当前没有用户登录的话  则直接推荐相同类型的
+					if(StringUtils.isNotBlank(movie.getTypes())){
+						List<String> typeList = movie.getTypeList();
+						RecommendMovie queryBean = new RecommendMovie();
+						queryBean.setTypes(typeList.get(0));
+						movieList = recommendMovieService.findByQueryBean(queryBean ,9);
+					}
+				}
+				model.addAttribute("recommendedMovies", movieList);
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
+				e.printStackTrace();
+			}
+		}
+		returnDatas.setData(movie);
+		model.addAttribute(GlobalStatic.returnDatas, returnDatas);
+		return "/movie/singleRecommend";
 	}
 
 	/**
@@ -286,7 +388,7 @@ public class MovieController  extends BaseController {
 		// ==执行分页查询
 		// List<Movie>
 		// datas=movieService.findListDataByFinder(null,page,Movie.class,movie);
-		List<Map<String, Object>> datas = movieService.findByQueryBean(page, movie);
+		List<Movie> datas = movieService.findByQueryBean(page, movie);
 		returnObject.setQueryBean(movie);
 		returnObject.setPage(page);
 		returnObject.setData(datas);
